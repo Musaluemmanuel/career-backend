@@ -1,59 +1,63 @@
 # API reference
 
-Base URL: your deployed Flask service URL. JSON endpoints expect `Content-Type: application/json`.
+Base URL: the deployed Flask API. JSON endpoints use `Content-Type: application/json`.
 
-## Health check
+## `GET /`
+Basic service health response. This does not verify that AI provider requests succeed.
 
-`GET /` returns a simple success message. This does not verify that every upstream AI provider is functioning.
+## Login and access token
 
-## Sign-in and bearer token
-
-The production Procfile starts `secured_app:app`. On successful verified password sign-in (`POST /login`) or Google sign-in (`POST /google-login`), the wrapper adds these fields to the existing success response when `AUTH_TOKEN_SECRET` is configured:
+The production entry point (`secured_app:app`) adds `access_token`, `token_type`, and `expires_in` to successful verified responses from `POST /login` and `POST /google-login`, when `AUTH_TOKEN_SECRET` is configured. The signed token identifies the database account and expires after `AUTH_TOKEN_TTL_SECONDS` (default 604800 seconds / 7 days). Keep it private.
 
 ```json
-{
-  "access_token": "<signed-token>",
-  "token_type": "Bearer",
-  "expires_in": 604800
-}
+{"access_token":"<signed-token>","token_type":"Bearer","expires_in":604800}
 ```
 
-The token is signed by the server, identifies the database user ID, and expires after `AUTH_TOKEN_TTL_SECONDS` (default: seven days). The client must store it safely and send it in the `Authorization` header. Sign-in response shapes otherwise remain as implemented by `app.py`.
+## `POST /recommend`
 
-## Recommendations
-
-`POST /recommend` requires a valid bearer token for an existing verified account. The request body includes the user's interest and grades. Any supplied email must match the signed-in user's email; the server sets the email and name from the authenticated account before invoking the existing route.
+Requires a verified account's bearer token. The app binds recommendation ownership to the user encoded in the token; a caller-supplied email must match that account.
 
 ```http
 Authorization: Bearer <access_token>
 Content-Type: application/json
 ```
 
+Example body:
+
 ```json
 {
   "interest": "computer science and software development",
-  "grades": {
-    "Math": "A-",
-    "English": "B",
-    "Kiswahili": "B",
-    "Biology": "B+",
-    "Physics": "C",
-    "Chemistry": "C+",
-    "ComputerStudies": "A"
-  }
+  "grades": {"Math":"A-","English":"B","Kiswahili":"B","Biology":"B+","Physics":"C","Chemistry":"C+","ComputerStudies":"A"}
 }
 ```
 
-Responses include the existing recommendation result. Errors from the auth wrapper:
+### Usage cap
+
+Three lifetime recommendation **requests** are allowed per authenticated account. Each request consumes one attempt as soon as it passes authentication and is admitted, including a request that later fails in the AI pipeline. Attempts are stored persistently in PostgreSQL. At the limit the API does not call the recommendation pipeline; it returns HTTP `402`:
+
+```json
+{
+  "error": "You have used all 3 complimentary recommendation attempts. Please request funding to continue.",
+  "code": "funding_required",
+  "limit": 3,
+  "funding_message": "Please contact the app administrator to request additional AI usage funding."
+}
+```
+
+This is a usage gate only; it does not collect payment or automatically grant additional attempts. Funding approval and counter reset must be performed by an administrator. The cap applies to endpoint requests; internal provider retries within an admitted request are not individually counted.
+
+### Error responses
 
 - `401 authentication_required` — bearer token absent.
-- `401 invalid_token` — signature invalid, expired, or account missing.
-- `403 account_not_verified` — the account is not verified.
-- `403 account_mismatch` — request email differs from the authenticated account.
-- `503 auth_not_configured` — server has no `AUTH_TOKEN_SECRET`/`SECRET_KEY`.
+- `401 invalid_token` — invalid/expired token or deleted account.
+- `403 account_not_verified` — account is not verified.
+- `403 account_mismatch` — request email differs from signed-in account.
+- `402 funding_required` — three attempts used; request funding.
+- `503 auth_not_configured` — signing secret is missing.
+- `503 quota_unavailable` — quota persistence failed; request is denied.
 
-There is no per-user recommendation quota. OPTIONS preflight requests are allowed through. The front end must attach the returned token to recommendation requests or the API will return `401`.
+OPTIONS preflight requests are excluded from the quota.
 
-## Legacy routes
+## Other routes
 
-Registration, verification, saved-history, account settings, scraping, and email routes are implemented in `app.py`. Review each route's current authorization and validation before exposing sensitive operations; the wrapper currently applies bearer-token authentication only to `/recommend`.
+Registration, verification, saved history, account settings, scraping, and email routes remain defined in `app.py`. This wrapper only applies token authentication and quota to `/recommend`. Review authorization of other routes separately.

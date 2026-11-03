@@ -1,9 +1,9 @@
 import os
 import unittest
 
-# Force an isolated database and signing secret before importing the app module.
+# Configure isolated state before importing Flask modules.
 os.environ["DATABASE_URL"] = "sqlite:///:memory:"
-os.environ["AUTH_TOKEN_SECRET"] = "unit-test-only-secret-not-for-production"
+os.environ["AUTH_TOKEN_SECRET"] = "tests-only-signing-secret-not-for-production"
 os.environ["GROQ_API_KEY"] = "unit-test-key"
 os.environ["GROQ_MODEL"] = "openai/gpt-oss-20b"
 
@@ -28,12 +28,7 @@ class SecuredRecommendationTests(unittest.TestCase):
         with app.app_context():
             db.drop_all()
             db.create_all()
-            user = User(
-                email="student@example.test",
-                password_hash="test-hash",
-                name="Test Student",
-                is_verified=True,
-            )
+            user = User(email="student@example.test", password_hash="test-hash", name="Test Student", is_verified=True)
             db.session.add(user)
             db.session.commit()
             self.user_id = user.id
@@ -45,60 +40,62 @@ class SecuredRecommendationTests(unittest.TestCase):
             db.session.remove()
             db.drop_all()
 
-    def test_recommendation_requires_bearer_token(self):
+    def post_recommend(self, payload=None):
+        return self.client.post(
+            "/recommend",
+            headers={"Authorization": f"Bearer {self.token}"},
+            json=payload or {"interest": "science", "grades": {}},
+        )
+
+    def test_missing_bearer_token_is_rejected(self):
         response = self.client.post("/recommend", json={"interest": "science", "grades": {}})
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.get_json()["code"], "authentication_required")
 
-    def test_recommendation_rejects_mismatched_email(self):
-        response = self.client.post(
-            "/recommend",
-            headers={"Authorization": f"Bearer {self.token}"},
-            json={"email": "other@example.test", "interest": "science", "grades": {}},
-        )
+    def test_mismatched_email_is_rejected_without_using_quota(self):
+        response = self.post_recommend({"email": "other@example.test", "interest": "science", "grades": {}})
         self.assertEqual(response.status_code, 403)
-        self.assertEqual(response.get_json()["code"], "account_mismatch")
+        with app.app_context():
+            self.assertIsNone(db.session.get(secured_app.RecommendationUsage, self.user_id))
 
-    def test_authenticated_user_identity_is_injected(self):
-        response = self.client.post(
-            "/recommend",
-            headers={"Authorization": f"Bearer {self.token}"},
-            json={"interest": "science", "grades": {}},
-        )
+    def test_verified_identity_is_bound_to_recommendation(self):
+        response = self.post_recommend()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json()["email"], "student@example.test")
         self.assertEqual(response.get_json()["name"], "Test Student")
 
-    def test_recommendation_is_not_capped_at_three_calls(self):
-        headers = {"Authorization": f"Bearer {self.token}"}
-        for _ in range(4):
-            response = self.client.post(
-                "/recommend",
-                headers=headers,
-                json={"interest": "science", "grades": {}},
-            )
+    def test_three_requests_allowed_fourth_requests_funding(self):
+        for _ in range(3):
+            response = self.post_recommend()
             self.assertEqual(response.status_code, 200)
-
-    def test_unverified_user_is_rejected(self):
+        fourth = self.post_recommend()
+        self.assertEqual(fourth.status_code, 402)
+        self.assertEqual(fourth.get_json()["code"], "funding_required")
+        self.assertEqual(fourth.get_json()["limit"], 3)
         with app.app_context():
-            user = db.session.get(User, self.user_id)
-            user.is_verified = False
+            usage = db.session.get(secured_app.RecommendationUsage, self.user_id)
+            self.assertEqual(usage.attempts, 3)
+
+    def test_unverified_account_is_rejected(self):
+        with app.app_context():
+            db.session.get(User, self.user_id).is_verified = False
             db.session.commit()
-        response = self.client.post(
-            "/recommend",
-            headers={"Authorization": f"Bearer {self.token}"},
-            json={"interest": "science", "grades": {}},
-        )
+        response = self.post_recommend()
         self.assertEqual(response.status_code, 403)
         self.assertEqual(response.get_json()["code"], "account_not_verified")
 
-    def test_login_response_includes_signed_token(self):
-        # Exercise only the wrapper's token-issuing post-response hook.
+    def test_successful_login_response_receives_signed_token(self):
         with app.test_request_context("/login", method="POST"):
             response = jsonify({"user": {"email": "student@example.test"}})
             response.status_code = 200
             hooked = secured_app.issue_sign_in_token(response)
         self.assertIn("access_token", hooked.get_json())
+
+    def test_options_preflight_does_not_consume_quota(self):
+        response = self.client.options("/recommend")
+        self.assertNotEqual(response.status_code, 402)
+        with app.app_context():
+            self.assertIsNone(db.session.get(secured_app.RecommendationUsage, self.user_id))
 
 
 if __name__ == "__main__":

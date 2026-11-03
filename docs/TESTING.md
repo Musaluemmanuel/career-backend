@@ -1,15 +1,13 @@
-# Test feedback checklist
+# Tests and expected feedback
 
-Run locally with `python -m unittest discover -s tests -v`.
+Run:
 
-The test module aims to verify that the production security wrapper:
+```bash
+python -m unittest discover -s tests -v
+```
 
-- rejects missing bearer credentials;
-- rejects unverified accounts and mismatched caller-supplied emails;
-- uses the signed-in database account as the recommendation identity;
-- issues a signed access token on successful login responses; and
-- allows more than three calls, confirming the quota was removed.
+The unit suite is intended to check missing/invalid authentication, user binding, email mismatch, unverified users, issuance of login tokens, exactly three admitted lifetime requests, and a fourth `402 funding_required` response. It uses isolated SQLite and a stub recommendation handler, so it must not make provider calls or consume tokens.
 
-Tests use an in-memory SQLite database and replace the recommendation view with a local JSON echo. No real provider requests or email sends should occur. A Render/Groq integration smoke test is still needed after deploy.
+After deploying, also verify via staging: login returns a token; the browser attaches it; three calls reach the recommendation route; the fourth receives the funding message; the stored count remains three; and OPTIONS preflight does not consume quota.
 
-Important current integration feedback: the frontend repository's `login.html` and `index.html` currently do not persist/attach the bearer token. While the backend requires it on `/recommend`, the recommendation flow will return `401` until the frontend stores `access_token` from successful `/login` or `/google-login` and sends `Authorization: Bearer ...`. Token persistence, API authorization, and all other protected routes should be addressed before treating the full stack as production-ready.
+Limit caveat: this caps recommendation HTTP attempts, not the number of internal LLM calls/retries made during each admitted request. Provider/org limits remain an additional cost control.

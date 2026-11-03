@@ -1,7 +1,8 @@
-"""Authenticated recommendation entry point.
+"""Production entry point with authenticated, lifetime-limited AI requests.
 
-This variant removes the recommendation quota entirely while keeping the
-account-bound bearer-token requirement in place.
+Run with ``gunicorn secured_app:app``. Successful verified password and Google
+sign-ins receive a signed bearer token. Every authenticated POST /recommend
+request reserves one of three lifetime attempts before invoking the AI pipeline.
 """
 
 import json
@@ -10,9 +11,13 @@ import os
 
 from flask import g, jsonify, request
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
+from sqlalchemy import ForeignKey
+from sqlalchemy.dialects.postgresql import insert as pg_insert
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 
-from app import User, app
+from app import User, app, db
 
+MAX_RECOMMENDATION_ATTEMPTS = 3
 TOKEN_TTL_SECONDS = int(os.environ.get("AUTH_TOKEN_TTL_SECONDS", str(7 * 24 * 60 * 60)))
 AUTH_TOKEN_SECRET = os.environ.get("AUTH_TOKEN_SECRET") or os.environ.get("SECRET_KEY")
 TOKEN_SERIALIZER = (
@@ -20,8 +25,21 @@ TOKEN_SERIALIZER = (
     if AUTH_TOKEN_SECRET
     else None
 )
-
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
+
+
+class RecommendationUsage(db.Model):
+    """Persistent lifetime counter; one row per account."""
+
+    __tablename__ = "recommendation_usage"
+
+    user_id = db.Column(db.Integer, ForeignKey("user.id", ondelete="CASCADE"), primary_key=True)
+    attempts = db.Column(db.Integer, nullable=False, default=0)
+
+
+# Create the quota table if absent. This does not migrate or drop existing data.
+with app.app_context():
+    db.create_all()
 
 
 class _CompletionsWithSelectedModel:
@@ -60,6 +78,7 @@ class _GroqClientWithSelectedModel:
         return getattr(self._client, name)
 
 
+# Force both existing Groq call sites through one configurable model setting.
 from utils import ai_engines, web_scraper  # noqa: E402
 
 for _module in (ai_engines, web_scraper):
@@ -71,8 +90,38 @@ def _json_error(message, code, status):
     return jsonify({"error": message, "code": code}), status
 
 
+def _reserve_attempt(user_id):
+    """Atomically reserve one of the account's three lifetime attempts."""
+    dialect = db.engine.dialect.name
+    if dialect == "postgresql":
+        insert = pg_insert
+    elif dialect == "sqlite":
+        insert = sqlite_insert
+    else:
+        raise RuntimeError(f"Recommendation limits are unsupported for database: {dialect}")
+
+    statement = insert(RecommendationUsage).values(user_id=user_id, attempts=1)
+    statement = statement.on_conflict_do_update(
+        index_elements=[RecommendationUsage.user_id],
+        set_={"attempts": RecommendationUsage.attempts + 1},
+        where=RecommendationUsage.attempts < MAX_RECOMMENDATION_ATTEMPTS,
+    ).returning(RecommendationUsage.attempts)
+
+    try:
+        reserved = db.session.execute(statement).scalar_one_or_none()
+        if reserved is None:
+            db.session.rollback()
+            return False
+        db.session.commit()
+        return True
+    except Exception:
+        db.session.rollback()
+        logging.exception("Failed to reserve recommendation attempt")
+        raise
+
+
 @app.before_request
-def require_authenticated_recommendation():
+def authenticate_and_limit_recommendations():
     if request.path != "/recommend" or request.method == "OPTIONS":
         return None
 
@@ -83,8 +132,7 @@ def require_authenticated_recommendation():
             503,
         )
 
-    authorization = request.headers.get("Authorization", "")
-    scheme, _, token = authorization.partition(" ")
+    scheme, _, token = request.headers.get("Authorization", "").partition(" ")
     if scheme.lower() != "bearer" or not token:
         return _json_error("Sign in and send the returned bearer token.", "authentication_required", 401)
 
@@ -94,7 +142,7 @@ def require_authenticated_recommendation():
     except (BadSignature, SignatureExpired, KeyError, TypeError, ValueError):
         return _json_error("Your sign-in token is invalid or expired. Please sign in again.", "invalid_token", 401)
 
-    user = User.query.get(user_id)
+    user = db.session.get(User, user_id)
     if user is None:
         return _json_error("The account for this token no longer exists.", "invalid_token", 401)
     if not user.is_verified:
@@ -108,27 +156,37 @@ def require_authenticated_recommendation():
     if supplied_email and str(supplied_email).strip().casefold() != user.email.casefold():
         return _json_error("Request email must match the signed-in account.", "account_mismatch", 403)
 
+    # Bind writes and quota identity to the authenticated database account.
     payload["email"] = user.email
     if user.name:
         payload["name"] = user.name
-
     g.authenticated_user = user
-    request._cached_json = payload
+
+    try:
+        if not _reserve_attempt(user.id):
+            return jsonify({
+                "error": "You have used all 3 complimentary recommendation attempts. Please request funding to continue.",
+                "code": "funding_required",
+                "limit": MAX_RECOMMENDATION_ATTEMPTS,
+                "funding_message": "Please contact the app administrator to request additional AI usage funding.",
+            }), 402
+    except Exception:
+        return _json_error("Could not check recommendation usage. Please try again later.", "quota_unavailable", 503)
+
+    # Flask caches parsed JSON as a tuple internally; the parsed dict itself is
+    # already cached and is modified above, so downstream request.get_json sees it.
     return None
 
 
 @app.after_request
 def issue_sign_in_token(response):
-    if request.path not in ("/login", "/google-login") or response.status_code != 200:
-        return response
-    if TOKEN_SERIALIZER is None:
+    if request.path not in ("/login", "/google-login") or response.status_code != 200 or TOKEN_SERIALIZER is None:
         return response
 
     try:
         payload = response.get_json()
         if not isinstance(payload, dict):
             return response
-
         account = payload.get("user") if isinstance(payload.get("user"), dict) else payload
         email = account.get("email") if isinstance(account, dict) else None
         if not email:

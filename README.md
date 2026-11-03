@@ -1,18 +1,18 @@
 # CareerPath AI Backend
 
-Flask API for personalized Kenyan course and career recommendations. It stores users and recommendation history in PostgreSQL (SQLite fallback for local development), generates recommendations through Groq, verifies university links, and serves the API with Gunicorn on Render.
+Flask API for personalized Kenyan course and career guidance. It stores account and recommendation history in SQLAlchemy, calls Groq for AI generation, verifies institution links, and is deployed as a Gunicorn web service.
 
-## Repository contents
+## Project layout
 
-- `app.py` — Flask routes, models, database configuration, recommendation pipeline.
-- `secured_app.py` — production entry point that issues signed bearer tokens after verified sign-in, requires them for `/recommend`, and selects one Groq model for Groq requests.
-- `utils/ai_engines.py` — course eligibility, validation, and AI recommendation generation.
-- `utils/web_scraper.py` — university link lookup and URL cache.
-- `requirements.txt`, `Procfile`, `Dockerfile` — Python dependencies and deployment configuration.
-- `docs/API.md`, `docs/DEPLOYMENT.md` — API and deployment instructions.
-- `tests/` — standard-library unit tests for the security wrapper.
+- `app.py` — Flask routes, database models, and recommendation pipeline.
+- `secured_app.py` — production entry point: bearer-token authentication for recommendations, three-attempt per-account lifetime cap, funding-required response, and shared Groq model configuration.
+- `utils/ai_engines.py` — course eligibility, validation, and career recommendation generation.
+- `utils/web_scraper.py` — institution-link lookup and local cache.
+- `docs/API.md` — API and authentication details.
+- `docs/DEPLOYMENT.md` — Render settings and environment variables.
+- `tests/` — isolated security and quota tests.
 
-## Run locally
+## Local setup
 
 Python 3.11 is recommended.
 
@@ -20,44 +20,38 @@ Python 3.11 is recommended.
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
 pip install -r requirements.txt
-```
-
-Set environment variables (use a local/test database and never commit secrets):
-
-```bash
 export DATABASE_URL='sqlite:///local_test.db'
-export AUTH_TOKEN_SECRET='replace-with-a-long-random-secret'
-export GROQ_API_KEY='your-groq-api-key'
+export AUTH_TOKEN_SECRET='use-a-long-random-secret'
+export GROQ_API_KEY='your-provider-api-key'
 export GROQ_MODEL='openai/gpt-oss-20b'
 ```
 
-Run the same secured entry point used by the Procfile:
+Run the production entry point:
 
 ```bash
 gunicorn secured_app:app --bind 0.0.0.0:${PORT:-10000} --timeout 300
 ```
 
-The root endpoint is `GET /`. Authenticated users must send `Authorization: Bearer <access_token>` on `POST /recommend`. Details are in [API documentation](docs/API.md).
+See the [API guide](docs/API.md) and [deployment guide](docs/DEPLOYMENT.md).
+
+## Recommendation attempt policy
+
+Each verified account can start at most three recommendation requests over its lifetime. A request reserves one attempt before AI execution, including a request whose provider call later fails, so repeated retries cannot evade the cap. A fourth request receives HTTP `402` with `code: funding_required` and a request-funding message. The counter is stored in the `recommendation_usage` table. This is an application usage limit, not a payment system; no payment is collected or automatically enabled.
+
+The recommendation endpoint requires a valid bearer token returned by successful verified login. Frontends must persist the `access_token` and send `Authorization: Bearer <token>` with `POST /recommend`.
 
 ## Tests
-
-Run the focused security-wrapper tests using Python's standard library:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-The tests use an isolated in-memory SQLite database and mock the recommendation handler; they do not call Groq or send email. They do not replace integration testing against a staging Render database or a Groq account with the selected model enabled.
+Tests use an in-memory SQLite database and stub the recommendation endpoint, so they do not consume provider tokens, send email, or verify Groq availability. Run staging integration tests after deployment.
 
-## Deployment
+## Provider secrets and cost
 
-Render must start `secured_app:app` (the Procfile is configured for this) and set `AUTH_TOKEN_SECRET`, `DATABASE_URL`, and `GROQ_API_KEY`. `GROQ_MODEL` is optional; the default is `openai/gpt-oss-20b`. Check [deployment guidance](docs/DEPLOYMENT.md) before deploying.
+This API uses Groq's API, not a ChatGPT account password. Do not send API keys, passwords, database URLs, or signing secrets in chat, source code, frontend code, or logs. Configure `GROQ_API_KEY` and `AUTH_TOKEN_SECRET` in Render's environment settings. The default Groq model is `openai/gpt-oss-20b`; model availability, free-tier eligibility, and provider limits depend on your Groq organization and must be checked in its console. There is no password for the model.
 
-## Cost and security notes
+## Security limitations to review
 
-- The recommendation quota has been removed. The bearer-token requirement authenticates `/recommend`; it does not cap AI usage.
-- A Groq model being usable without charge is subject to Groq's current plan, model availability, and organization limits. This repository cannot guarantee free or unlimited inference. Confirm the model and limits in your Groq console.
-- The current web frontend must preserve the `access_token` from login/Google login and send it on `/recommend`. Until that client integration is present, authenticated recommendations will receive `401`.
-- Only `/recommend` is protected by `secured_app.py`'s bearer-token hook. Other legacy API routes are not made authenticated by this wrapper.
-- `db.create_all()` currently runs during import in `app.py`; use migrations for production schema changes and do not expose destructive database-reset routes publicly.
-- Never put API keys, database URLs, or signing secrets in source control or client-side code.
+The wrapper requires a bearer token specifically on `/recommend`; other legacy routes in `app.py` have not been comprehensively protected by this change. `app.py` invokes `db.create_all()` during import. Use database migrations for future schema changes and disable/remove destructive routes such as `/reset-db-now` before production exposure.
