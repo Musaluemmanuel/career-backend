@@ -2,46 +2,46 @@
 
 ## Web service
 
-- Python runtime: 3.11.
+- Runtime: Python 3.11.
 - Build command: `pip install -r requirements.txt`.
-- Start command: `gunicorn secured_app:app --bind 0.0.0.0:$PORT --timeout 300` (also configured in `Procfile`).
+- Start command: `gunicorn secured_app:app --bind 0.0.0.0:$PORT --timeout 300` (configured in `Procfile`).
 - Optional health-check path: `/`.
 
-If a Render dashboard Start Command overrides `Procfile`, ensure it uses `secured_app:app`, not `app:app`; the secured entry point enforces the request cap and bearer authentication.
+If the Render dashboard overrides the Procfile, ensure the command uses `secured_app:app`, not `app:app`; otherwise authentication and quota handling are bypassed.
 
 ## Environment variables
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `DATABASE_URL` | Yes in production | Full URL for the active Render Postgres database. Use the service's current internal URL where available; keep credentials private. |
+| `DATABASE_URL` | Yes in production | Full URL for the active Render Postgres database. Use the current internal URL as appropriate. Keep credentials private. |
 | `AUTH_TOKEN_SECRET` | Yes | Long, random signing key for access tokens. Changing it invalidates issued tokens. |
-| `GROQ_API_KEY` | For Groq calls | Provider API key. Keep it server-side in Render; never send it in chat or frontend code. |
-| `GROQ_MODEL` | No | Defaults to `openai/gpt-oss-20b`; verify the exact model is enabled for your Groq org and check current billing/free-tier terms. |
-| `AUTH_TOKEN_TTL_SECONDS` | No | Signed-token lifetime; defaults to seven days. |
+| `GROQ_API_KEY` | For Groq calls | Provider API key. Keep it in Render environment settings; never put it in frontend code. |
+| `GROQ_MODEL` | No | Defaults to `openai/gpt-oss-20b`; verify access and current pricing/plan terms for your Groq organization. |
+| `AUTH_TOKEN_TTL_SECONDS` | No | Token lifetime; defaults to 604800 seconds (7 days). |
 | `GEMINI_API_KEY` | If Gemini code paths are used | Server-side provider key. |
 | `MAIL_USERNAME`, `MAIL_PASSWORD` | If SMTP is used | Server-side mail credentials. |
 
-There is no GPT model password. The project makes provider API requests through Groq; configure a Groq API key in the Render environment. Never share credentials in source code or support messages.
+There is no GPT model password. This service calls Groq's API; configure a Groq API key in the backend environment. The `openai/gpt-oss-20b` model ID names an open-weight GPT-OSS model served by Groq; it is not an OpenAI ChatGPT subscription/API credential. Free-tier access and limits are subject to Groq policies and model availability; do not assume usage is free or unlimited.
 
-## Three-attempt cap
+## Quota and funding
 
-The authenticated recommendation wrapper atomically records up to three lifetime requests per account in `recommendation_usage`. It charges a request before AI execution, preventing users from bypassing the cap through repeated provider failures. The fourth request returns HTTP 402 with `funding_required`. It does not process payments or reset the counter. Admin funding approval and any counter adjustment must be handled through a secure operational process, not a public endpoint.
+The secured wrapper atomically records up to three lifetime requests per account in `recommendation_usage`. It reserves an attempt before AI generation, so failed provider requests count. A fourth request returns HTTP 402 with `funding_required`. It does not process payments or reset counters. Any funding approval/counter adjustment must be carried out through a secure admin procedure.
 
-`secured_app.py` creates the new table if missing using `db.create_all()`. Back up production data and verify the database connection before deploying. Future schema changes should use migrations.
+`secured_app.py` uses `db.create_all()` to create the missing quota table. Back up production data and verify the database connection before deploy. Use migrations for future schema changes.
 
 ## Deploy checklist and feedback
 
 1. Set secrets in Render's Environment page; do not commit them.
-2. Verify web service and database connectivity. For DNS errors, compare the configured `DATABASE_URL` with the active database's Internal Database URL and check Render network/region settings.
-3. Deploy latest `main` and confirm Gunicorn binds to `0.0.0.0:$PORT` and Render reports service live.
-4. Check `GET /`, then sign in and confirm the response includes `access_token`.
-5. Send three authenticated recommendation POSTs; each admitted POST uses one attempt. A fourth must return `402 funding_required` and must not run recommendation generation.
+2. Check web service/database network and region, and verify `DATABASE_URL` matches the active DB's URL.
+3. Deploy latest `main` and verify Gunicorn listens on `0.0.0.0:$PORT` and Render reports service live.
+4. Check `GET /`, then sign in and verify response includes `access_token`.
+5. Send three authenticated recommendation POSTs; the next must return `402 funding_required` without invoking the recommender.
 6. Confirm the frontend sends the bearer token. Without it, recommendation requests receive 401.
-7. Watch logs for provider `model_not_found`, rate-limit responses, and DB exceptions. A live health check alone does not establish AI-provider health.
+7. Watch logs for provider `model_not_found`, rate-limit, and database exceptions. A successful health check doesn't prove AI generation works.
 
 ## Security notes
 
-- No API keys, passwords, connection strings, or tokens in Git, browser storage logs, or diagnostics.
-- Only `/recommend` is protected by this wrapper; other legacy routes need an authorization review.
-- Remove or secure `/reset-db-now`; it drops application tables.
-- `db.create_all()` is not a migration system.
+- Never put API keys, passwords, database URLs, or access tokens in Git or logs.
+- Only `/recommend` is authenticated by this wrapper; other legacy routes need review.
+- Secure or remove `/reset-db-now`; it drops application tables.
+- `db.create_all()` is not a database migration system.

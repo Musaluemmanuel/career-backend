@@ -1,7 +1,7 @@
 """Production entry point with authenticated, lifetime-limited AI requests.
 
 Run with ``gunicorn secured_app:app``. Successful verified password and Google
-sign-ins receive a signed bearer token. Every authenticated POST /recommend
+sign-ins receive signed bearer tokens. Every authenticated POST /recommend
 request reserves one of three lifetime attempts before invoking the AI pipeline.
 """
 
@@ -25,11 +25,13 @@ TOKEN_SERIALIZER = (
     if AUTH_TOKEN_SECRET
     else None
 )
+# Groq serves the open-weight GPT-OSS model through its API. This is not an
+# OpenAI ChatGPT account/password; access and pricing depend on Groq org policy.
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
 
 
 class RecommendationUsage(db.Model):
-    """Persistent lifetime counter; one row per account."""
+    """Persistent lifetime counter, keyed by the authenticated account."""
 
     __tablename__ = "recommendation_usage"
 
@@ -37,7 +39,7 @@ class RecommendationUsage(db.Model):
     attempts = db.Column(db.Integer, nullable=False, default=0)
 
 
-# Create the quota table if absent. This does not migrate or drop existing data.
+# Create the quota table if absent. This does not drop existing user data.
 with app.app_context():
     db.create_all()
 
@@ -78,7 +80,7 @@ class _GroqClientWithSelectedModel:
         return getattr(self._client, name)
 
 
-# Force both existing Groq call sites through one configurable model setting.
+# Use one model for both career generation and institution-link lookup.
 from utils import ai_engines, web_scraper  # noqa: E402
 
 for _module in (ai_engines, web_scraper):
@@ -108,8 +110,8 @@ def _reserve_attempt(user_id):
     ).returning(RecommendationUsage.attempts)
 
     try:
-        reserved = db.session.execute(statement).scalar_one_or_none()
-        if reserved is None:
+        reserved_count = db.session.execute(statement).scalar_one_or_none()
+        if reserved_count is None:
             db.session.rollback()
             return False
         db.session.commit()
@@ -156,7 +158,7 @@ def authenticate_and_limit_recommendations():
     if supplied_email and str(supplied_email).strip().casefold() != user.email.casefold():
         return _json_error("Request email must match the signed-in account.", "account_mismatch", 403)
 
-    # Bind writes and quota identity to the authenticated database account.
+    # Bind recommendation ownership to the signed-in identity, not a caller ID.
     payload["email"] = user.email
     if user.name:
         payload["name"] = user.name
@@ -173,14 +175,14 @@ def authenticate_and_limit_recommendations():
     except Exception:
         return _json_error("Could not check recommendation usage. Please try again later.", "quota_unavailable", 503)
 
-    # Flask caches parsed JSON as a tuple internally; the parsed dict itself is
-    # already cached and is modified above, so downstream request.get_json sees it.
     return None
 
 
 @app.after_request
 def issue_sign_in_token(response):
-    if request.path not in ("/login", "/google-login") or response.status_code != 200 or TOKEN_SERIALIZER is None:
+    if request.path not in ("/login", "/google-login", "/verify") or response.status_code != 200:
+        return response
+    if TOKEN_SERIALIZER is None:
         return response
 
     try:

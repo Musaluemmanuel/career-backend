@@ -1,13 +1,15 @@
-# Tests and expected feedback
+# Test guide and feedback
 
-Run:
+Run tests with:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-The unit suite is intended to check missing/invalid authentication, user binding, email mismatch, unverified users, issuance of login tokens, exactly three admitted lifetime requests, and a fourth `402 funding_required` response. It uses isolated SQLite and a stub recommendation handler, so it must not make provider calls or consume tokens.
+The focused suite checks the secured entry point's missing-token rejection, account binding, email mismatch, unverified-user rejection, token issuance, quota behavior (three allowed and the fourth returns `402 funding_required`), and OPTIONS preflight behavior. It uses in-memory SQLite and a stub recommendation handler; it makes no provider calls and sends no email.
 
-After deploying, also verify via staging: login returns a token; the browser attaches it; three calls reach the recommendation route; the fourth receives the funding message; the stored count remains three; and OPTIONS preflight does not consume quota.
+After deployment, verify in staging: successful sign-in returns an access token; the browser attaches it; three calls enter the recommendation handler; a fourth returns the funding response; usage remains at three; and OPTIONS does not use a trial. Check the Render and provider consoles separately for live DB/model access.
 
-Limit caveat: this caps recommendation HTTP attempts, not the number of internal LLM calls/retries made during each admitted request. Provider/org limits remain an additional cost control.
+The quota caps HTTP recommendation attempts, not internal Groq calls/retries made for one admitted attempt. Groq account limits and any costs remain separate.
+
+Frontend integration is required: `login.html` must save the returned `access_token`, and the dashboard's recommendation request must send `Authorization: Bearer <token>`. Until that frontend update deploys, its requests will receive HTTP 401.
