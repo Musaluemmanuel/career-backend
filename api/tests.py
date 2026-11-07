@@ -1,6 +1,7 @@
 import base64
 import json
 import urllib.error
+import urllib.parse
 from unittest.mock import MagicMock, patch
 
 from django.conf import settings
@@ -70,6 +71,83 @@ class ApiViewsTests(TestCase):
     def test_resend_email_surfaces_provider_rejection(self, _urlopen):
         with self.assertRaisesRegex(RuntimeError, "HTTP 403"):
             _send_email("Verify account", "student@example.com", "Your code is 123456.")
+
+    @override_settings(
+        EMAIL_PROVIDER="gmail_api",
+        MAIL_FROM="ai.career.recommender@gmail.com",
+        GMAIL_CLIENT_ID="test-client-id",
+        GMAIL_CLIENT_SECRET="test-client-secret",
+        GMAIL_REFRESH_TOKEN="test-refresh-token",
+        EMAIL_TIMEOUT=8,
+    )
+    @patch("api.views.urllib.request.urlopen")
+    def test_gmail_api_sends_email_with_oauth_and_attachment(self, urlopen):
+        token_response = MagicMock()
+        token_response.read.return_value = json.dumps({
+            "access_token": "test-access-token",
+        }).encode()
+        send_response = MagicMock()
+        send_response.status = 200
+        urlopen.side_effect = [
+            MagicMock(__enter__=MagicMock(return_value=token_response)),
+            MagicMock(__enter__=MagicMock(return_value=send_response)),
+        ]
+
+        _send_email(
+            "Verify account",
+            "student@example.com",
+            "Your verification code is 123456.",
+            "<p>Your code is <strong>123456</strong>.</p>",
+            [("report.pdf", b"%PDF-1.4", "application/pdf")],
+        )
+
+        token_request, send_request = [call.args[0] for call in urlopen.call_args_list]
+        self.assertEqual(token_request.full_url, "https://oauth2.googleapis.com/token")
+        self.assertEqual(
+            urllib.parse.parse_qs(token_request.data.decode()),
+            {
+                "client_id": ["test-client-id"],
+                "client_secret": ["test-client-secret"],
+                "refresh_token": ["test-refresh-token"],
+                "grant_type": ["refresh_token"],
+            },
+        )
+        self.assertEqual(
+            send_request.full_url,
+            "https://gmail.googleapis.com/gmail/v1/users/me/messages/send",
+        )
+        self.assertEqual(send_request.get_header("Authorization"), "Bearer test-access-token")
+        raw_message = json.loads(send_request.data)["raw"]
+        decoded_message = base64.urlsafe_b64decode(raw_message + "=" * (-len(raw_message) % 4))
+        self.assertIn(b"From: ai.career.recommender@gmail.com", decoded_message)
+        self.assertIn(b"To: student@example.com", decoded_message)
+        self.assertIn(b"Verify account", decoded_message)
+        self.assertIn(b"report.pdf", decoded_message)
+        self.assertEqual([call.kwargs["timeout"] for call in urlopen.call_args_list], [8, 8])
+
+    @override_settings(
+        EMAIL_PROVIDER="gmail_api",
+        MAIL_FROM="ai.career.recommender@gmail.com",
+        GMAIL_CLIENT_ID="test-client-id",
+        GMAIL_CLIENT_SECRET="test-client-secret",
+        GMAIL_REFRESH_TOKEN="test-refresh-token",
+    )
+    def test_gmail_api_surfaces_missing_send_permission(self):
+        token_response = MagicMock()
+        token_response.read.return_value = b'{"access_token":"test-access-token"}'
+        with patch("api.views.urllib.request.urlopen") as urlopen:
+            urlopen.side_effect = [
+                MagicMock(__enter__=MagicMock(return_value=token_response)),
+                urllib.error.HTTPError(
+                    "https://gmail.googleapis.com/gmail/v1/users/me/messages/send",
+                    403,
+                    "Forbidden",
+                    {},
+                    None,
+                ),
+            ]
+            with self.assertRaisesRegex(RuntimeError, "Gmail API email delivery failed with HTTP 403"):
+                _send_email("Verify account", "student@example.com", "Your code is 123456.")
 
     @override_settings(
         EMAIL_PROVIDER="resend",
@@ -684,6 +762,57 @@ class ApiViewsTests(TestCase):
             )
 
         self.assertEqual(result, url)
+        get_page.assert_not_called()
+
+    def test_course_url_uses_saved_verified_registry_entry_without_search(self):
+        url = "https://cuea.edu/all-courses/bsc-computer-science/"
+        registry = {
+            "schema_version": 1,
+            "entries": [{
+                "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+                "domain": "cuea.edu",
+                "course": "BACHELOR OF SCIENCE IN COMPUTER SCIENCE",
+                "url": url,
+                "verified": True,
+                "status": "verified",
+            }],
+        }
+        with (
+            patch("utils.web_scraper.OFFICIAL_DOMAINS", {}),
+            patch("utils.web_scraper.load_course_url_database", return_value=registry),
+            patch("utils.web_scraper.requests.get") as get_page,
+        ):
+            result = get_course_url(
+                "Catholic University of Eastern Africa",
+                "Bachelor of Science in Computer Science",
+            )
+
+        self.assertEqual(result, url)
+        get_page.assert_not_called()
+
+    def test_course_url_ignores_unverified_registry_entry(self):
+        registry = {
+            "schema_version": 1,
+            "entries": [{
+                "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+                "domain": "cuea.edu",
+                "course": "BACHELOR OF SCIENCE IN COMPUTER SCIENCE",
+                "url": "https://cuea.edu/all-courses/bsc-computer-science/",
+                "verified": False,
+                "status": "not_found",
+            }],
+        }
+        with (
+            patch("utils.web_scraper.OFFICIAL_DOMAINS", {}),
+            patch("utils.web_scraper.load_course_url_database", return_value=registry),
+            patch("utils.web_scraper.requests.get") as get_page,
+        ):
+            result = get_course_url(
+                "Catholic University of Eastern Africa",
+                "Bachelor of Science in Computer Science",
+            )
+
+        self.assertIsNone(result)
         get_page.assert_not_called()
 
     def test_course_url_search_requires_an_official_course_page(self):

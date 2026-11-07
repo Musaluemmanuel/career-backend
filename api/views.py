@@ -9,6 +9,7 @@ import secrets
 import string
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from collections import Counter
 
@@ -80,6 +81,59 @@ def _json_body(request):
     return payload if isinstance(payload, dict) else None
 
 
+def _send_via_gmail_api(message):
+    credentials = {
+        "client_id": settings.GMAIL_CLIENT_ID,
+        "client_secret": settings.GMAIL_CLIENT_SECRET,
+        "refresh_token": settings.GMAIL_REFRESH_TOKEN,
+        "grant_type": "refresh_token",
+    }
+    if not all(credentials.values()) or not settings.MAIL_FROM:
+        raise RuntimeError(
+            "Gmail API delivery requires Gmail OAuth credentials and MAIL_FROM."
+        )
+
+    token_request = urllib.request.Request(
+        "https://oauth2.googleapis.com/token",
+        data=urllib.parse.urlencode(credentials).encode("utf-8"),
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(token_request, timeout=settings.EMAIL_TIMEOUT) as response:
+            token_payload = json.loads(response.read())
+    except urllib.error.HTTPError as error:
+        raise RuntimeError(
+            f"Gmail OAuth token refresh failed with HTTP {error.code}."
+        ) from error
+
+    access_token = token_payload.get("access_token") if isinstance(token_payload, dict) else None
+    if not access_token:
+        raise RuntimeError("Gmail OAuth token refresh returned no access token.")
+
+    message.from_email = settings.MAIL_FROM
+    raw_message = base64.urlsafe_b64encode(message.message().as_bytes()).decode("ascii")
+    send_request = urllib.request.Request(
+        "https://gmail.googleapis.com/gmail/v1/users/me/messages/send",
+        data=json.dumps({"raw": raw_message}).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(send_request, timeout=settings.EMAIL_TIMEOUT) as response:
+            if response.status >= 400:
+                raise RuntimeError(
+                    f"Gmail API email delivery failed with HTTP {response.status}."
+                )
+    except urllib.error.HTTPError as error:
+        raise RuntimeError(
+            f"Gmail API email delivery failed with HTTP {error.code}."
+        ) from error
+
+
 def _send_email(subject, recipient, text, html=None, attachments=None):
     message = EmailMultiAlternatives(
         subject=subject,
@@ -89,6 +143,13 @@ def _send_email(subject, recipient, text, html=None, attachments=None):
     )
     if html:
         message.attach_alternative(html, "text/html")
+    if settings.EMAIL_PROVIDER == "gmail_api":
+        if not settings.MAIL_FROM:
+            raise RuntimeError("Gmail API email delivery requires MAIL_FROM.")
+        for filename, content, mime_type in attachments or []:
+            message.attach(filename, content, mime_type)
+        _send_via_gmail_api(message)
+        return
     if settings.EMAIL_PROVIDER == "resend":
         if not settings.RESEND_API_KEY or not settings.MAIL_FROM:
             raise RuntimeError(
@@ -134,7 +195,7 @@ def _send_email(subject, recipient, text, html=None, attachments=None):
             ) from error
         return
     if settings.EMAIL_PROVIDER != "smtp":
-        raise RuntimeError("MAIL_PROVIDER must be either 'smtp' or 'resend'.")
+        raise RuntimeError("MAIL_PROVIDER must be 'smtp', 'resend', or 'gmail_api'.")
     if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
         raise RuntimeError("SMTP email delivery is not configured.")
     for filename, content, mime_type in attachments or []:

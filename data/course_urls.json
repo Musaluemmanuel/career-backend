@@ -1,1 +1,3331 @@
-{}
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "university": "AMREF INTERNATIONAL UNIVERSITY",
+      "domain": "amref.ac.ke",
+      "course": "BACHELOR OF SCIENCE (PHYSIOTHERAPY)",
+      "target_type": "institution",
+      "url": "https://amref.ac.ke/bsc-physiotherapy/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "4275465",
+      "kuccps_program_codes": [
+        "4275465"
+      ]
+    },
+    {
+      "university": "AMREF INTERNATIONAL UNIVERSITY",
+      "domain": "amref.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN COMMUNITY HEALTH PRACTICE",
+      "target_type": "institution",
+      "url": "https://amref.ac.ke/bsc-in-community-health-practice/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "4275423",
+      "kuccps_program_codes": [
+        "4275423"
+      ]
+    },
+    {
+      "university": "AMREF INTERNATIONAL UNIVERSITY",
+      "domain": "amref.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN HEALTH RECORDS AND INFORMATION MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://amref.ac.ke/bsc-health-records-and-information-management-hrim-systems/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "4275681",
+      "kuccps_program_codes": [
+        "4275681"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS ( KISWAHILI AND COMMUNICATION)",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-kiswahili/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480325",
+      "kuccps_program_codes": [
+        "1480325"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS (RELIGIOUS STUDIES)",
+      "target_type": "institution",
+      "url": "https://cuea.edu/all-courses/ba-religious-studies/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480445",
+      "kuccps_program_codes": [
+        "1480445"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS (SOCIAL WORK)",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-social-work/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480144",
+      "kuccps_program_codes": [
+        "1480144"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN ANTHROPOLOGY",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-anthropology/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480106",
+      "kuccps_program_codes": [
+        "1480106"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN DEVELOPMENT STUDIES",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-dev-studies/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480303",
+      "kuccps_program_codes": [
+        "1480303"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN ECONOMICS",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-economics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480146",
+      "kuccps_program_codes": [
+        "1480146"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN ENVIRONMENTAL PLANNING AND MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-env-planning/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480312",
+      "kuccps_program_codes": [
+        "1480312"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN GEOGRAPHY",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-geography/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480292",
+      "kuccps_program_codes": [
+        "1480292"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN HISTORY",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-history-ir/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480522",
+      "kuccps_program_codes": [
+        "1480522"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN INTERNATIONAL RELATIONS",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-int-relations/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480296",
+      "kuccps_program_codes": [
+        "1480296"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN PHILOSOPHY",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-philosophy/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480392",
+      "kuccps_program_codes": [
+        "1480392"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ARTS IN POLITICAL SCIENCE",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/ba-political-science/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480550",
+      "kuccps_program_codes": [
+        "1480550"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF COMMERCE",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/b-commerce/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480133",
+      "kuccps_program_codes": [
+        "1480133"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ECONOMICS & STATISTICS",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/b-econ-statistics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480199",
+      "kuccps_program_codes": [
+        "1480199"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF ECONOMICS AND FINANCE",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/b-econ-finance/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480540",
+      "kuccps_program_codes": [
+        "1480540"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF JUSTICE AND PEACE",
+      "target_type": "institution",
+      "url": "https://cuea.edu/all-courses/b-justice-peace/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480652",
+      "kuccps_program_codes": [
+        "1480652"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE (CHEMISTRY)",
+      "target_type": "institution",
+      "url": "https://cuea.edu/all-courses/bsc-chemistry/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1480513",
+      "kuccps_program_codes": [
+        "1480513"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE (MATHEMATICS)",
+      "target_type": "institution",
+      "url": "https://cuea.edu/all-courses/bsc-mathematics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480109",
+      "kuccps_program_codes": [
+        "1480109"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE (PHYSICS)",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/bsc-physics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480366",
+      "kuccps_program_codes": [
+        "1480366"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE IN ACTUARIAL SCIENCE",
+      "target_type": "institution",
+      "url": "https://cuea.edu/all-courses/bsc-actuarial/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1480107",
+      "kuccps_program_codes": [
+        "1480107"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE IN BIOLOGY",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/bsc-biology/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480111",
+      "kuccps_program_codes": [
+        "1480111"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE IN COMMUNITY HEALTH AND DEVELOPMENT",
+      "target_type": "institution",
+      "url": "https://www.cuea.edu/all-courses/bsc-comm-health/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480423",
+      "kuccps_program_codes": [
+        "1480423"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE IN COMPUTER SCIENCE",
+      "target_type": "institution",
+      "url": "https://cuea.edu/all-courses/bsc-computer-science/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480115",
+      "kuccps_program_codes": [
+        "1480115"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE IN LIBRARY AND INFORMATION SCIENCE",
+      "target_type": "institution",
+      "url": "https://cuea.edu/all-courses/bsc-library/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480233",
+      "kuccps_program_codes": [
+        "1480233"
+      ]
+    },
+    {
+      "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
+      "domain": "cuea.edu",
+      "course": "BACHELOR OF SCIENCE IN NURSING",
+      "target_type": "institution",
+      "url": "https://cuea.edu/all-courses/bsc-nursing/",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1480132",
+      "kuccps_program_codes": [
+        "1480132"
+      ]
+    },
+    {
+      "university": "CO-OPERATIVE UNIVERSITY OF KENYA",
+      "domain": "cuk.ac.ke",
+      "course": "BACHELOR OF CO-OPERATIVE BUSINESS",
+      "target_type": "institution",
+      "url": "https://cuk.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1080610",
+      "kuccps_program_codes": [
+        "1080610"
+      ]
+    },
+    {
+      "university": "CO-OPERATIVE UNIVERSITY OF KENYA",
+      "domain": "cuk.ac.ke",
+      "course": "BACHELOR OF COMMUNITY DEVELOPMENT",
+      "target_type": "institution",
+      "url": "https://cuk.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1080239",
+      "kuccps_program_codes": [
+        "1080239"
+      ]
+    },
+    {
+      "university": "DAYSTAR UNIVERSITY",
+      "domain": "daystar.ac.ke",
+      "course": "BACHELOR OF ARTS (SOCIAL WORK)",
+      "target_type": "institution",
+      "url": "https://www.daystar.ac.ke/school-of-applied-human-sciences/ba-social-work",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1162144",
+      "kuccps_program_codes": [
+        "1162144"
+      ]
+    },
+    {
+      "university": "DAYSTAR UNIVERSITY",
+      "domain": "daystar.ac.ke",
+      "course": "BACHELOR OF ARTS IN ENGLISH",
+      "target_type": "institution",
+      "url": "https://new.daystar.ac.ke/programmes/bachelor-of-arts-in-english",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1162602",
+      "kuccps_program_codes": [
+        "1162602"
+      ]
+    },
+    {
+      "university": "DAYSTAR UNIVERSITY",
+      "domain": "daystar.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN NURSING",
+      "target_type": "institution",
+      "url": "https://daystar.ac.ke/school-of-nursing/bsc-nursing",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:27:24.983343+00:00",
+      "kuccps_program_code": "1162132",
+      "kuccps_program_codes": [
+        "1162132"
+      ]
+    },
+    {
+      "university": "DEDAN KIMATHI UNIVERSITY OF TECHNOLOGY",
+      "domain": "dkut.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN NURSING SCIENCE",
+      "target_type": "institution",
+      "url": "https://nursing.dkut.ac.ke/programmes.html",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1173132",
+      "kuccps_program_codes": [
+        "1173132"
+      ]
+    },
+    {
+      "university": "ISLAMIC UNIVERSITY OF KENYA",
+      "domain": "iuk.ac.ke",
+      "course": "BACHELOR OF ARTS IN ISLAMIC SHARIA",
+      "target_type": "institution",
+      "url": "https://admissions.iuk.ac.ke/course.php?id=25",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "3895642",
+      "kuccps_program_codes": [
+        "3895642"
+      ]
+    },
+    {
+      "university": "ISLAMIC UNIVERSITY OF KENYA",
+      "domain": "iuk.ac.ke",
+      "course": "BACHELOR OF BUSINESS MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://admissions.iuk.ac.ke/course.php?id=9",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "3895151",
+      "kuccps_program_codes": [
+        "3895151"
+      ]
+    },
+    {
+      "university": "ISLAMIC UNIVERSITY OF KENYA",
+      "domain": "iuk.ac.ke",
+      "course": "BACHELOR OF EDUCATION ARTS",
+      "target_type": "institution",
+      "url": "https://admissions.iuk.ac.ke/programmes.php",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "3895135",
+      "kuccps_program_codes": [
+        "3895135"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF ARTS(SPATIAL PLANNING)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/52/16",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1053485",
+      "kuccps_program_codes": [
+        "1053485"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF BUSINESS ADMINISTRATION WITH IT",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/166/5",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1053153",
+      "kuccps_program_codes": [
+        "1053153"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF EDUCATION (SPECIAL NEEDS EDUCATION, WITH IT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/85/24",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053155",
+      "kuccps_program_codes": [
+        "1053155"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF EDUCATION(ARTS) WITH IT",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/86/26",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1053135",
+      "kuccps_program_codes": [
+        "1053135"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF EDUCATION(EARLY CHILDHOOD DEVELOPMENT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/88/24",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1053180",
+      "kuccps_program_codes": [
+        "1053180"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF EDUCATION(SCIENCE WITH IT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/87/0",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1053137",
+      "kuccps_program_codes": [
+        "1053137"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF INTERNATIONAL TOURISM MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/165/6",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1053235",
+      "kuccps_program_codes": [
+        "1053235"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF LOGISTICS AND SUPPLY CHAIN MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/163/5",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1053248",
+      "kuccps_program_codes": [
+        "1053248"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (ACTUARIAL SCIENCE WITH IT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/62/21",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053107",
+      "kuccps_program_codes": [
+        "1053107"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (AGRICULTURAL EXTENSION EDUCATION)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/34/12",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053415",
+      "kuccps_program_codes": [
+        "1053415"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (ANIMAL SCIENCE)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/35/11",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053293",
+      "kuccps_program_codes": [
+        "1053293"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (COMMUNITY HEALTH AND DEVELOPMENT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/97/31",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053423",
+      "kuccps_program_codes": [
+        "1053423"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (COMPUTER SECURITY AND FORENSICS)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/8/1",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053511",
+      "kuccps_program_codes": [
+        "1053511"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (INFORMATION AND COMMUNICATION TECHNOLOGY)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/12/2",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053158",
+      "kuccps_program_codes": [
+        "1053158"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (PUBLIC HEALTH)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/98/31",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053732",
+      "kuccps_program_codes": [
+        "1053732"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (RENEWABLE ENERGY TECHNOLOGY AND MANAGEMENT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/9/29",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053626",
+      "kuccps_program_codes": [
+        "1053626"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (SOIL SCIENCE)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/33/10",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053479",
+      "kuccps_program_codes": [
+        "1053479"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (WATER RESOURCES AND ENVIRONMENT MANAGEMENT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/53/17",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "kuccps_program_code": "1053486",
+      "kuccps_program_codes": [
+        "1053486"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE(AGRIBUSINESS MANAGEMENT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/30/12",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053187",
+      "kuccps_program_codes": [
+        "1053187"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE(BIOLOGICAL SCIENCES)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/48/14",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053111",
+      "kuccps_program_codes": [
+        "1053111"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE(BUSINESS INFORMATION SYSTEMS)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/13/2",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053554",
+      "kuccps_program_codes": [
+        "1053554"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE(CONSTRUCTION MANAGEMENT)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/10/28",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053776",
+      "kuccps_program_codes": [
+        "1053776"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE(FOOD SECURITY)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/31/13",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053483",
+      "kuccps_program_codes": [
+        "1053483"
+      ]
+    },
+    {
+      "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "jooust.ac.ke",
+      "course": "BACHELOR OF SCIENCE(HORTICULTURE)",
+      "target_type": "institution",
+      "url": "https://profiles.jooust.ac.ke/programmes/programme/32/10",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1053185",
+      "kuccps_program_codes": [
+        "1053185"
+      ]
+    },
+    {
+      "university": "JOMO KENYATTA UNIVERSITY OF AGRICULTURE AND TECHNOLOGY",
+      "domain": "jkuat.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN NURSING",
+      "target_type": "institution",
+      "url": "https://www.jkuat.ac.ke/school/nursing/?page_id=17395",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1249132",
+      "kuccps_program_codes": [
+        "1249132"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF BUSINESS INFORMATION TECHNOLOGY",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bbit",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061206",
+      "kuccps_program_codes": [
+        "1061206"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF BUSINESS MANAGEMENT AND INFORMATION TECHNOLOGY",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bmit",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061301",
+      "kuccps_program_codes": [
+        "1061301"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF COMMERCE",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/short-courses?view=course&id=119:online-bachelor-of-commerce",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061133",
+      "kuccps_program_codes": [
+        "1061133"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF COUNSELLING PSYCHOLOGY",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-counselling-psychology",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061337",
+      "kuccps_program_codes": [
+        "1061337"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF EDUCATION (ARTS)",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-education-arts",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061135",
+      "kuccps_program_codes": [
+        "1061135"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF EDUCATION (SCIENCE)",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-education-science",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061137",
+      "kuccps_program_codes": [
+        "1061137"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF LAWS (LL.B.)",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-laws",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061134",
+      "kuccps_program_codes": [
+        "1061134"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF MASS COMMUNICATION",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-mass-communication",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061242",
+      "kuccps_program_codes": [
+        "1061242"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF MUSIC PRODUCTION TECHNOLOGY",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-music-production-technology",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061661",
+      "kuccps_program_codes": [
+        "1061661"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF MUSIC THEORY AND COMPOSITION",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-music-theory,-composition-and-performance",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061160",
+      "kuccps_program_codes": [
+        "1061160"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF PROCUREMENT AND LOGISTICS MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-procurement-and-logistics-management",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061250",
+      "kuccps_program_codes": [
+        "1061250"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF SCIENCE",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-science",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061120",
+      "kuccps_program_codes": [
+        "1061120"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF SCIENCE CLINICAL MEDICINE",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-science-in-clinical-medicine",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061560",
+      "kuccps_program_codes": [
+        "1061560"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN COMPUTER SECURITY AND",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-science-in-computer-security-and-forensics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061511",
+      "kuccps_program_codes": [
+        "1061511"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN ECONOMICS AND MATHEMATICS",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-science-in-economics-and-mathematics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061588",
+      "kuccps_program_codes": [
+        "1061588"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN ENVIRONMENTAL SCIENCE",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-science-in-environmental-science",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061213",
+      "kuccps_program_codes": [
+        "1061213"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN HOSPITALITY MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-science-in-hospitality-management",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061224",
+      "kuccps_program_codes": [
+        "1061224"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN HUMAN NUTRITION AND DIETETICS",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bachelor-of-science-in-human-nutrition-and-dietetics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061405",
+      "kuccps_program_codes": [
+        "1061405"
+      ]
+    },
+    {
+      "university": "KABARAK UNIVERSITY",
+      "domain": "kabarak.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN NURSING",
+      "target_type": "institution",
+      "url": "https://kabarak.ac.ke/programme/bscn",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1061132",
+      "kuccps_program_codes": [
+        "1061132"
+      ]
+    },
+    {
+      "university": "KENYA ASSEMBLIES OF GOD EAST UNIVERSITY",
+      "domain": "east.university",
+      "course": "BA IN BIBLICAL STUDIES",
+      "target_type": "institution",
+      "url": "https://east.university/bachelor-of-arts-in-biblical-studies/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1555252",
+      "kuccps_program_codes": [
+        "1555252"
+      ]
+    },
+    {
+      "university": "KENYA ASSEMBLIES OF GOD EAST UNIVERSITY",
+      "domain": "east.university",
+      "course": "BA IN CHURCH EDUCATIONAL MINISTRIES",
+      "target_type": "institution",
+      "url": "https://east.university/bachelor-of-arts-in-church-educational-ministries/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1555253",
+      "kuccps_program_codes": [
+        "1555253"
+      ]
+    },
+    {
+      "university": "KENYA ASSEMBLIES OF GOD EAST UNIVERSITY",
+      "domain": "east.university",
+      "course": "BACHELOR IN BUSINESS ADMINISTRATION",
+      "target_type": "institution",
+      "url": "https://east.university/bachelor-of-business-administration/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1555153",
+      "kuccps_program_codes": [
+        "1555153"
+      ]
+    },
+    {
+      "university": "KENYA ASSEMBLIES OF GOD EAST UNIVERSITY",
+      "domain": "east.university",
+      "course": "BACHELOR OF ARTS IN COMMUNITY DEVELOPMENT",
+      "target_type": "institution",
+      "url": "https://east.university/bachelor-of-arts-in-community-development/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1555171",
+      "kuccps_program_codes": [
+        "1555171"
+      ]
+    },
+    {
+      "university": "KENYATTA UNIVERSITY",
+      "domain": "ku.ac.ke",
+      "course": "BACHELOR OF SCIENCE (B.SC)",
+      "target_type": "institution",
+      "url": "https://www.ku.ac.ke/departments/dept-civil-engineering.php",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1111120",
+      "kuccps_program_codes": [
+        "1111120"
+      ]
+    },
+    {
+      "university": "KENYATTA UNIVERSITY",
+      "domain": "ku.ac.ke",
+      "course": "BACHELOR OF SCIENCE (CIVIL ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://www.ku.ac.ke/departments/dept-civil-engineering.php",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1111116",
+      "kuccps_program_codes": [
+        "1111116"
+      ]
+    },
+    {
+      "university": "KENYATTA UNIVERSITY",
+      "domain": "ku.ac.ke",
+      "course": "BACHELOR OF SCIENCE (ENVIRONMENTAL HEALTH)",
+      "target_type": "institution",
+      "url": "https://www.ku.ac.ke/departments/dept-community-health.php",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1111188",
+      "kuccps_program_codes": [
+        "1111188"
+      ]
+    },
+    {
+      "university": "KENYATTA UNIVERSITY",
+      "domain": "ku.ac.ke",
+      "course": "BACHELOR OF SCIENCE (HEALTH PROMOTION)",
+      "target_type": "institution",
+      "url": "https://www.ku.ac.ke/departments/dept-community-health.php",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1111618",
+      "kuccps_program_codes": [
+        "1111618"
+      ]
+    },
+    {
+      "university": "KENYATTA UNIVERSITY",
+      "domain": "ku.ac.ke",
+      "course": "BACHELOR OF SCIENCE (MECHANICAL ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://www.ku.ac.ke/departments/dept-civil-engineering.php",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1111118",
+      "kuccps_program_codes": [
+        "1111118"
+      ]
+    },
+    {
+      "university": "KENYATTA UNIVERSITY",
+      "domain": "ku.ac.ke",
+      "course": "BACHELOR OF SCIENCE(AEROSPACE ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://www.ku.ac.ke/departments/dept-civil-engineering.php",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1111573",
+      "kuccps_program_codes": [
+        "1111573"
+      ]
+    },
+    {
+      "university": "KIRINYAGA UNIVERSITY",
+      "domain": "kyu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (NURSING)",
+      "target_type": "institution",
+      "url": "https://kyu.ac.ke/phocadownload/KyU%20Programmes%20202526.pdf",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1079132",
+      "kuccps_program_codes": [
+        "1079132"
+      ]
+    },
+    {
+      "university": "KISII UNIVERSITY",
+      "domain": "kisiiuniversity.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN NURSING",
+      "target_type": "institution",
+      "url": "https://kisiiuniversity.ac.ke/cat-programmes/3",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1087132",
+      "kuccps_program_codes": [
+        "1087132"
+      ]
+    },
+    {
+      "university": "KOITALEEL SAMOEI UNIVERSITY COLLEGE",
+      "domain": "ksu.ac.ke",
+      "course": "BACHELOR OF COMMERCE",
+      "target_type": "institution",
+      "url": "https://ksu.ac.ke/index.php/bachelor-of-commerce-2/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "3890133",
+      "kuccps_program_codes": [
+        "3890133"
+      ]
+    },
+    {
+      "university": "KOITALEEL SAMOEI UNIVERSITY COLLEGE",
+      "domain": "ksu.ac.ke",
+      "course": "BACHELOR OF PROJECT PLANNING AND MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://ksu.ac.ke/index.php/bachelor-of-commerce/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "3890327",
+      "kuccps_program_codes": [
+        "3890327"
+      ]
+    },
+    {
+      "university": "MANAGEMENT UNIVERSITY OF AFRICA",
+      "domain": "mua.ac.ke",
+      "course": "BACHELOR OF ARTS IN DEVELOPMENT STUDIES",
+      "target_type": "institution",
+      "url": "https://odel.mua.ac.ke/programs/level/undergraduate",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1066303",
+      "kuccps_program_codes": [
+        "1066303"
+      ]
+    },
+    {
+      "university": "MASENO UNIVERSITY",
+      "domain": "maseno.ac.ke",
+      "course": "BACHELOR OF SCIENCE (NURSING, WITH IT)",
+      "target_type": "institution",
+      "url": "https://maseno.ac.ke/nursing",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:49:31.724658+00:00",
+      "kuccps_program_code": "1229132",
+      "kuccps_program_codes": [
+        "1229132"
+      ]
+    },
+    {
+      "university": "MASINDE MULIRO UNIVERSITY OF SCIENCE & TECHNOLOGY",
+      "domain": "mmust.ac.ke",
+      "course": "BACHELOR OF SCIENCE (NURSING)",
+      "target_type": "institution",
+      "url": "https://nursing.mmust.ac.ke/programmes-2/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1082132",
+      "kuccps_program_codes": [
+        "1082132"
+      ]
+    },
+    {
+      "university": "MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "must.ac.ke",
+      "course": "BACHELOR OF EDUCATION TECHNOLOGY (CIVIL ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://sed.must.ac.ke/bachelor-of-education-in-technology-civil-engineering/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1240320",
+      "kuccps_program_codes": [
+        "1240320"
+      ]
+    },
+    {
+      "university": "MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "must.ac.ke",
+      "course": "BACHELOR OF EDUCATION TECHNOLOGY (MECHANICAL ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://sed.must.ac.ke/bachelor-of-education-in-technology-mechanical-engineering/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1240318",
+      "kuccps_program_codes": [
+        "1240318"
+      ]
+    },
+    {
+      "university": "MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+      "domain": "must.ac.ke",
+      "course": "BACHELOR OF SCIENCE (NURSING)",
+      "target_type": "institution",
+      "url": "https://son.must.ac.ke/bachelor-of-science-in-nursing/",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1240132",
+      "kuccps_program_codes": [
+        "1240132"
+      ]
+    },
+    {
+      "university": "MOUNT KENYA UNIVERSITY",
+      "domain": "mku.ac.ke",
+      "course": "BACHELOR OF LAWS (LLB)",
+      "target_type": "institution",
+      "url": "https://plc.mku.ac.ke/bachelor-of-laws-llb/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1279134",
+      "kuccps_program_codes": [
+        "1279134"
+      ]
+    },
+    {
+      "university": "MOUNT KENYA UNIVERSITY",
+      "domain": "mku.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN NURSING",
+      "target_type": "institution",
+      "url": "https://nursing.mku.ac.ke/bachelor-of-science-in-nursing/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1279132",
+      "kuccps_program_codes": [
+        "1279132"
+      ]
+    },
+    {
+      "university": "MURANG'A UNIVERSITY OF TECHNOLOGY",
+      "domain": "mut.ac.ke",
+      "course": "BACHELOR OF SCIENCE (NURSING)",
+      "target_type": "institution",
+      "url": "https://shs.mut.ac.ke/",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1246132",
+      "kuccps_program_codes": [
+        "1246132"
+      ]
+    },
+    {
+      "university": "OPEN UNIVERSITY OF KENYA",
+      "domain": "ouk.ac.ke",
+      "course": "BACHELOR OF AGRI TECHNOLOGY AND FOOD SYSTEMS",
+      "target_type": "institution",
+      "url": "https://ouk.ac.ke/bachelor-agri-technology-and-food-systems",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "5145J24",
+      "kuccps_program_codes": [
+        "5145J24"
+      ]
+    },
+    {
+      "university": "OPEN UNIVERSITY OF KENYA",
+      "domain": "ouk.ac.ke",
+      "course": "BACHELOR OF BUSINESS AND ENTREPRENEURSHIP",
+      "target_type": "institution",
+      "url": "https://ouk.ac.ke/bachelor-business-and-entrepreneurship",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "5145299",
+      "kuccps_program_codes": [
+        "5145299"
+      ]
+    },
+    {
+      "university": "OPEN UNIVERSITY OF KENYA",
+      "domain": "ouk.ac.ke",
+      "course": "BACHELOR OF DATA SCIENCE",
+      "target_type": "institution",
+      "url": "https://ouk.ac.ke/bachelor-data-science",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "5145409",
+      "kuccps_program_codes": [
+        "5145409"
+      ]
+    },
+    {
+      "university": "OPEN UNIVERSITY OF KENYA",
+      "domain": "ouk.ac.ke",
+      "course": "BACHELOR OF ECONOMICS AND DATA SCIENCE",
+      "target_type": "institution",
+      "url": "https://ouk.ac.ke/bachelor-economics-and-data-science",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "5145200",
+      "kuccps_program_codes": [
+        "5145200"
+      ]
+    },
+    {
+      "university": "OPEN UNIVERSITY OF KENYA",
+      "domain": "ouk.ac.ke",
+      "course": "BACHELOR OF ECONOMICS AND STATISTICS",
+      "target_type": "institution",
+      "url": "https://ouk.ac.ke/bachelor-economics-and-statistics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "5145199",
+      "kuccps_program_codes": [
+        "5145199"
+      ]
+    },
+    {
+      "university": "OPEN UNIVERSITY OF KENYA",
+      "domain": "ouk.ac.ke",
+      "course": "BACHELOR OF SCIENCE (COMPUTER SCIENCE)",
+      "target_type": "institution",
+      "url": "https://ouk.ac.ke/bachelor-science-computer-science",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "5145115",
+      "kuccps_program_codes": [
+        "5145115"
+      ]
+    },
+    {
+      "university": "OPEN UNIVERSITY OF KENYA",
+      "domain": "ouk.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN CYBER SECURITY AND DIGITAL FORENSICS",
+      "target_type": "institution",
+      "url": "https://ouk.ac.ke/bachelor-science-cyber-security-and-digital-forensics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "5145511",
+      "kuccps_program_codes": [
+        "5145511"
+      ]
+    },
+    {
+      "university": "OPEN UNIVERSITY OF KENYA",
+      "domain": "ouk.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY EDUCATION",
+      "target_type": "institution",
+      "url": "https://ouk.ac.ke/bachelor-technology-education",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "5145192",
+      "kuccps_program_codes": [
+        "5145192"
+      ]
+    },
+    {
+      "university": "SCOTT CHRISTIAN UNIVERSITY",
+      "domain": "scott.ac.ke",
+      "course": "BACHELOR IN BUSINESS ADMINISTRATION",
+      "target_type": "institution",
+      "url": "https://scott.ac.ke/academics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1090153",
+      "kuccps_program_codes": [
+        "1090153"
+      ]
+    },
+    {
+      "university": "SCOTT CHRISTIAN UNIVERSITY",
+      "domain": "scott.ac.ke",
+      "course": "BACHELOR OF ARTS IN COMMUNITY DEVELOPMENT",
+      "target_type": "institution",
+      "url": "https://scott.ac.ke/academics/theology/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1090171",
+      "kuccps_program_codes": [
+        "1090171"
+      ]
+    },
+    {
+      "university": "SCOTT CHRISTIAN UNIVERSITY",
+      "domain": "scott.ac.ke",
+      "course": "BACHELOR OF ARTS IN COUNSELING PSYCHOLOGY",
+      "target_type": "institution",
+      "url": "https://scott.ac.ke/academics/theology/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1090337",
+      "kuccps_program_codes": [
+        "1090337"
+      ]
+    },
+    {
+      "university": "SCOTT CHRISTIAN UNIVERSITY",
+      "domain": "scott.ac.ke",
+      "course": "BACHELOR OF BUSINESS INFORMATION TECHNOLOGY",
+      "target_type": "institution",
+      "url": "https://scott.ac.ke/academics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1090244",
+      "kuccps_program_codes": [
+        "1090244"
+      ]
+    },
+    {
+      "university": "SCOTT CHRISTIAN UNIVERSITY",
+      "domain": "scott.ac.ke",
+      "course": "BACHELOR OF EDUCATION (ARTS)",
+      "target_type": "institution",
+      "url": "https://scott.ac.ke/academics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1090135",
+      "kuccps_program_codes": [
+        "1090135"
+      ]
+    },
+    {
+      "university": "SCOTT CHRISTIAN UNIVERSITY",
+      "domain": "scott.ac.ke",
+      "course": "BACHELOR OF HOSPITALITY AND TOURISM MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://scott.ac.ke/academics/theology/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1090221",
+      "kuccps_program_codes": [
+        "1090221"
+      ]
+    },
+    {
+      "university": "SCOTT CHRISTIAN UNIVERSITY",
+      "domain": "scott.ac.ke",
+      "course": "BACHELOR OF INFORMATION COMMUNICATION TECHNOLOGY",
+      "target_type": "institution",
+      "url": "https://scott.ac.ke/academics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1090158",
+      "kuccps_program_codes": [
+        "1090158"
+      ]
+    },
+    {
+      "university": "SCOTT CHRISTIAN UNIVERSITY",
+      "domain": "scott.ac.ke",
+      "course": "BACHELOR OF LEADERSHIP AND MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://scott.ac.ke/academics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1090448",
+      "kuccps_program_codes": [
+        "1090448"
+      ]
+    },
+    {
+      "university": "SOUTH EASTERN KENYA UNIVERSITY",
+      "domain": "seku.ac.ke",
+      "course": "BACHELOR OF SCIENCE (NURSING)",
+      "target_type": "institution",
+      "url": "https://seku.ac.ke/undergraduate-programmes.html",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T11:03:53.547756+00:00",
+      "kuccps_program_code": "1166132",
+      "kuccps_program_codes": [
+        "1166132"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR IN BUSINESS ADMINISTRATION",
+      "target_type": "institution",
+      "url": "https://spu.ac.ke/bachelor-of-business-administration-and-management",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107153",
+      "kuccps_program_codes": [
+        "1107153"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF ARTS IN COMMUNICATION",
+      "target_type": "institution",
+      "url": "https://spu.ac.ke/index.php/bachelor-of-arts-in-communication",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107620",
+      "kuccps_program_codes": [
+        "1107620"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF ARTS IN COMMUNITY DEVELOPMENT",
+      "target_type": "institution",
+      "url": "https://www.spu.ac.ke/index.php/bachelor-of-arts-in-community-development",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107171",
+      "kuccps_program_codes": [
+        "1107171"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF ARTS IN COUNSELING PSYCHOLOGY",
+      "target_type": "institution",
+      "url": "https://spu.ac.ke/bachelor-of-arts-in-counseling-psychology",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107337",
+      "kuccps_program_codes": [
+        "1107337"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF ARTS IN LEADERSHIP AND MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://spu.ac.ke/index.php/bachelor-of-arts-in-leadership-and-management",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107448",
+      "kuccps_program_codes": [
+        "1107448"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF ARTS IN PEACE AND CONFLICT STUDIES",
+      "target_type": "institution",
+      "url": "https://odel.spu.ac.ke/index.php/bachelor-of-arts-in-peace-and-conflict-studies",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107662",
+      "kuccps_program_codes": [
+        "1107662"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF DIVINITY",
+      "target_type": "institution",
+      "url": "https://odel.spu.ac.ke/index.php/bachelor-of-divinity",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107446",
+      "kuccps_program_codes": [
+        "1107446"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF EDUCATION IN SPECIAL NEEDS EDUCATION",
+      "target_type": "institution",
+      "url": "https://spu.ac.ke/bachelor-of-education-special-needs-education",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107155",
+      "kuccps_program_codes": [
+        "1107155"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN COMPUTING AND INFORMATION SYSTEMS",
+      "target_type": "institution",
+      "url": "https://www.spu.ac.ke/index.php/bachelor-of-science-in-computing-and-information-systems",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107614",
+      "kuccps_program_codes": [
+        "1107614"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN HEALTH RECORDS MANAGEMENT & INFORMATICS",
+      "target_type": "institution",
+      "url": "https://www.spu.ac.ke/index.php/bachelor-of-science-in-health-records-management-and-informatics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1107543",
+      "kuccps_program_codes": [
+        "1107543"
+      ]
+    },
+    {
+      "university": "ST PAULS UNIVERSITY",
+      "domain": "spu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN NURSING",
+      "target_type": "institution",
+      "url": "https://www.spu.ac.ke/index.php/bachelors-programmes",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1107132",
+      "kuccps_program_codes": [
+        "1107132"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF BUSINESS INFORMATION TECHNOLOGY",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091244",
+      "kuccps_program_codes": [
+        "1091244"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF ECONOMICS",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091146",
+      "kuccps_program_codes": [
+        "1091146"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF EDUCATION (ARTS)",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091135",
+      "kuccps_program_codes": [
+        "1091135"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF EDUCATION (SCIENCE)",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091137",
+      "kuccps_program_codes": [
+        "1091137"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF MARITIME AND SHIPPING MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091548",
+      "kuccps_program_codes": [
+        "1091548"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF PURCHASING AND SUPPLIES MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091247",
+      "kuccps_program_codes": [
+        "1091247"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (CIVIL ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091116",
+      "kuccps_program_codes": [
+        "1091116"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (HORTICULTURE)",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091185",
+      "kuccps_program_codes": [
+        "1091185"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (INFORMATION TECHNOLOGY)",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091232",
+      "kuccps_program_codes": [
+        "1091232"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (MATHEMATICS AND COMPUTER",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091309",
+      "kuccps_program_codes": [
+        "1091309"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (MECHANICAL ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091118",
+      "kuccps_program_codes": [
+        "1091118"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (MINING AND MINERAL PROCESSING ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091349",
+      "kuccps_program_codes": [
+        "1091349"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (STATISTICS)",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091163",
+      "kuccps_program_codes": [
+        "1091163"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN AGRIBUSINESS MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091256",
+      "kuccps_program_codes": [
+        "1091256"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN AGRICULTURE",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091122",
+      "kuccps_program_codes": [
+        "1091122"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN AGRICULTURE EDUCATION & EXTENSION",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091415",
+      "kuccps_program_codes": [
+        "1091415"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN ANALYTICAL CHEMISTRY",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091114",
+      "kuccps_program_codes": [
+        "1091114"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN APPLIED PHYSICS",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091498",
+      "kuccps_program_codes": [
+        "1091498"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN INDUSTRIAL CHEMISTRY",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091108",
+      "kuccps_program_codes": [
+        "1091108"
+      ]
+    },
+    {
+      "university": "TAITA TAVETA UNIVERSITY",
+      "domain": "ttu.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN RANGELAND ECOSYSTEM MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://ttu.ac.ke/programmes/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1091G67",
+      "kuccps_program_codes": [
+        "1091G67"
+      ]
+    },
+    {
+      "university": "TANGAZA UNIVERSITY",
+      "domain": "tangaza.ac.ke",
+      "course": "BACHELOR OF EDUCATION (ARTS)",
+      "target_type": "institution",
+      "url": "https://application.tangaza.ac.ke/programmes",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1475135",
+      "kuccps_program_codes": [
+        "1475135"
+      ]
+    },
+    {
+      "university": "TANGAZA UNIVERSITY",
+      "domain": "tangaza.ac.ke",
+      "course": "BACHELOR OF EDUCATION (SCIENCE)",
+      "target_type": "institution",
+      "url": "https://application.tangaza.ac.ke/programmes",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1475137",
+      "kuccps_program_codes": [
+        "1475137"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF ENGINEERING (AERONAUTICAL ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=117",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112503",
+      "kuccps_program_codes": [
+        "1112503"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF ENGINEERING (CIVIL ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=116",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112116",
+      "kuccps_program_codes": [
+        "1112116"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF ENGINEERING (ELECTRICAL AND ELECTRONIC ENGINEERING)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=119",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112617",
+      "kuccps_program_codes": [
+        "1112617"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF SCIENCE (ACCOUNTANCY)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=154",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112466",
+      "kuccps_program_codes": [
+        "1112466"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF SCIENCE (LAND ADMINISTRATION)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=139",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112371",
+      "kuccps_program_codes": [
+        "1112371"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY (BUSINESS INFORMATION TECHNOLOGY)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=128",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112384",
+      "kuccps_program_codes": [
+        "1112384"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY (ELECTRICAL AND ELECTRONIC ENGINEERING TECHNOLOGY)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=1",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112527",
+      "kuccps_program_codes": [
+        "1112527"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY (INDUSTRIAL AND APPLIED CHEMISTRY)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=151",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112425",
+      "kuccps_program_codes": [
+        "1112425"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY (SCIENCE LABORATORY TECHNOLOGY)",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=150",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112195",
+      "kuccps_program_codes": [
+        "1112195"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF KENYA",
+      "domain": "tukenya.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY (TECHNICAL AND APPLIED",
+      "target_type": "institution",
+      "url": "https://intake.tukenya.ac.ke/index.php?r=courseApplication/default/home&prog=153",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1112424",
+      "kuccps_program_codes": [
+        "1112424"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF MOMBASA",
+      "domain": "tum.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN FOOD TECHNOLOGY & QUALITY ASSURANCE",
+      "target_type": "institution",
+      "url": "https://tum.ac.ke/programmes/bachelor-of-science-in-food-technology-and-quality-assurance",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:24:04.290953+00:00",
+      "kuccps_program_code": "1063124",
+      "kuccps_program_codes": [
+        "1063124"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF MOMBASA",
+      "domain": "tum.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN MOLECULAR BIOLOGY AND FORENSIC TECHNOLOGY",
+      "target_type": "institution",
+      "url": "https://tum.ac.ke/programmes/bachelor-of-science-in-molecular-biology-and-forensic-technology",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:24:04.290953+00:00",
+      "kuccps_program_code": "1063439",
+      "kuccps_program_codes": [
+        "1063439"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF MOMBASA",
+      "domain": "tum.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY IN APPLIED CHEMISTRY (ANALYTICAL AND INDUSTRIAL OPTIONS)",
+      "target_type": "institution",
+      "url": "https://tum.ac.ke/programmes/bachelor-of-technology-in-applied-chemistry-analytical-and-industrial-options",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1063426",
+      "kuccps_program_codes": [
+        "1063426"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF MOMBASA",
+      "domain": "tum.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY IN APPLIED PHYSICS (ELECTRONICS & INSTRUMENTATION)",
+      "target_type": "institution",
+      "url": "https://tum.ac.ke/programmes/bachelor-of-technology-in-applied-physics-electronics-and-instrumentation",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1063B76",
+      "kuccps_program_codes": [
+        "1063B76"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF MOMBASA",
+      "domain": "tum.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY IN ELECTRICAL AND ELECTRONIC ENGINEERING",
+      "target_type": "institution",
+      "url": "https://tum.ac.ke/programmes/bachelor-of-technology-in-electrical-and-electronic-engineering",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:24:04.290953+00:00",
+      "kuccps_program_code": "1063527",
+      "kuccps_program_codes": [
+        "1063527"
+      ]
+    },
+    {
+      "university": "TECHNICAL UNIVERSITY OF MOMBASA",
+      "domain": "tum.ac.ke",
+      "course": "BACHELOR OF TECHNOLOGY IN RENEWABLE ENERGY & ENVIRONMENTAL PHYSICS",
+      "target_type": "institution",
+      "url": "https://tum.ac.ke/programmes/bachelor-of-technology-in-renewable-energy-and-environmental-physics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1063B80",
+      "kuccps_program_codes": [
+        "1063B80"
+      ]
+    },
+    {
+      "university": "THE EAST AFRICAN UNIVERSITY",
+      "domain": "teau.ac.ke",
+      "course": "BACHELOR OF BUSINESS INFORMATION TECHNOLOGY",
+      "target_type": "institution",
+      "url": "https://teau.ac.ke/programs/bachelor-of-business-information-technology-bbit/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1500244",
+      "kuccps_program_codes": [
+        "1500244"
+      ]
+    },
+    {
+      "university": "THE EAST AFRICAN UNIVERSITY",
+      "domain": "teau.ac.ke",
+      "course": "BACHELOR OF EDUCATION (ARTS)",
+      "target_type": "institution",
+      "url": "https://teau.ac.ke/programs/bachelor-of-education-arts/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1500494",
+      "kuccps_program_codes": [
+        "1500494"
+      ]
+    },
+    {
+      "university": "TOM MBOYA UNIVERSITY",
+      "domain": "tmu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (COMPUTER SCIENCE",
+      "target_type": "institution",
+      "url": "https://tmu.ac.ke/courses/course_details.php?id=2837",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1515115",
+      "kuccps_program_codes": [
+        "1515115"
+      ]
+    },
+    {
+      "university": "TOM MBOYA UNIVERSITY",
+      "domain": "tmu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (FORENSIC SCIENCE)",
+      "target_type": "institution",
+      "url": "https://tmu.ac.ke/courses/course_details.php?id=2839",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1515568",
+      "kuccps_program_codes": [
+        "1515568"
+      ]
+    },
+    {
+      "university": "TOM MBOYA UNIVERSITY",
+      "domain": "tmu.ac.ke",
+      "course": "BACHELOR OF SCIENCE (MATHEMATICS & COMPUTER SCIENCE)",
+      "target_type": "institution",
+      "url": "https://tmu.ac.ke/courses/course_details.php?id=252",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1515309",
+      "kuccps_program_codes": [
+        "1515309"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF COMMERCE",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/online-bachelor-commerce",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114133",
+      "kuccps_program_codes": [
+        "1114133"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF EDUCATION (ARTS)",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-education-arts",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114135",
+      "kuccps_program_codes": [
+        "1114135"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF EDUCATION (SCIENCE)",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-education-science",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114137",
+      "kuccps_program_codes": [
+        "1114137"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF EDUCATION (TECHNOLOGY EDUCATION)",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-education-technology-education",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114331",
+      "kuccps_program_codes": [
+        "1114331"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF ENVIRONMENTAL STUDIES (SCIENCE)",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
+      "kuccps_program_code": "1114213",
+      "kuccps_program_codes": [
+        "1114213"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF SCIENCE (AGRICULTURAL ECONOMICS)",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-science-agricultural-economics",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114216",
+      "kuccps_program_codes": [
+        "1114216"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF SCIENCE (ANIMAL SCIENCE & MANAGEMENT)",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-science-animal-science-and-management",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114293",
+      "kuccps_program_codes": [
+        "1114293"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF SCIENCE (FOOD OPERATIONS MANAGEMENT)",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-science-food-operations-management",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114353",
+      "kuccps_program_codes": [
+        "1114353"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF SCIENCE (PROJECT PLANNING MANAGEMENT)",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-science-project-planning-and-management",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114327",
+      "kuccps_program_codes": [
+        "1114327"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN ANALYTICAL CHEMISTRY WITH COMPUTING",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-science-analytical-chemistry-computing",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114114",
+      "kuccps_program_codes": [
+        "1114114"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF ELDORET",
+      "domain": "uoeld.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN ETHNOBOTANY",
+      "target_type": "institution",
+      "url": "https://uoeld.ac.ke/academic-programmes/bachelor-science-ethnobotany",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1114356",
+      "kuccps_program_codes": [
+        "1114356"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF ACCOUNTING",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bachelor-of-accounting/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093469",
+      "kuccps_program_codes": [
+        "1093469"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF ARTS (SOCIAL WORK)",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bachelor-of-arts-ba-in-social-work/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093144",
+      "kuccps_program_codes": [
+        "1093144"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF ECONOMICS",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bachelor-of-economics/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093146",
+      "kuccps_program_codes": [
+        "1093146"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF EDUCATION (ARTS)",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bachelor-of-education-arts/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093135",
+      "kuccps_program_codes": [
+        "1093135"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF LAWS (LL.B.)",
+      "target_type": "institution",
+      "url": "https://law.embuni.ac.ke/programme",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093134",
+      "kuccps_program_codes": [
+        "1093134"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF LIBRARY AND INFORMATION SCIENCE",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bachelor-of-library-and-information-science/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093233",
+      "kuccps_program_codes": [
+        "1093233"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF SCIENCE (AGRIBUSINESS MANAGEMENT)",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bsc-in-agribusiness-management/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093187",
+      "kuccps_program_codes": [
+        "1093187"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF SCIENCE (AGRICULTURAL EDUCATION AND EXTENSION)",
+      "target_type": "institution",
+      "url": "https://aee.embuni.ac.ke/index.php/component/content/article/bachelor-of-science-in-agricultural-education-and-extension-an-overview?catid=2",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093417",
+      "kuccps_program_codes": [
+        "1093417"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF SCIENCE (ANALYTICAL CHEMISTRY)",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bsc-in-analytical-chemistry/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093114",
+      "kuccps_program_codes": [
+        "1093114"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF SCIENCE (BIOLOGY)",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bsc-in-biology/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093111",
+      "kuccps_program_codes": [
+        "1093111"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF SCIENCE (HORTICULTURE)",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bsc-in-horticulture/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093185",
+      "kuccps_program_codes": [
+        "1093185"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF SCIENCE (NURSING)",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bachelor-of-science-in-nursing-bscn-direct-entry/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093132",
+      "kuccps_program_codes": [
+        "1093132"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN CYBER SECURITY",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bachelor-of-science-bsc-in-cyber-security/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093511",
+      "kuccps_program_codes": [
+        "1093511"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF EMBU",
+      "domain": "embuni.ac.ke",
+      "course": "BACHELOR PURCHASING AND SUPPLIES MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://embuni.ac.ke/courses/bachelor-of-purchasing-supplies-management-2/",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1093249",
+      "kuccps_program_codes": [
+        "1093249"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF KABIANGA",
+      "domain": "kabianga.ac.ke",
+      "course": "BACHELOR OF SCIENCE (BSC.)",
+      "target_type": "institution",
+      "url": "https://www.kabianga.ac.ke/node/388",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1118120",
+      "kuccps_program_codes": [
+        "1118120"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF KABIANGA",
+      "domain": "kabianga.ac.ke",
+      "course": "BACHELOR OF SCIENCE (PUBLIC HEALTH)",
+      "target_type": "institution",
+      "url": "https://www.kabianga.ac.ke/node/388",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1118732",
+      "kuccps_program_codes": [
+        "1118732"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF KABIANGA",
+      "domain": "kabianga.ac.ke",
+      "course": "BACHELOR OF TOURISM MANAGEMENT",
+      "target_type": "institution",
+      "url": "https://www.kabianga.ac.ke/node/96",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1118157",
+      "kuccps_program_codes": [
+        "1118157"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF NAIROBI",
+      "domain": "uonbi.ac.ke",
+      "course": "BACHELOR OF ARTS",
+      "target_type": "institution",
+      "url": "https://african-studies.uonbi.ac.ke/index.php/programs/bachelor-arts-gender-and-development-studies",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1263101",
+      "kuccps_program_codes": [
+        "1263101"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF NAIROBI",
+      "domain": "uonbi.ac.ke",
+      "course": "BACHELOR OF ARTS (GENDER AND DEVELOPMENT STUDIES)",
+      "target_type": "institution",
+      "url": "https://african-studies.uonbi.ac.ke/index.php/programs/bachelor-arts-gender-and-development-studies",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1263302",
+      "kuccps_program_codes": [
+        "1263302"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF NAIROBI",
+      "domain": "uonbi.ac.ke",
+      "course": "BACHELOR OF ARTS (PLANNING)",
+      "target_type": "institution",
+      "url": "https://urbanplanning.uonbi.ac.ke/admission-content-type/bachelor-arts-planning",
+      "source": "kuccps_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1263165",
+      "kuccps_program_codes": [
+        "1263165"
+      ]
+    },
+    {
+      "university": "UNIVERSITY OF NAIROBI",
+      "domain": "uonbi.ac.ke",
+      "course": "BACHELOR OF SCIENCE (NURSING)",
+      "target_type": "institution",
+      "url": "https://nursing.uonbi.ac.ke/index.php/programs-content-type/bachelor-science-degree-nursing-bscn",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:27:24.588130+00:00",
+      "kuccps_program_code": "1263132",
+      "kuccps_program_codes": [
+        "1263132"
+      ]
+    },
+    {
+      "university": "UZIMA UNIVERSITY",
+      "domain": "uzimauniversity.ac.ke",
+      "course": "BACHELOR OF SCIENCE IN NURSING",
+      "target_type": "institution",
+      "url": "https://uzimauniversity.ac.ke/undergraduate-programmes/",
+      "source": "manually_curated_official_course_page",
+      "verified": true,
+      "status": "verified",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
+      "kuccps_program_code": "1116132",
+      "kuccps_program_codes": [
+        "1116132"
+      ]
+    }
+  ]
+}

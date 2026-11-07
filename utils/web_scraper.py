@@ -110,9 +110,34 @@ def _search_result_url(url):
         return None
 
 
-def _local_course_url(university_name, course_name, domain):
+def _local_course_url(university_name, course_name, domain=None):
     database = load_course_url_database()
     university_key = _normalized_key(university_name)
+    entries = database.get("entries")
+    if isinstance(entries, list):
+        course_key = _normalized_key(course_name)
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            if (
+                entry.get("verified") is not True
+                or entry.get("status") != "verified"
+                or _normalized_key(entry.get("university", "")) != university_key
+                or _normalized_key(entry.get("course", "")) != course_key
+            ):
+                continue
+            saved_domain = entry.get("domain")
+            url = entry.get("url")
+            if (
+                isinstance(saved_domain, str)
+                and _url_is_on_domain(url, saved_domain.strip().lower().removeprefix("www."))
+                and (domain is None or domain == saved_domain.strip().lower().removeprefix("www."))
+            ):
+                return url
+        return None
+
+    if not domain:
+        return None
     for name, courses in database.items():
         if _normalized_key(name) != university_key or not isinstance(courses, dict):
             continue
@@ -202,6 +227,10 @@ def get_course_url(university_name, course_name, target_type="institution"):
     if not isinstance(course_name, str) or not is_course_in_catalog(course_name):
         logging.info("Skipping course-page search for a course absent from the KUCCPS catalog.")
         return None
+
+    local_url = _local_course_url(university_name, course_name)
+    if local_url:
+        return local_url
 
     domain = _official_domain(university_name)
     if not domain:
