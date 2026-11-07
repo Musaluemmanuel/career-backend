@@ -123,25 +123,24 @@ def grade_to_int(grade_str):
     return mapping.get(clean_grade, 0)
 
 def calculate_total_points(student_grades):
-    total = 0
-    
+    grade_points = []
     if isinstance(student_grades, dict):
         for subject, grade_data in student_grades.items():
             if isinstance(grade_data, dict) and "grade" in grade_data:
-                total += grade_to_int(str(grade_data["grade"]))
+                grade_points.append(grade_to_int(str(grade_data["grade"])))
             else:
-                total += grade_to_int(str(grade_data))
+                grade_points.append(grade_to_int(str(grade_data)))
                 
     elif isinstance(student_grades, list):
         for item in student_grades:
             if isinstance(item, dict):
                 grade_val = item.get("grade") or item.get("value") or "E"
-                total += grade_to_int(str(grade_val))
+                grade_points.append(grade_to_int(str(grade_val)))
             elif isinstance(item, str):
-                total += grade_to_int(item)
+                grade_points.append(grade_to_int(item))
 
-    logging.debug("Frontend grade data received by math engine.")
-    logging.debug("Calculated total grade points: %s/84", total)
+    total = sum(sorted(grade_points, reverse=True)[:7])
+    logging.info("Calculated best seven total points: %s/84", total)
     
     return total
 

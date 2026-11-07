@@ -12,6 +12,7 @@ from werkzeug.security import generate_password_hash
 
 from utils.ai_engines import (
     ask_hybrid_career_advice,
+    calculate_total_points,
     fetch_from_groq,
     generate_chat_reply,
     is_course_in_catalog,
@@ -749,6 +750,22 @@ class ApiViewsTests(TestCase):
             recommendation["universities"][0]["requirements_met"][0]["status"],
             "Not checked",
         )
+
+    def test_total_points_uses_best_seven_grades(self):
+        grades = {
+            "Math": "A",
+            "English": "A-",
+            "Kiswahili": "B+",
+            "Biology": "B",
+            "Physics": "B-",
+            "Chemistry": "C+",
+            "History": "C",
+            "Geography": "E",
+        }
+        grade_list = [{"grade": grade} for grade in grades.values()]
+
+        self.assertEqual(calculate_total_points(grades), 63)
+        self.assertEqual(calculate_total_points(grade_list), 63)
 
     def test_course_catalog_matches_titles_without_cutoff_metadata(self):
         self.assertTrue(is_course_in_catalog("Bachelor of Science (Nursing)"))
