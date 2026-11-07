@@ -7,6 +7,8 @@ from django.test import TestCase, override_settings
 from itsdangerous import URLSafeTimedSerializer
 from werkzeug.security import generate_password_hash
 
+from utils.ai_engines import ask_hybrid_career_advice, validate_ai_response
+
 from .models import RecommendationUsage, User
 
 
@@ -249,6 +251,52 @@ class ApiViewsTests(TestCase):
         self.assertEqual(response.status_code, 402)
         self.assertEqual(response.json()["code"], "funding_required")
         ask_advice.assert_not_called()
+
+    @patch("utils.ai_engines.fetch_from_groq")
+    def test_recommendation_ai_accepts_interview_context_without_grades(self, fetch):
+        fetch.return_value = {
+            "specific_course": "Bachelor of Nursing",
+            "level": "Degree",
+            "universities": [{
+                "requirements_met": [{
+                    "subject": "Biology",
+                    "required": "C+",
+                    "attained": "Not provided",
+                    "status": "Not checked",
+                }],
+            }],
+        }
+        result = ask_hybrid_career_advice(
+            "Amina",
+            "nursing",
+            {},
+            0,
+            "Degree",
+            profile_context="Prefers practical learning.",
+        )
+        self.assertIsNotNone(result)
+        prompt = fetch.call_args.args[1]
+        self.assertIn("Prefers practical learning.", prompt)
+        self.assertIn("fewer than seven valid grades supplied", prompt)
+
+    def test_ai_validation_does_not_treat_missing_grades_as_failing(self):
+        recommendation = {
+            "specific_course": "Bachelor of Nursing",
+            "level": "Degree",
+            "universities": [{
+                "requirements_met": [{
+                    "subject": "Biology",
+                    "required": "C+",
+                    "attained": "Not provided",
+                    "status": "Not checked",
+                }],
+            }],
+        }
+        self.assertEqual(validate_ai_response(recommendation, {}, "Degree"), [])
+        self.assertEqual(
+            recommendation["universities"][0]["requirements_met"][0]["status"],
+            "Not checked",
+        )
 
     def test_reset_endpoint_is_not_exposed(self):
         response = self.client.get("/reset-db-now")
