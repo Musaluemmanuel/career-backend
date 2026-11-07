@@ -63,6 +63,50 @@ class ApiViewsTests(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["user"]["email"], user.email)
 
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
+    @patch("api.views.ask_hybrid_career_advice")
+    def test_multiple_users_can_sign_in_independently(self, ask_advice):
+        ask_advice.side_effect = lambda name, *args, **kwargs: {
+            "specific_course": f"{name} pathway",
+            "universities": [],
+        }
+        serializer = URLSafeTimedSerializer(
+            settings.AUTH_TOKEN_SECRET,
+            salt="career-backend-auth-v1",
+        )
+        results = []
+        for name, email in (
+            ("Amina", "amina@example.com"),
+            ("Brian", "brian@example.com"),
+        ):
+            User.objects.create(
+                name=name,
+                email=email,
+                password_hash=generate_password_hash("correct horse"),
+                is_verified=True,
+                history=[],
+            )
+            response = self.client.post(
+                "/login",
+                data=json.dumps({"email": email, "password": "correct horse"}),
+                content_type="application/json",
+            )
+            self.assertEqual(response.status_code, 200)
+            token = response.json()["access_token"]
+            claims = serializer.loads(token)
+            self.assertEqual(claims["sub"], User.objects.get(email=email).pk)
+
+            response = self.client.post(
+                "/recommend",
+                data=json.dumps({"interest": name, "grades": {}}),
+                content_type="application/json",
+                HTTP_AUTHORIZATION=f"Bearer {token}",
+            )
+            self.assertEqual(response.status_code, 200)
+            results.append(response.json()["specific_course"])
+
+        self.assertEqual(results, ["Amina pathway", "Brian pathway"])
+
     def test_unverified_account_cannot_log_in(self):
         User.objects.create(
             name="Amina",
