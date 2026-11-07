@@ -834,19 +834,14 @@ def recommend(request):
                 executor.submit(
                     get_course_url,
                     item["name"],
-                    item.get("specific_course") or item.get("course") or item.get("course_name") or course,
+                    course,
                     target_type="institution",
                 ): item
                 for item in candidates
             }
             for future in concurrent.futures.as_completed(futures):
                 university = futures[future]
-                course_name = (
-                    university.get("specific_course")
-                    or university.get("course")
-                    or university.get("course_name")
-                    or course
-                )
+                course_name = course
                 try:
                     url = future.result()
                 except Exception:

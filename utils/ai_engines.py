@@ -263,8 +263,10 @@ def fetch_from_groq(system_instruction, base_prompt, grades, expected_level):
             )
             data = json.loads(res.choices[0].message.content)
 
+            selected_course = data.get("specific_course", "")
             for university in data.get("universities", []):
                 if isinstance(university, dict):
+                    university["specific_course"] = selected_course
                     university["requirements_met"] = []
                     university["verified_offering"] = False
                     university["website_url"] = ""
@@ -539,6 +541,7 @@ def ask_hybrid_career_advice(student_name, interest, grades, calculated_points, 
     2. ABBREVIATION RULE: Always use 'BSc.', 'B.Ed.', or 'Diploma' correctly.
     3. INSTITUTION POLICY: You may suggest up to five Kenyan institution candidates, but do not claim they offer the course. The server will check official course pages; an empty list is acceptable.
     4. URL POLICY: Do not invent URLs. Output an empty website_url; the server will add only verified official course pages.
+       Every university's "specific_course" value must exactly equal the recommendation's top-level "specific_course".
     5. INTERVIEW CONTEXT: Use stated interests and preferences; do not invent facts, offerings, or admission requirements.
     6. REQUIREMENTS: Do not claim eligibility or specific entry requirements unless confirmed by an official course page.
     
