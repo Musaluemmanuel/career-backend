@@ -303,15 +303,21 @@ def register():
 
 @app.route('/verify', methods=['POST'])
 def verify():
-    data = request.json
-    email = data.get('email')
-    code = data.get('code')
+    data = request.get_json(silent=True) or {}
+    email = str(data.get('email') or '').strip().lower()
+    code = str(data.get('code') or '').strip()
 
-    user = User.query.filter_by(email=email).first()
+    if not email or not code:
+        return jsonify({"message": "Email and verification code are required."}), 400
+
+    try:
+        user = User.query.filter(db.func.lower(User.email) == email).first()
+    except Exception:
+        logging.exception("Account verification lookup failed for %s", email)
+        return jsonify({"message": "Unable to verify the account right now. Please try again."}), 503
     if not user:
         return jsonify({"message": "User not found"}), 404
 
-    # The verification code is preserved in the database schema to handle this check robustly.
     if user.verification_code == code:
         user.is_verified = True
         user.verification_code = None
@@ -363,14 +369,30 @@ def verify():
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.json
-    email = data.get('email')
-    password = data.get('password')
+    data = request.get_json(silent=True) or {}
+    identifier = str(data.get('username') or data.get('email') or data.get('identifier') or '').strip()
+    password = data.get('password') or ''
 
-    user = User.query.filter_by(email=email).first()
-    if not user or not check_password_hash(user.password_hash, password):
+    if not identifier or not password:
+        return jsonify({"message": "Username or email and password are required"}), 400
+
+    try:
+        user = User.query.filter(db.func.lower(User.email) == identifier.lower()).first()
+        if not user:
+            user = User.query.filter(db.func.lower(User.name) == identifier.lower()).first()
+        if not user or user.password_hash == "GOOGLE_AUTH_USER":
+            return jsonify({"message": "Invalid email or password"}), 401
+        try:
+            password_matches = check_password_hash(user.password_hash, password)
+        except Exception:
+            logging.exception("Invalid password hash for user %s", identifier)
+            return jsonify({"message": "Invalid email or password"}), 401
+    except Exception:
+        logging.exception("Login lookup failed for %s", identifier)
+        return jsonify({"message": "Unable to sign in right now. Please try again."}), 503
+
+    if not password_matches:
         return jsonify({"message": "Invalid email or password"}), 401
-
     if not user.is_verified:
         return jsonify({"message": "Please verify your email first."}), 403
 
@@ -379,7 +401,7 @@ def login():
         "user": {
             "name": user.name, "email": user.email,
             "has_taken_test": user._has_taken_test,
-            "history": user.history
+            "history": user.history or []
         }
     }), 200
 
