@@ -323,6 +323,52 @@ class ApiViewsTests(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["user"]["email"], user.email)
 
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
+    @patch("api.views.ask_hybrid_career_advice")
+    def test_multiple_users_can_sign_in_and_get_independent_recommendations(self, ask_advice):
+        ask_advice.side_effect = lambda name, *args, **kwargs: {
+            "ai_role": f"{name} role",
+            "specific_course": "Bachelor of Science (Nursing)",
+            "universities": [],
+        }
+        serializer = URLSafeTimedSerializer(
+            settings.AUTH_TOKEN_SECRET,
+            salt="career-backend-auth-v1",
+        )
+        results = []
+        for name, email in (
+            ("Amina", "amina@example.com"),
+            ("Brian", "brian@example.com"),
+        ):
+            user = User.objects.create(
+                name=name,
+                email=email,
+                password_hash=generate_password_hash("correct horse"),
+                is_verified=True,
+                history=[],
+            )
+            response = self.client.post(
+                "/login",
+                data=json.dumps({"email": email, "password": "correct horse"}),
+                content_type="application/json",
+            )
+            self.assertEqual(response.status_code, 200)
+            token = response.json()["access_token"]
+            self.assertEqual(serializer.loads(token)["sub"], user.pk)
+
+            response = self.client.post(
+                "/recommend",
+                data=json.dumps({"interest": name, "grades": {}}),
+                content_type="application/json",
+                HTTP_AUTHORIZATION=f"Bearer {token}",
+            )
+            self.assertEqual(response.status_code, 200)
+            results.append(response.json()["ai_role"])
+            user.refresh_from_db()
+            self.assertEqual(user.history[-1]["ai_role"], f"{name} role")
+
+        self.assertEqual(results, ["Amina role", "Brian role"])
+
     def test_malformed_password_hash_returns_invalid_credentials(self):
         User.objects.create(
             name="Broken Account",
@@ -638,7 +684,13 @@ class ApiViewsTests(TestCase):
     @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
     @patch("api.views.ask_hybrid_career_advice")
     def test_recommendation_requires_token_and_has_no_lifetime_limit(self, ask_advice):
-        user = User.objects.create(name="Amina", email="amina@example.com", password_hash="unused", is_verified=True, history=[])
+        user = User.objects.create(
+            name="Amina",
+            email="amina@example.com",
+            password_hash="unused",
+            is_verified=True,
+            history=[],
+        )
         body = json.dumps({"interest": "nursing", "grades": {}})
         response = self.client.post("/recommend", data=body, content_type="application/json")
         self.assertEqual(response.status_code, 401)
