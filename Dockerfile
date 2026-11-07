@@ -9,4 +9,4 @@ COPY . .
 RUN pip install -r requirements.txt
 
 # Start Gunicorn directly
-CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:${PORT:-10000} --timeout 300"]
+CMD ["sh", "-c", "python manage.py migrate --noinput --fake-initial && gunicorn careerpath.wsgi:application --bind 0.0.0.0:${PORT:-10000} --timeout 300"]

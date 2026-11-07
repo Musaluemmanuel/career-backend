@@ -1,0 +1,27 @@
+from django.db import models
+
+
+class User(models.Model):
+    email = models.CharField(max_length=120, unique=True)
+    password_hash = models.CharField(max_length=256)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    is_verified = models.BooleanField(default=False)
+    verification_code = models.CharField(max_length=10, null=True, blank=True)
+    has_taken_test = models.BooleanField(default=False, db_column="_has_taken_test")
+    history = models.JSONField(default=list)
+
+    class Meta:
+        db_table = "user"
+
+
+class StudentLog(models.Model):
+    timestamp = models.CharField(max_length=50, null=True, blank=True)
+    student_name = models.CharField(max_length=100, null=True, blank=True)
+    interest = models.CharField(max_length=100, null=True, blank=True)
+    points = models.IntegerField(null=True, blank=True)
+    grades = models.JSONField(null=True, blank=True)
+    ai_response = models.JSONField(null=True, blank=True)
+    history = models.JSONField(default=list)
+
+    class Meta:
+        db_table = "student_log"
