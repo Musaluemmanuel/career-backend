@@ -456,19 +456,21 @@ def verify(request):
     data = _json_body(request)
     if data is None:
         return JsonResponse({"message": "A valid JSON object is required."}, status=400)
-    user = _user_by_email(data.get("email"))
-    if not user:
-        return JsonResponse({"message": "User not found"}, status=404)
-    submitted_code = str(data.get("code") or "").strip()
-    if not submitted_code or user.verification_code != submitted_code:
-        return JsonResponse({"message": "Invalid verification code"}, status=400)
-    user.is_verified = True
-    user.verification_code = None
-    user.save(update_fields=["is_verified", "verification_code"])
-    return JsonResponse(_with_access_token(
-        {"message": "Email verified successfully!", "user": _user_payload(user)},
-        user,
-    ))
+    try:
+        user = _user_by_email(data.get("email"))
+        if not user:
+            return JsonResponse({"message": "User not found"}, status=404)
+        submitted_code = str(data.get("code") or "").strip()
+        if not submitted_code or user.verification_code != submitted_code:
+            return JsonResponse({"message": "Invalid verification code"}, status=400)
+        user.is_verified = True
+        user.verification_code = None
+        user.save(update_fields=["is_verified", "verification_code"])
+        payload = {"message": "Email verified successfully!", "user": _user_payload(user)}
+        return JsonResponse(_with_access_token(payload, user))
+    except Exception:
+        logger.exception("Account verification failed for %s.", data.get("email") or "unknown email")
+        return JsonResponse({"message": "Unable to verify this account right now. Please try again."}, status=503)
 
 
 @require_http_methods(["POST"])
@@ -484,34 +486,36 @@ def login(request):
         return JsonResponse(
             {"message": "Username or email and password are required"}, status=400
         )
-    user = _user_by_email(identifier)
-    if user and user.password_hash != "GOOGLE_AUTH_USER":
-        try:
-            password_matches = check_password_hash(user.password_hash, password)
-        except Exception:
-            logger.exception("Invalid password hash for user %s.", identifier)
-            return JsonResponse({"message": "Invalid email or password"}, status=401)
-    else:
-        candidates = User.objects.filter(name__iexact=identifier)
-        user = None
-        for candidate in candidates:
-            if candidate.password_hash == "GOOGLE_AUTH_USER":
-                continue
+    try:
+        user = _user_by_email(identifier)
+        if user and user.password_hash != "GOOGLE_AUTH_USER":
             try:
-                if check_password_hash(candidate.password_hash, password):
-                    user = candidate
-                    break
+                password_matches = check_password_hash(user.password_hash, password)
             except Exception:
-                logger.exception("Invalid password hash for username candidate %s.", identifier)
-        password_matches = user is not None
-    if not user or not password_matches:
-        return JsonResponse({"message": "Invalid email or password"}, status=401)
-    if not user.is_verified:
-        return JsonResponse({"message": "Please verify your email first."}, status=403)
-    return JsonResponse(_with_access_token(
-        {"message": "Login successful", "user": _user_payload(user)},
-        user,
-    ))
+                logger.exception("Invalid password hash for user %s.", identifier)
+                return JsonResponse({"message": "Invalid email or password"}, status=401)
+        else:
+            candidates = User.objects.filter(name__iexact=identifier)
+            user = None
+            for candidate in candidates:
+                if candidate.password_hash == "GOOGLE_AUTH_USER":
+                    continue
+                try:
+                    if check_password_hash(candidate.password_hash, password):
+                        user = candidate
+                        break
+                except Exception:
+                    logger.exception("Invalid password hash for username candidate %s.", identifier)
+            password_matches = user is not None
+        if not user or not password_matches:
+            return JsonResponse({"message": "Invalid email or password"}, status=401)
+        if not user.is_verified:
+            return JsonResponse({"message": "Please verify your email first."}, status=403)
+        payload = {"message": "Login successful", "user": _user_payload(user)}
+        return JsonResponse(_with_access_token(payload, user))
+    except Exception:
+        logger.exception("Login failed for %s.", identifier)
+        return JsonResponse({"message": "Unable to sign in right now. Please try again."}, status=503)
 
 
 @require_http_methods(["GET", "POST"])
