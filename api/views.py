@@ -19,6 +19,7 @@ from django.views.decorators.http import require_http_methods
 from google.auth.exceptions import GoogleAuthError
 from google.auth.transport import requests as google_requests
 from google.oauth2 import id_token
+from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from utils.ai_engines import (
@@ -29,12 +30,41 @@ from utils.ai_engines import (
 )
 from utils.web_scraper import get_course_url
 
-from .models import StudentLog, User
+from .models import RecommendationUsage, StudentLog, User
 
 
 logger = logging.getLogger(__name__)
 email_executor = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 GOOGLE_CLIENT_ID = settings.GOOGLE_CLIENT_ID
+MAX_RECOMMENDATION_ATTEMPTS = 3
+
+
+def _token_serializer():
+    if not settings.AUTH_TOKEN_SECRET:
+        return None
+    return URLSafeTimedSerializer(settings.AUTH_TOKEN_SECRET, salt="career-backend-auth-v1")
+
+
+def _with_access_token(payload, user):
+    serializer = _token_serializer()
+    if serializer and user.is_verified:
+        payload.update({
+            "access_token": serializer.dumps({"sub": user.pk}),
+            "token_type": "Bearer",
+            "expires_in": settings.AUTH_TOKEN_TTL_SECONDS,
+        })
+    return payload
+
+
+def _reserve_recommendation_attempt(user):
+    with transaction.atomic():
+        RecommendationUsage.objects.get_or_create(user=user)
+        usage = RecommendationUsage.objects.select_for_update().get(user=user)
+        if usage.attempts >= MAX_RECOMMENDATION_ATTEMPTS:
+            return False
+        usage.attempts += 1
+        usage.save(update_fields=["attempts"])
+    return True
 
 
 def _json_body(request):
@@ -135,7 +165,7 @@ def google_login(request):
         "message": "Account created and logged in!" if created else "Login successful",
         **_user_payload(user),
     }
-    return JsonResponse(result)
+    return JsonResponse(_with_access_token(result, user))
 
 
 @require_http_methods(["POST"])
@@ -194,9 +224,10 @@ def verify(request):
         )
     except Exception:
         logger.exception("Failed to send account verified email to %s.", user.email)
-    return JsonResponse(
-        {"message": "Email verified successfully!", "user": _user_payload(user)}
-    )
+    return JsonResponse(_with_access_token(
+        {"message": "Email verified successfully!", "user": _user_payload(user)},
+        user,
+    ))
 
 
 @require_http_methods(["POST"])
@@ -230,7 +261,10 @@ def login(request):
         return JsonResponse({"message": "Invalid email or password"}, status=401)
     if not user.is_verified:
         return JsonResponse({"message": "Please verify your email first."}, status=403)
-    return JsonResponse({"message": "Login successful", "user": _user_payload(user)})
+    return JsonResponse(_with_access_token(
+        {"message": "Login successful", "user": _user_payload(user)},
+        user,
+    ))
 
 
 @require_http_methods(["GET", "POST"])
@@ -429,9 +463,70 @@ def _recommendation_level(grades, points, preferred_level):
 
 @require_http_methods(["POST"])
 def recommend(request):
+    serializer = _token_serializer()
+    if serializer is None:
+        return JsonResponse(
+            {
+                "error": "Server authentication is not configured. Set AUTH_TOKEN_SECRET in the service environment.",
+                "code": "auth_not_configured",
+            },
+            status=503,
+        )
+    scheme, separator, token = request.META.get("HTTP_AUTHORIZATION", "").partition(" ")
+    if scheme.lower() != "bearer" or not separator or not token:
+        return JsonResponse(
+            {"error": "Sign in and send the returned bearer token.", "code": "authentication_required"},
+            status=401,
+        )
+    try:
+        claims = serializer.loads(token, max_age=settings.AUTH_TOKEN_TTL_SECONDS)
+        user_id = int(claims["sub"])
+    except (BadSignature, SignatureExpired, KeyError, TypeError, ValueError):
+        return JsonResponse(
+            {"error": "Your sign-in token is invalid or expired. Please sign in again.", "code": "invalid_token"},
+            status=401,
+        )
+    user = User.objects.filter(pk=user_id).first()
+    if user is None:
+        return JsonResponse(
+            {"error": "The account for this token no longer exists.", "code": "invalid_token"},
+            status=401,
+        )
+    if not user.is_verified:
+        return JsonResponse(
+            {"error": "Verify your account before requesting recommendations.", "code": "account_not_verified"},
+            status=403,
+        )
     data = _json_body(request)
     if data is None:
-        return JsonResponse({"error": "Recommendation details must be sent as a JSON object."}, status=400)
+        return JsonResponse({"error": "A JSON request body is required.", "code": "invalid_request"}, status=400)
+    supplied_email = data.get("email")
+    if supplied_email and str(supplied_email).strip().casefold() != user.email.casefold():
+        return JsonResponse(
+            {"error": "Request email must match the signed-in account.", "code": "account_mismatch"},
+            status=403,
+        )
+    data["email"] = user.email
+    if user.name:
+        data["name"] = user.name
+    try:
+        if not _reserve_recommendation_attempt(user):
+            return JsonResponse(
+                {
+                    "error": "You have used all 3 complimentary recommendation attempts. Please request funding to continue.",
+                    "code": "funding_required",
+                    "limit": MAX_RECOMMENDATION_ATTEMPTS,
+                    "funding_message": "Please contact the app administrator to request additional AI usage funding.",
+                },
+                status=402,
+            )
+    except Exception:
+        logger.exception("Could not check or reserve recommendation usage.")
+        return JsonResponse(
+            {"error": "Could not check recommendation usage. Please try again later.", "code": "quota_unavailable"},
+            status=503,
+        )
+
     user_name = data.get("name", "Student")
     interest = str(data.get("interest") or "General").strip()[:12000]
     grades = data.get("grades", {})
@@ -514,11 +609,9 @@ def recommend(request):
         }]
         insight["validated_points"] = points if complete else None
 
-        user = _user_by_email(data.get("email")) or User.objects.filter(name__iexact=user_name).first()
-        if user:
-            user.has_taken_test = True
-            user.history = [*(user.history or []), insight]
-            user.save(update_fields=["has_taken_test", "history"])
+        user.has_taken_test = True
+        user.history = [*(user.history or []), insight]
+        user.save(update_fields=["has_taken_test", "history"])
         try:
             StudentLog.objects.create(
                 timestamp=time.strftime("%Y-%m-%d %H:%M:%S"),

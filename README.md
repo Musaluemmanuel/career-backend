@@ -25,6 +25,9 @@ Create a private `.env` file in this directory:
 
 ```dotenv
 DJANGO_SECRET_KEY=replace_with_a_private_random_value
+AUTH_TOKEN_SECRET=replace_with_a_separate_private_random_value
+# Optional; defaults to 604800 seconds (7 days).
+AUTH_TOKEN_TTL_SECONDS=604800
 GROQ_API_KEY=your_groq_api_key
 GEMINI_API_KEY=your_gemini_api_key
 MAIL_USERNAME=your_email_address
@@ -36,6 +39,12 @@ DATABASE_URL=sqlite:///local_test.db
 Groq supports text chat and recommendations. Gemini enables document, image,
 and video analysis. SMTP credentials are required for verification and report
 emails. Do not commit `.env` or real credentials.
+Successful verified sign-in returns a signed bearer token. Set
+`AUTH_TOKEN_SECRET` to a long, random value in production; recommendation
+requests require that token and each verified account is limited to three
+lifetime requests. The attempt counter is stored in `recommendation_usage`;
+failed AI generation still consumes an attempt. A fourth request returns
+HTTP 402 with `code: funding_required`.
 
 Initialize the database and start the development server:
 
@@ -67,6 +76,8 @@ migration state before deploying to a production database.
 Chat attachments can include PDF, JPEG, PNG, WebP, MP4, MOV, or WebM. Up to
 three files are accepted per message, with a 5 MB limit per file. Image and
 document analysis requires Gemini credentials.
+`/recommend` requires `Authorization: Bearer <access_token>` from a verified
+sign-in response. Tokens expire after `AUTH_TOKEN_TTL_SECONDS`.
 
 ## Tests and checks
 
