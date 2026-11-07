@@ -1,11 +1,13 @@
 import json
 from unittest.mock import patch
 
+from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import TestCase, override_settings
+from itsdangerous import URLSafeTimedSerializer
 from werkzeug.security import generate_password_hash
 
-from .models import User
+from .models import RecommendationUsage, User
 
 
 class ApiViewsTests(TestCase):
@@ -163,23 +165,90 @@ class ApiViewsTests(TestCase):
         self.assertEqual(response.status_code, 503)
         self.assertEqual(response.json()["error"], "AI is unavailable")
 
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
     @patch("api.views.get_course_url", return_value="https://example.edu/nursing")
     @patch("api.views.ask_hybrid_career_advice")
     def test_recommendation_supports_missing_grades(self, ask_advice, get_course_url):
+        user = User.objects.create(
+            name="Amina",
+            email="amina@example.com",
+            password_hash="unused",
+            is_verified=True,
+            history=[],
+        )
         ask_advice.return_value = {
             "specific_course": "Bachelor of Nursing",
             "universities": [{"name": "Example University"}],
         }
+        token = URLSafeTimedSerializer(
+            settings.AUTH_TOKEN_SECRET,
+            salt="career-backend-auth-v1",
+        ).dumps({"sub": user.pk})
         response = self.client.post(
             "/recommend",
             data=json.dumps({"name": "Amina", "interest": "nursing", "grades": {}}),
             content_type="application/json",
+            HTTP_AUTHORIZATION=f"Bearer {token}",
         )
         self.assertEqual(response.status_code, 200)
         self.assertIsNone(response.json()["validated_points"])
         self.assertTrue(response.json()["universities"][0]["verified_offering"])
         self.assertEqual(ask_advice.call_args.kwargs["profile_context"], "")
         get_course_url.assert_called_once()
+        self.assertEqual(RecommendationUsage.objects.get(user=user).attempts, 1)
+
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
+    def test_login_returns_bearer_token_for_verified_account(self):
+        user = User.objects.create(
+            name="Amina",
+            email="amina@example.com",
+            password_hash=generate_password_hash("correct horse"),
+            is_verified=True,
+            history=[],
+        )
+        response = self.client.post(
+            "/login",
+            data=json.dumps({"email": user.email, "password": "correct horse"}),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["token_type"], "Bearer")
+        self.assertEqual(response.json()["expires_in"], 3600)
+        claims = URLSafeTimedSerializer(
+            settings.AUTH_TOKEN_SECRET,
+            salt="career-backend-auth-v1",
+        ).loads(response.json()["access_token"])
+        self.assertEqual(claims["sub"], user.pk)
+
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
+    @patch("api.views.ask_hybrid_career_advice")
+    def test_recommendation_requires_token_and_enforces_account_quota(self, ask_advice):
+        user = User.objects.create(
+            name="Amina",
+            email="amina@example.com",
+            password_hash="unused",
+            is_verified=True,
+            history=[],
+        )
+        token = URLSafeTimedSerializer(
+            settings.AUTH_TOKEN_SECRET,
+            salt="career-backend-auth-v1",
+        ).dumps({"sub": user.pk})
+        body = json.dumps({"interest": "nursing", "grades": {}})
+        response = self.client.post("/recommend", data=body, content_type="application/json")
+        self.assertEqual(response.status_code, 401)
+        ask_advice.assert_not_called()
+
+        RecommendationUsage.objects.create(user=user, attempts=3)
+        response = self.client.post(
+            "/recommend",
+            data=body,
+            content_type="application/json",
+            HTTP_AUTHORIZATION=f"Bearer {token}",
+        )
+        self.assertEqual(response.status_code, 402)
+        self.assertEqual(response.json()["code"], "funding_required")
+        ask_advice.assert_not_called()
 
     def test_reset_endpoint_is_not_exposed(self):
         response = self.client.get("/reset-db-now")

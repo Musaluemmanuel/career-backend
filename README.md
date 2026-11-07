@@ -55,12 +55,13 @@ production. Tokens expire after `AUTH_TOKEN_TTL_SECONDS` (seven days by
 default). If the signing secret is unset, recommendation requests fail closed
 with `503 auth_not_configured`.
 
-`POST /recommend` requires `Authorization: Bearer <access_token>`. Each
-verified account can start three recommendation requests over its lifetime.
-An attempt is reserved before AI generation, so failed provider requests count;
-a fourth request returns HTTP `402` with `code: funding_required`. The counter
-is stored in `recommendation_usage`. This is a usage limit, not a payment or
-funding system; there is no public counter-reset endpoint.
+`POST /recommend` requires a bearer token from a verified sign-in response.
+Each verified account can start three recommendation requests over its
+lifetime. An attempt is reserved before AI generation, so failed provider
+requests count; a fourth request returns HTTP `402` with
+`code: funding_required`. The counter is stored in `recommendation_usage`.
+This is a usage limit, not a payment or funding system; there is no public
+counter-reset endpoint.
 
 ## API routes
 

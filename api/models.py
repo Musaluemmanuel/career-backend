@@ -25,3 +25,17 @@ class StudentLog(models.Model):
 
     class Meta:
         db_table = "student_log"
+
+
+class RecommendationUsage(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        db_column="user_id",
+        related_name="recommendation_usage",
+    )
+    attempts = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        db_table = "recommendation_usage"
