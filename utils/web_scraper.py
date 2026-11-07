@@ -13,6 +13,7 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 client_groq = Groq(api_key=os.environ.get("GROQ_API_KEY") , default_headers={"Groq-Model-Version": "latest"}  # 👈 CRITICAL for visit_website
 )
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
 
 DATA_FOLDER = "data"
 CACHE_FILE = os.path.join(DATA_FOLDER, "verified_urls.json")
@@ -88,7 +89,7 @@ def call_groq_api(prompt):
         try:
             response = client_groq.chat.completions.create(
                 # Swapped to a fast, reliable standard model
-                model="llama-3.1-8b-instant", 
+                model=GROQ_MODEL,
                 messages=[
                     {"role": "system", "content": "You are a web URL expert. Based on your knowledge, deduce the most likely official URL. Return ONLY the raw URL string with absolutely no other text."},
                     {"role": "user", "content": prompt}

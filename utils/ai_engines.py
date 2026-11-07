@@ -12,6 +12,7 @@ from google.genai import types
 # --- API KEYS ---
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY") 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
 
 # --- DATABASE LOADING ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -220,7 +221,7 @@ def fetch_from_groq(system_instruction, base_prompt, grades, expected_level):
                     {"role": "system", "content": system_instruction}, 
                     {"role": "user", "content": current_prompt}
                 ],
-                model="llama-3.1-8b-instant", 
+                model=GROQ_MODEL,
                 response_format={"type": "json_object"}, 
                 temperature=0.3 
             )
@@ -318,7 +319,7 @@ Return one to four short, specific, optional suggestions. Do not use markdown fe
                     for message in messages
                 ],
             ],
-            model="llama-3.1-8b-instant",
+            model=GROQ_MODEL,
             response_format={"type": "json_object"},
             temperature=0.7,
             max_tokens=900,
