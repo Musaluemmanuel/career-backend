@@ -426,20 +426,12 @@ def verify(request):
     user = _user_by_email(data.get("email"))
     if not user:
         return JsonResponse({"message": "User not found"}, status=404)
-    if user.verification_code != data.get("code"):
+    submitted_code = str(data.get("code") or "").strip()
+    if not submitted_code or user.verification_code != submitted_code:
         return JsonResponse({"message": "Invalid verification code"}, status=400)
     user.is_verified = True
     user.verification_code = None
     user.save(update_fields=["is_verified", "verification_code"])
-    try:
-        _send_email(
-            "Account verified - welcome to CareerPath AI",
-            user.email,
-            f"Hello {user.name or 'Student'}, your email has been verified.",
-            f"<p>Hello {user.name or 'Student'}, your CareerPath AI account is now active.</p>",
-        )
-    except Exception:
-        logger.exception("Failed to send account verified email to %s.", user.email)
     return JsonResponse(_with_access_token(
         {"message": "Email verified successfully!", "user": _user_payload(user)},
         user,
@@ -461,17 +453,23 @@ def login(request):
         )
     user = _user_by_email(identifier)
     if user and user.password_hash != "GOOGLE_AUTH_USER":
-        password_matches = check_password_hash(user.password_hash, password)
+        try:
+            password_matches = check_password_hash(user.password_hash, password)
+        except (TypeError, ValueError):
+            logger.exception("Invalid password hash for user %s.", identifier)
+            return JsonResponse({"message": "Invalid email or password"}, status=401)
     else:
         candidates = User.objects.filter(name__iexact=identifier)
-        user = next(
-            (
-                candidate for candidate in candidates
-                if candidate.password_hash != "GOOGLE_AUTH_USER"
-                and check_password_hash(candidate.password_hash, password)
-            ),
-            None,
-        )
+        user = None
+        for candidate in candidates:
+            if candidate.password_hash == "GOOGLE_AUTH_USER":
+                continue
+            try:
+                if check_password_hash(candidate.password_hash, password):
+                    user = candidate
+                    break
+            except (TypeError, ValueError):
+                logger.exception("Invalid password hash for username candidate %s.", identifier)
         password_matches = user is not None
     if not user or not password_matches:
         return JsonResponse({"message": "Invalid email or password"}, status=401)
