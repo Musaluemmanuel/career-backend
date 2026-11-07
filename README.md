@@ -69,6 +69,7 @@ counter-reset endpoint.
 - `POST /resend-code`, `/forgot-password`
 - `POST /change-username`, `/change-password`, `/delete-account`
 - `GET|POST /history`, `POST /save-history`
+- `GET|POST /data-consent` (bearer-authenticated optional data-use choices)
 - `POST /chat`, `POST /recommend`
 - `POST /scrape`, `POST /send-report`
 

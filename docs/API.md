@@ -83,6 +83,34 @@ cap is on endpoint attempts, not internal LLM calls or retries.
 - `503 auth_not_configured` — signing secret is missing.
 - `503 quota_unavailable` — persistent quota check failed; request is denied.
 
+## `GET|POST /data-consent`
+
+Requires a verified account's bearer token. Existing accounts start with both
+optional choices turned off; submitting `false` later revokes the choice. The
+dashboard uses `personalization` to control local chat/profile persistence and
+`improvement` to control whether a de-identified career category may be
+included in aggregate career trends.
+
+```json
+{
+  "personalization": true,
+  "improvement": false
+}
+```
+
+`GET` returns the saved choices, whether a choice has been recorded, its
+timestamp and policy version, and `model_training_active: false`. CareerPath AI
+does not currently train AI models on user data. A separate consent will be
+required before any model-training use begins. The data a user submits to
+generate a requested recommendation is still processed by the configured AI
+provider, and the resulting report is saved to the user's account history;
+these optional choices do not control that essential service processing.
+
+`POST /recommend` additionally requires `improvement_consent: true` in its
+request body, as well as a saved `improvement: true` choice, before it records
+an aggregate contribution. Such a record contains only the generated career
+category; it excludes name, email, grades, points, and conversation history.
+
 ## Other routes
 
 All routes accept the methods listed below. JSON request bodies should use
@@ -101,6 +129,7 @@ All routes accept the methods listed below. JSON request bodies should use
 | `/recommend` | `POST` | Generate recommendations; requires bearer authentication and consumes one attempt. |
 | `/history` | `GET`, `POST` | Read saved reports by username/email (`GET`) or email (`POST`). |
 | `/save-history` | `POST` | Append a report to account history. |
+| `/data-consent` | `GET`, `POST` | Read or update optional data-use choices; requires bearer authentication. |
 | `/change-username` | `POST` | Change the username for an email address. |
 | `/change-password` | `POST` | Change a password after checking the current password. |
 | `/delete-account` | `POST`, `DELETE` | Permanently delete the account identified by email. |
@@ -131,7 +160,7 @@ received the email.
 ## Authorization boundary
 
 Bearer authentication and the three-attempt quota currently protect only
-`/recommend`. Other account, history, chat, scraping, and email endpoints do
+`/recommend`; `/data-consent` also requires a bearer token. Other account, history, chat, scraping, and email endpoints do
 not consistently require a bearer token. Do not treat this API reference or a
 frontend login state as proof that those routes are authorized for the
 requesting user. Review and enforce server-side authorization before exposing

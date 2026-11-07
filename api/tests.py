@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash
 
 from utils.ai_engines import ask_hybrid_career_advice, validate_ai_response
 
-from .models import RecommendationUsage, User
+from .models import RecommendationUsage, StudentLog, User
 
 
 class ApiViewsTests(TestCase):
@@ -97,6 +97,110 @@ class ApiViewsTests(TestCase):
         response = self.client.get("/history", {"username": "amina"})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), [report])
+
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
+    def test_data_consent_is_account_scoped_and_revocable(self):
+        user = User.objects.create(
+            name="Amina",
+            email="amina@example.com",
+            password_hash="unused",
+            is_verified=True,
+        )
+        token = URLSafeTimedSerializer(
+            settings.AUTH_TOKEN_SECRET,
+            salt="career-backend-auth-v1",
+        ).dumps({"sub": user.pk})
+        headers = {"HTTP_AUTHORIZATION": f"Bearer {token}"}
+
+        response = self.client.get("/data-consent")
+        self.assertEqual(response.status_code, 401)
+
+        response = self.client.get("/data-consent", **headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.json()["personalization"])
+        self.assertFalse(response.json()["improvement"])
+        self.assertFalse(response.json()["recorded"])
+        self.assertFalse(response.json()["model_training_active"])
+
+        response = self.client.post(
+            "/data-consent",
+            data=json.dumps({"personalization": True, "improvement": True}),
+            content_type="application/json",
+            **headers,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["recorded"])
+        self.assertEqual(response.json()["policy_version"], "2026-11-v1")
+
+        response = self.client.post(
+            "/data-consent",
+            data=json.dumps({"personalization": False, "improvement": False}),
+            content_type="application/json",
+            **headers,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.json()["personalization"])
+        self.assertFalse(response.json()["improvement"])
+        user.refresh_from_db()
+        self.assertIsNotNone(user.consent_updated_at)
+
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
+    @patch("api.views.get_course_url", return_value="https://example.edu/nursing")
+    @patch("api.views.ask_hybrid_career_advice")
+    def test_improvement_contribution_requires_consent_and_excludes_profile_data(
+        self,
+        ask_advice,
+        get_course_url,
+    ):
+        user = User.objects.create(
+            name="Amina",
+            email="amina@example.com",
+            password_hash="unused",
+            is_verified=True,
+            improvement_consent=True,
+        )
+        ask_advice.return_value = {
+            "specific_course": "Bachelor of Nursing",
+            "ai_role": "Nurse",
+            "universities": [{"name": "Example University"}],
+        }
+        token = URLSafeTimedSerializer(
+            settings.AUTH_TOKEN_SECRET,
+            salt="career-backend-auth-v1",
+        ).dumps({"sub": user.pk})
+        headers = {"HTTP_AUTHORIZATION": f"Bearer {token}"}
+        body = {
+            "name": "Amina",
+            "interest": "nursing",
+            "grades": {"Biology": "A"},
+            "improvement_consent": False,
+        }
+
+        response = self.client.post(
+            "/recommend",
+            data=json.dumps(body),
+            content_type="application/json",
+            **headers,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(StudentLog.objects.exists())
+
+        body["improvement_consent"] = True
+        response = self.client.post(
+            "/recommend",
+            data=json.dumps(body),
+            content_type="application/json",
+            **headers,
+        )
+        self.assertEqual(response.status_code, 200)
+        contribution = StudentLog.objects.get()
+        self.assertTrue(contribution.contributed_to_improvement)
+        self.assertIsNone(contribution.student_name)
+        self.assertEqual(contribution.interest, "Nurse")
+        self.assertIsNone(contribution.grades)
+        self.assertIsNone(contribution.points)
+        self.assertEqual(contribution.ai_response, {"ai_role": "Nurse"})
+        self.assertEqual(contribution.history, [])
 
     @patch("api.views.generate_chat_reply")
     def test_valid_image_is_forwarded_to_chat_model(self, generate_reply):

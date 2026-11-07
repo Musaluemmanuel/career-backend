@@ -15,6 +15,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.db import IntegrityError, transaction
 from django.db.models import Q
 from django.http import JsonResponse
+from django.utils import timezone
 from django.views.decorators.http import require_http_methods
 from google.auth.exceptions import GoogleAuthError
 from google.auth.transport import requests as google_requests
@@ -37,6 +38,7 @@ logger = logging.getLogger(__name__)
 email_executor = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 GOOGLE_CLIENT_ID = settings.GOOGLE_CLIENT_ID
 MAX_RECOMMENDATION_ATTEMPTS = 3
+DATA_CONSENT_POLICY_VERSION = "2026-11-v1"
 
 
 def _token_serializer():
@@ -121,9 +123,92 @@ def _user_by_email(email):
     return User.objects.filter(email__iexact=email.strip()).first()
 
 
+def _authenticated_user(request):
+    serializer = _token_serializer()
+    if serializer is None:
+        return None, JsonResponse(
+            {
+                "error": "Server authentication is not configured. Set AUTH_TOKEN_SECRET in the service environment.",
+                "code": "auth_not_configured",
+            },
+            status=503,
+        )
+    scheme, separator, token = request.META.get("HTTP_AUTHORIZATION", "").partition(" ")
+    if scheme.lower() != "bearer" or not separator or not token:
+        return None, JsonResponse(
+            {"error": "Sign in and send the returned bearer token.", "code": "authentication_required"},
+            status=401,
+        )
+    try:
+        claims = serializer.loads(token, max_age=settings.AUTH_TOKEN_TTL_SECONDS)
+        user_id = int(claims["sub"])
+    except (BadSignature, SignatureExpired, KeyError, TypeError, ValueError):
+        return None, JsonResponse(
+            {"error": "Your sign-in token is invalid or expired. Please sign in again.", "code": "invalid_token"},
+            status=401,
+        )
+    user = User.objects.filter(pk=user_id).first()
+    if user is None:
+        return None, JsonResponse(
+            {"error": "The account for this token no longer exists.", "code": "invalid_token"},
+            status=401,
+        )
+    if not user.is_verified:
+        return None, JsonResponse(
+            {"error": "Verify your account before continuing.", "code": "account_not_verified"},
+            status=403,
+        )
+    return user, None
+
+
 @require_http_methods(["GET"])
 def home(request):
     return JsonResponse({"message": "CareerPath AI Backend is running beautifully!"})
+
+
+@require_http_methods(["GET", "POST"])
+def data_consent(request):
+    user, error = _authenticated_user(request)
+    if error:
+        return error
+
+    if request.method == "GET":
+        return JsonResponse({
+            "personalization": user.personalization_consent,
+            "improvement": user.improvement_consent,
+            "recorded": user.consent_updated_at is not None,
+            "updated_at": user.consent_updated_at.isoformat() if user.consent_updated_at else None,
+            "policy_version": user.consent_policy_version,
+            "model_training_active": False,
+        })
+
+    data = _json_body(request)
+    if data is None or any(
+        type(data.get(field)) is not bool
+        for field in ("personalization", "improvement")
+    ):
+        return JsonResponse(
+            {"error": "Both personalization and improvement choices must be true or false."},
+            status=400,
+        )
+    user.personalization_consent = data["personalization"]
+    user.improvement_consent = data["improvement"]
+    user.consent_updated_at = timezone.now()
+    user.consent_policy_version = DATA_CONSENT_POLICY_VERSION
+    user.save(update_fields=[
+        "personalization_consent",
+        "improvement_consent",
+        "consent_updated_at",
+        "consent_policy_version",
+    ])
+    return JsonResponse({
+        "personalization": user.personalization_consent,
+        "improvement": user.improvement_consent,
+        "recorded": True,
+        "updated_at": user.consent_updated_at.isoformat(),
+        "policy_version": user.consent_policy_version,
+        "model_training_active": False,
+    })
 
 
 @require_http_methods(["POST"])
@@ -463,40 +548,9 @@ def _recommendation_level(grades, points, preferred_level):
 
 @require_http_methods(["POST"])
 def recommend(request):
-    serializer = _token_serializer()
-    if serializer is None:
-        return JsonResponse(
-            {
-                "error": "Server authentication is not configured. Set AUTH_TOKEN_SECRET in the service environment.",
-                "code": "auth_not_configured",
-            },
-            status=503,
-        )
-    scheme, separator, token = request.META.get("HTTP_AUTHORIZATION", "").partition(" ")
-    if scheme.lower() != "bearer" or not separator or not token:
-        return JsonResponse(
-            {"error": "Sign in and send the returned bearer token.", "code": "authentication_required"},
-            status=401,
-        )
-    try:
-        claims = serializer.loads(token, max_age=settings.AUTH_TOKEN_TTL_SECONDS)
-        user_id = int(claims["sub"])
-    except (BadSignature, SignatureExpired, KeyError, TypeError, ValueError):
-        return JsonResponse(
-            {"error": "Your sign-in token is invalid or expired. Please sign in again.", "code": "invalid_token"},
-            status=401,
-        )
-    user = User.objects.filter(pk=user_id).first()
-    if user is None:
-        return JsonResponse(
-            {"error": "The account for this token no longer exists.", "code": "invalid_token"},
-            status=401,
-        )
-    if not user.is_verified:
-        return JsonResponse(
-            {"error": "Verify your account before requesting recommendations.", "code": "account_not_verified"},
-            status=403,
-        )
+    user, error = _authenticated_user(request)
+    if error:
+        return error
     data = _json_body(request)
     if data is None:
         return JsonResponse({"error": "A JSON request body is required.", "code": "invalid_request"}, status=400)
@@ -612,21 +666,24 @@ def recommend(request):
         user.has_taken_test = True
         user.history = [*(user.history or []), insight]
         user.save(update_fields=["has_taken_test", "history"])
-        try:
-            StudentLog.objects.create(
-                timestamp=time.strftime("%Y-%m-%d %H:%M:%S"),
-                student_name=user_name,
-                interest=interest[:100],
-                grades=grades,
-                points=points if complete else None,
-                ai_response=insight,
-                history=[insight],
-            )
-        except Exception:
-            logger.exception("Failed to save the student recommendation log.")
+        career_category = str(insight.get("ai_role") or "").strip()[:100]
+        if (
+            user.improvement_consent
+            and data.get("improvement_consent") is True
+            and career_category
+        ):
+            try:
+                StudentLog.objects.create(
+                    timestamp=time.strftime("%Y-%m-%d %H:%M:%S"),
+                    interest=career_category,
+                    ai_response={"ai_role": career_category},
+                    contributed_to_improvement=True,
+                )
+            except Exception:
+                logger.exception("Failed to save the de-identified improvement contribution.")
         counts = Counter()
         try:
-            for log in StudentLog.objects.filter(interest__icontains=interest[:100]):
+            for log in StudentLog.objects.filter(contributed_to_improvement=True):
                 role = (log.ai_response or {}).get("ai_role") if isinstance(log.ai_response, dict) else None
                 if role:
                     counts[role.strip().title()] += 1
