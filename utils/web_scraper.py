@@ -1,197 +1,215 @@
-import os
-import re
+import base64
+import binascii
 import json
 import logging
+import os
+import re
+from urllib.parse import parse_qs, urlparse
+
 import requests
-import threading
-import time
-import urllib.parse
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-from groq import Groq, RateLimitError
-import urllib3
-# Add this at the top level
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-client_groq = Groq(api_key=os.environ.get("GROQ_API_KEY") , default_headers={"Groq-Model-Version": "latest"}  # 👈 CRITICAL for visit_website
-)
-GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
+from bs4 import BeautifulSoup
 
-DATA_FOLDER = "data"
-CACHE_FILE = os.path.join(DATA_FOLDER, "verified_urls.json")
-KENET_FILE = "kenet_all_200_institutions.txt"
+from utils.ai_engines import is_course_in_catalog
 
-cache_lock = threading.Lock()
-# --- NEW: Lock to pace Groq requests ---
-groq_lock = threading.Lock()
 
-def load_kenet_domains():
-    domains = {}
-    if not os.path.exists(KENET_FILE):
-        logging.warning(f"⚠️ KENET file not found at {KENET_FILE}. Proceeding without domain hints.")
-        return domains
-    
-    with open(KENET_FILE, 'r', encoding='utf-8') as f:
-        for line in f:
-            if '->' in line:
-                parts = line.split('->')
-                name = parts[0].lower().strip()
-                url_match = re.search(r'https?://([a-zA-Z0-9.-]+)', parts[1])
-                if url_match:
-                    domains[name] = url_match.group(1).replace('www.', '')
-    return domains
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_FOLDER = os.path.join(PROJECT_ROOT, "data")
+COURSE_URLS_FILE = os.path.join(DATA_FOLDER, "course_urls.json")
+SCHOOL_DOMAINS_FILE = os.path.join(DATA_FOLDER, "school_domains.json")
+SEARCH_URL = "https://www.bing.com/search"
 
-KENET_DOMAINS = load_kenet_domains()
 
-def get_cached_url(uni_name, course_key):
-    if not os.path.exists(CACHE_FILE):
-        return None
+def _load_json_mapping(path, description):
     try:
-        with open(CACHE_FILE, 'r') as f:
-            cache = json.load(f)
-            return cache.get(uni_name, {}).get(course_key)
-    except:
+        with open(path, "r", encoding="utf-8") as file:
+            data = json.load(file)
+    except (OSError, json.JSONDecodeError) as error:
+        logging.error("Could not load %s from %s: %s", description, path, error)
+        return {}
+
+    if not isinstance(data, dict):
+        logging.error("%s at %s must contain a JSON object.", description, path)
+        return {}
+    return data
+
+
+def load_course_url_database():
+    return _load_json_mapping(COURSE_URLS_FILE, "course URL database")
+
+
+def load_school_domains():
+    return _load_json_mapping(SCHOOL_DOMAINS_FILE, "institution domain database")
+
+
+OFFICIAL_DOMAINS = load_school_domains()
+
+
+def _normalized_key(value):
+    return re.sub(r"[^a-z0-9]", "", str(value).casefold())
+
+
+def _course_title_words(value):
+    text = str(value).casefold()
+    text = re.sub(r"\bb\s*\.?\s*sc\.?\b", " bachelor of science ", text)
+    text = re.sub(r"\bb\s*\.?\s*ed\.?\b", " bachelor of education ", text)
+    text = re.sub(r"\bb\s*\.?\s*a\.?\b", " bachelor of arts ", text)
+    text = re.sub(r"\b(?:of|in|and|the|with|for)\b", " ", text)
+    return set(re.findall(r"[a-z0-9]+", text))
+
+
+def _course_title_is_present(course_name, text):
+    course_words = _course_title_words(course_name)
+    return bool(course_words) and course_words.issubset(_course_title_words(text))
+
+
+def _official_domain(university_name):
+    key = _normalized_key(university_name)
+    for name, domain in OFFICIAL_DOMAINS.items():
+        if _normalized_key(name) == key and isinstance(domain, str) and domain.strip():
+            domain = domain.strip().lower().removeprefix("www.")
+            if re.fullmatch(r"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,63}", domain):
+                return domain
+            logging.warning("Ignoring invalid official domain for institution %s.", university_name)
+            return None
+    return None
+
+
+def _url_is_on_domain(url, domain):
+    try:
+        parsed = urlparse(url)
+        port = parsed.port
+    except (TypeError, ValueError):
+        return False
+    host = (parsed.hostname or "").lower().rstrip(".")
+    return (
+        parsed.scheme == "https"
+        and parsed.username is None
+        and parsed.password is None
+        and port in (None, 443)
+        and (host == domain or host.endswith(f".{domain}"))
+    )
+
+
+def _search_result_url(url):
+    try:
+        parsed = urlparse(url)
+    except (TypeError, ValueError):
+        return None
+    if parsed.hostname not in {"bing.com", "www.bing.com"}:
+        return url
+
+    encoded_target = parse_qs(parsed.query).get("u", [""])[0]
+    if not encoded_target.startswith("a1"):
+        return None
+    encoded_target = encoded_target[2:]
+    encoded_target += "=" * (-len(encoded_target) % 4)
+    try:
+        return base64.urlsafe_b64decode(encoded_target).decode("utf-8")
+    except (binascii.Error, UnicodeDecodeError, ValueError):
+        logging.warning("Ignoring a malformed course-search result URL.")
         return None
 
-def save_to_cache(uni_name, course_key, url):
-    with cache_lock:
-        cache = {}
-        if os.path.exists(CACHE_FILE):
-            try:
-                with open(CACHE_FILE, 'r') as f:
-                    cache = json.load(f)
-            except: pass
-        
-        if uni_name not in cache:
-            cache[uni_name] = {}
-        
-        cache[uni_name][course_key] = url
-        
-        os.makedirs(DATA_FOLDER, exist_ok=True)
-        with open(CACHE_FILE, 'w') as f:
-            json.dump(cache, f, indent=4)
 
-# --- 1. THE COMPOUND AI RETRY ENGINE ---
-@retry(
-    wait=wait_exponential(multiplier=2, min=3, max=20), 
-    stop=stop_after_attempt(4),
-    retry=retry_if_exception_type(RateLimitError),
-    reraise=True
-)
-# 👇 MAKE SURE THESE 6 LINES ARE ABOVE THE FUNCTION
-@retry(
-    wait=wait_exponential(multiplier=2, min=3, max=20), 
-    stop=stop_after_attempt(4),
-    retry=retry_if_exception_type(RateLimitError),
-    reraise=True
-)
-def call_groq_api(prompt):
-    """Wraps the actual Groq call with a lock and a delay to respect limits."""
-    with groq_lock:
-        try:
-            response = client_groq.chat.completions.create(
-                # Swapped to a fast, reliable standard model
-                model=GROQ_MODEL,
-                messages=[
-                    {"role": "system", "content": "You are a web URL expert. Based on your knowledge, deduce the most likely official URL. Return ONLY the raw URL string with absolutely no other text."},
-                    {"role": "user", "content": prompt}
-                ],
-                # Notice: The entire extra_body dictionary has been removed!
-                temperature=0.1 
-            )
-            time.sleep(2.0) 
-            
-            return response.choices[0].message.content
-        except Exception as e:
-            logging.error(f"Standard Model System Error: {e}")
-            return None
+def _local_course_url(university_name, course_name, domain):
+    database = load_course_url_database()
+    university_key = _normalized_key(university_name)
+    for name, courses in database.items():
+        if _normalized_key(name) != university_key or not isinstance(courses, dict):
+            continue
+        course_key = _normalized_key(course_name)
+        for title, url in courses.items():
+            if _normalized_key(title) == course_key and isinstance(url, str):
+                if _url_is_on_domain(url, domain):
+                    return url
+                logging.warning(
+                    "Ignoring non-official course URL for %s at %s.",
+                    course_name,
+                    university_name,
+                )
+    return None
 
 
-        
-# --- 2. URL RETRIEVAL & VALIDATION ---
-def get_course_url(university_name, course_name, target_type="kuccps"):
-    uni_key = university_name.lower().strip()
-    course_key = f"{course_name.lower().strip()}_{target_type}"
-    
+def _page_heading(response):
+    soup = BeautifulSoup(response.text, "html.parser")
+    headings = [soup.title.get_text(" ", strip=True)] if soup.title else []
+    headings.extend(heading.get_text(" ", strip=True) for heading in soup.find_all(["h1", "h2"]))
+    return " ".join(headings)
 
-    # Cache Check
-    cached = get_cached_url(uni_key, course_key)
-    if cached: return cached
 
-    # --- FIX: Define the missing variables ---
-    # Retrieve domain hint from KENET list (e.g., 'uonbi.ac.ke')
-    domain_hint = next((dom for name, dom in KENET_DOMAINS.items() if name in uni_key), None)
-    
-    # Create a URL-safe query string for Google fallbacks
-    safe_query = urllib.parse.quote_plus(f'"{course_name}" {university_name} Kenya')
-    
-    # --- 2. Define Prompts (University Links Only) ---
-    domain_instruction = f"site:{domain_hint} " if domain_hint else ""
-    
-    if target_type == "institution":
-        base_prompt = (
-            f"{domain_instruction}Find the official direct course information page for "
-            f"'{course_name}' at '{university_name}' in Kenya. Return ONLY the raw URL string."
+def _search_official_course_page(university_name, course_name, domain):
+    query = f'site:{domain} "{course_name}"'
+    try:
+        search_response = requests.get(
+            SEARCH_URL,
+            params={"q": query},
+            headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36",
+                "Accept-Language": "en-US,en;q=0.9",
+            },
+            timeout=8,
         )
-        fallback_url = f"https://www.google.com/search?q={safe_query}+{university_name}+official+course+page"
-    else:
-        # Fallback for general official homepage
-        base_prompt = f"Find the official homepage URL for {university_name} in Kenya. Return ONLY the raw URL."
-        fallback_url = f"https://www.google.com/search?q={urllib.parse.quote_plus(university_name + ' official website')}"
+    except requests.RequestException as error:
+        logging.warning("Official course search failed for %s at %s: %s", course_name, university_name, error)
+        return None
 
-    max_attempts = 3
-    bad_urls = []
-    for attempt in range(max_attempts):
-        current_prompt = base_prompt
-        
-        # --- 🚨 THE FIX: PREVENT 413 PAYLOAD ERRORS ---
-        if bad_urls:
-            # Only keep the 2 most recent dead URLs so the prompt doesn't snowball
-            recent_bad_urls = bad_urls[-2:] 
-            current_prompt += f"\n\nIMPORTANT: Do NOT return these dead URLs: {', '.join(recent_bad_urls)}. They resulted in a 404. Find an ALTERNATIVE working link."
+    if search_response.status_code != 200:
+        logging.warning(
+            "Official course search returned HTTP %s for %s at %s.",
+            search_response.status_code,
+            course_name,
+            university_name,
+        )
+        return None
+
+    soup = BeautifulSoup(search_response.text, "html.parser")
+    for result in soup.select("li.b_algo"):
+        link = result.select_one("h2 a[href]")
+        if not link:
+            continue
+        url = _search_result_url(link.get("href"))
+        title = link.get_text(" ", strip=True)
+        snippet = result.get_text(" ", strip=True)
+        if not isinstance(url, str) or not _url_is_on_domain(url, domain):
+            continue
+        if not _course_title_is_present(course_name, f"{title} {snippet}"):
+            continue
 
         try:
-            # ASK GROQ
-            response_text = call_groq_api(current_prompt)
-            
-            # Add a safety check in case the API returned None
-            if not response_text:
-                logging.warning(f"⚠️ Attempt {attempt+1}: Groq returned None. Retrying...")
-                continue
-                
-            # Search the string directly!
-            match = re.search(r'(https?://[^\s"\'\`]+)', response_text)
-            if match:
-                found_url = match.group(1).strip().rstrip('.,')
-                
-                # 3. ADVANCED PYTHON PING (Catches 404s and Soft 404s)
-                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
-                resp = requests.get(found_url, headers=headers, timeout=5, verify=False)
-                
-                if resp.status_code == 200:
-                    html_lower = resp.text.lower()
-                    # Detect Soft 404s (pages that load but say "Not Found")
-                    is_soft_404 = any(phrase in html_lower for phrase in [
-                        "page not found", "404 error", "cannot be found", "could not be found"
-                    ])
-                    
-                    if not is_soft_404:
-                        save_to_cache(uni_key, course_key, found_url)
-                        logging.info(f"✅ [VERIFIED] {target_type.upper()} Attempt {attempt+1}: {found_url}")
-                        return found_url
-                    else:
-                        logging.warning(f"⚠️ [SOFT 404] Attempt {attempt+1}: {found_url} is dead text. Retrying...")
-                        bad_urls.append(found_url)
-                else:
-                    logging.warning(f"⚠️ [HTTP {resp.status_code}] Attempt {attempt+1}: {found_url} is dead. Retrying...")
-                    bad_urls.append(found_url)
-            else:
-                logging.warning(f"⚠️ Attempt {attempt+1}: Groq didn't return a URL. Retrying...")
+            response = requests.get(
+                url,
+                headers={"User-Agent": "CareerPath course-page verifier"},
+                timeout=8,
+                allow_redirects=True,
+            )
+        except requests.RequestException as error:
+            logging.warning("Could not open official course page %s: %s", url, error)
+            continue
 
-        except RateLimitError:
-            logging.error(f"⏳ Rate limit hit on attempt {attempt+1}. Stopping loop.")
-            break # Exit the loop immediately to avoid hitting the API further
-        except Exception as e:
-            logging.error(f"🚨 Ping/Search failed on attempt {attempt+1}: {e}")
+        final_url = response.url
+        if response.status_code != 200 or not _url_is_on_domain(final_url, domain):
+            continue
+        if _course_title_is_present(course_name, _page_heading(response)):
+            return final_url
 
-    # 4. IF ALL ATTEMPTS FAIL: Use the Unbreakable Google Fallback
-    logging.warning(f"❌ All {max_attempts} attempts failed for {university_name}. Using Fallback.")
-   
+    logging.info("No official course page verified for %s at %s.", course_name, university_name)
+    return None
+
+
+def get_course_url(university_name, course_name, target_type="institution"):
+    """Return a direct official course page only when catalog and page evidence agree."""
+    if not isinstance(university_name, str) or not university_name.strip():
+        return None
+    if not isinstance(course_name, str) or not is_course_in_catalog(course_name):
+        logging.info("Skipping course-page search for a course absent from the KUCCPS catalog.")
+        return None
+
+    domain = _official_domain(university_name)
+    if not domain:
+        logging.info("No official domain is registered for institution %s.", university_name)
+        return None
+
+    local_url = _local_course_url(university_name, course_name, domain)
+    if local_url:
+        return local_url
+
+    return _search_official_course_page(university_name, course_name, domain)

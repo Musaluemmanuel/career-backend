@@ -80,8 +80,36 @@ cap is on endpoint attempts, not internal LLM calls or retries.
 - `403 account_not_verified` — account is not verified.
 - `403 account_mismatch` — request email differs from signed-in account.
 - `402 funding_required` — three attempts used; request funding.
+- `502 course_not_in_catalog` — the AI course suggestion was not in the KUCCPS catalog.
 - `503 auth_not_configured` — signing secret is missing.
 - `503 quota_unavailable` — persistent quota check failed; request is denied.
+
+### Course and institution verification
+
+The KUCCPS catalog in `utils/kuccps_courses.json` is used to validate course
+names; it does not contain institution-to-course relationships. The optional
+local offering index is `data/course_urls.json`, with this structure:
+
+```json
+{
+  "Kenyatta University": {
+    "Bachelor of Science (Nursing)": "https://www.ku.ac.ke/official-course-page"
+  }
+}
+```
+
+The checked-in offering index is currently empty, so local institution matches
+will not be returned until verified mappings are added.
+
+Local links are accepted only when they use the institution's domain from
+`data/school_domains.json`. If there is no local entry, the API searches for a
+course-specific page on that official domain and checks the search result and
+the page heading. It does not treat an AI-suggested URL, a homepage, or a
+search-results page as a verified offering. If no page can be confirmed,
+`universities` is empty and `institution_match_status` is `not_verified`;
+the API does not invent a university match. Entry requirements are not
+validated by this page check and should be confirmed on the linked official
+page.
 
 ## `GET|POST /data-consent`
 

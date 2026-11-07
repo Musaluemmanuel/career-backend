@@ -1,5 +1,6 @@
+import base64
 import json
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -7,7 +8,13 @@ from django.test import TestCase, override_settings
 from itsdangerous import URLSafeTimedSerializer
 from werkzeug.security import generate_password_hash
 
-from utils.ai_engines import ask_hybrid_career_advice, validate_ai_response
+from utils.ai_engines import (
+    ask_hybrid_career_advice,
+    fetch_from_groq,
+    is_course_in_catalog,
+    validate_ai_response,
+)
+from utils.web_scraper import get_course_url
 
 from .models import RecommendationUsage, StudentLog, User
 
@@ -304,6 +311,42 @@ class ApiViewsTests(TestCase):
         self.assertEqual(RecommendationUsage.objects.get(user=user).attempts, 1)
 
     @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
+    @patch("api.views.get_course_url", return_value=None)
+    @patch("api.views.ask_hybrid_career_advice")
+    def test_recommendation_does_not_present_unverified_institutions(
+        self,
+        ask_advice,
+        get_course_url,
+    ):
+        user = User.objects.create(
+            name="Amina",
+            email="amina-no-matches@example.com",
+            password_hash="unused",
+            is_verified=True,
+            history=[],
+        )
+        ask_advice.return_value = {
+            "specific_course": "Bachelor of Nursing",
+            "universities": [{"name": "Example University"}],
+        }
+        token = URLSafeTimedSerializer(
+            settings.AUTH_TOKEN_SECRET,
+            salt="career-backend-auth-v1",
+        ).dumps({"sub": user.pk})
+        response = self.client.post(
+            "/recommend",
+            data=json.dumps({"interest": "nursing", "grades": {}}),
+            content_type="application/json",
+            HTTP_AUTHORIZATION=f"Bearer {token}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["universities"], [])
+        self.assertEqual(response.json()["institution_match_status"], "not_verified")
+        self.assertIn("no official institution", response.json()["institution_match_message"])
+        get_course_url.assert_called_once()
+
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
     def test_login_returns_bearer_token_for_verified_account(self):
         user = User.objects.create(
             name="Amina",
@@ -401,6 +444,146 @@ class ApiViewsTests(TestCase):
             recommendation["universities"][0]["requirements_met"][0]["status"],
             "Not checked",
         )
+
+    def test_course_catalog_matches_titles_without_cutoff_metadata(self):
+        self.assertTrue(is_course_in_catalog("Bachelor of Science (Nursing)"))
+        self.assertTrue(is_course_in_catalog("Nursing"))
+        self.assertFalse(is_course_in_catalog("Bachelor of Science"))
+        self.assertFalse(is_course_in_catalog("Interplanetary Tourism"))
+
+    def test_ai_can_return_a_catalog_course_without_unverified_institutions(self):
+        with patch("utils.ai_engines.fetch_from_groq") as fetch:
+            fetch.return_value = {
+                "specific_course": "Bachelor of Science (Nursing)",
+                "universities": [],
+            }
+            result = ask_hybrid_career_advice(
+                "Amina",
+                "nursing",
+                {},
+                0,
+                "Undetermined",
+            )
+
+        self.assertIsNotNone(result)
+        self.assertEqual(result["universities"], [])
+
+    def test_ai_candidate_reaches_official_verifier_without_trusting_requirements(self):
+        response = MagicMock()
+        response.choices[0].message.content = json.dumps({
+            "specific_course": "Bachelor of Science (Nursing)",
+            "universities": [{
+                "name": "Kenyatta University",
+                "specific_course": "Bachelor of Science (Nursing)",
+                "website_url": "https://invented.example/course",
+                "verified_offering": True,
+                "requirements_met": [{"subject": "Biology", "required": "A+"}],
+            }],
+        })
+        client = MagicMock()
+        client.chat.completions.create.return_value = response
+        with patch("utils.ai_engines.client_groq", client):
+            result = fetch_from_groq("system", "prompt", {}, "Degree")
+
+        self.assertEqual(len(result["universities"]), 1)
+        candidate = result["universities"][0]
+        self.assertEqual(candidate["requirements_met"], [])
+        self.assertFalse(candidate["verified_offering"])
+        self.assertEqual(candidate["website_url"], "")
+
+    def test_course_url_uses_local_official_course_mapping_first(self):
+        url = "https://www.ku.ac.ke/programmes/nursing"
+        with (
+            patch("utils.web_scraper.OFFICIAL_DOMAINS", {"kenyatta university": "ku.ac.ke"}),
+            patch(
+                "utils.web_scraper.load_course_url_database",
+                return_value={
+                    "Kenyatta University": {
+                        "Bachelor of Science (Nursing)": url,
+                    },
+                },
+            ),
+            patch("utils.web_scraper.requests.get") as get_page,
+        ):
+            result = get_course_url(
+                "Kenyatta University",
+                "Bachelor of Science (Nursing)",
+            )
+
+        self.assertEqual(result, url)
+        get_page.assert_not_called()
+
+    def test_course_url_search_requires_an_official_course_page(self):
+        url = "https://www.ku.ac.ke/programmes/nursing"
+        tracked_url = (
+            "https://www.bing.com/ck/a?u=a1"
+            + base64.urlsafe_b64encode(url.encode("utf-8")).decode("ascii").rstrip("=")
+        )
+        search_page = MagicMock(
+            status_code=200,
+            text=(
+                '<ol><li class="b_algo"><h2><a href="'
+                f'{tracked_url}">Bachelor of Science in Nursing - Kenyatta University</a></h2>'
+                "<p>Programme overview and course details.</p></li></ol>"
+            ),
+        )
+        page = MagicMock(
+            status_code=200,
+            url=url,
+            text="<title>Bachelor of Science in Nursing</title><h1>Bachelor of Science in Nursing</h1>",
+        )
+        with (
+            patch("utils.web_scraper.OFFICIAL_DOMAINS", {"kenyatta university": "ku.ac.ke"}),
+            patch("utils.web_scraper.load_course_url_database", return_value={}),
+            patch("utils.web_scraper.requests.get", side_effect=[search_page, page]) as get_page,
+        ):
+            result = get_course_url(
+                "Kenyatta University",
+                "Bachelor of Science (Nursing)",
+            )
+
+        self.assertEqual(result, url)
+        self.assertEqual(get_page.call_count, 2)
+
+    def test_course_url_rejects_unrelated_or_non_official_search_results(self):
+        search_page = MagicMock(
+            status_code=200,
+            text=(
+                '<ol><li class="b_algo"><h2><a href="https://www.ku.ac.ke/">'
+                "Kenyatta University homepage</a></h2><p>Welcome to the official site.</p></li>"
+                '<li class="b_algo"><h2><a href="https://example.com/nursing">'
+                "Bachelor of Science in Nursing</a></h2><p>Course details.</p></li></ol>"
+            ),
+        )
+        with (
+            patch("utils.web_scraper.OFFICIAL_DOMAINS", {"kenyatta university": "ku.ac.ke"}),
+            patch("utils.web_scraper.load_course_url_database", return_value={}),
+            patch("utils.web_scraper.requests.get", return_value=search_page) as get_page,
+        ):
+            result = get_course_url(
+                "Kenyatta University",
+                "Bachelor of Science (Nursing)",
+            )
+
+        self.assertIsNone(result)
+        get_page.assert_called_once()
+
+    def test_course_url_rejects_invalid_institution_domain_mapping(self):
+        with (
+            patch(
+                "utils.web_scraper.OFFICIAL_DOMAINS",
+                {"Technical and Vocational Education and Training Authority": "Not a domain"},
+            ),
+            patch("utils.web_scraper.load_course_url_database", return_value={}),
+            patch("utils.web_scraper.requests.get") as get_page,
+        ):
+            result = get_course_url(
+                "Technical and Vocational Education and Training Authority",
+                "Nursing",
+            )
+
+        self.assertIsNone(result)
+        get_page.assert_not_called()
 
     def test_reset_endpoint_is_not_exposed(self):
         response = self.client.get("/reset-db-now")

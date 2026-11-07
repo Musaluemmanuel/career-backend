@@ -28,6 +28,7 @@ from utils.ai_engines import (
     calculate_total_points,
     generate_chat_reply,
     grade_to_int,
+    is_course_in_catalog,
 )
 from utils.web_scraper import get_course_url
 
@@ -622,10 +623,24 @@ def recommend(request):
             insight.get("specific_course")
             or primary.get("course_name")
             or insight.get("course")
-            or interest
         )
+        if not is_course_in_catalog(course):
+            logger.warning("Recommendation AI selected a course outside the KUCCPS catalog.")
+            return JsonResponse(
+                {
+                    "error": "We could not confirm the suggested course in the KUCCPS catalog. Please try again.",
+                    "code": "course_not_in_catalog",
+                },
+                status=502,
+            )
         universities = []
-        candidates = [item for item in insight.get("universities", []) if isinstance(item, dict) and item.get("name")]
+        raw_candidates = insight.get("universities")
+        raw_candidates = raw_candidates if isinstance(raw_candidates, list) else []
+        candidates = [
+            item
+            for item in raw_candidates
+            if isinstance(item, dict) and item.get("name")
+        ][:5]
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             futures = {
                 executor.submit(
@@ -649,18 +664,31 @@ def recommend(request):
                 except Exception:
                     logger.exception("Could not verify an offering at %s.", university["name"])
                     url = None
+                if not url:
+                    continue
                 university["specific_course"] = course_name
-                university["website_url"] = url if url and url.startswith("https://") else None
-                university["verified_offering"] = bool(university["website_url"])
+                university["website_url"] = url
+                university["verified_offering"] = True
+                university["reason"] = (
+                    "The official course page was verified. Check it for current entry requirements."
+                )
+                university["requirements_met"] = [{
+                    "subject": "Admission requirements",
+                    "required": "See official course page",
+                    "attained": "Not verified",
+                    "status": "Not checked",
+                }]
                 universities.append(university)
-        insight["universities"] = universities[:5] or [{
-            "name": "KUCCPS Official Portal",
-            "description": "We could not automatically verify institutions offering this exact course. Please search the official KUCCPS portal.",
-            "specific_course": course,
-            "website_url": None,
-            "verified_offering": False,
-            "requirements_met": [{"subject": "General Requirement", "required": "Check Website", "status": "Pending"}],
-        }]
+        insight["universities"] = universities[:5]
+        insight["institution_match_status"] = "verified" if universities else "not_verified"
+        insight["institution_match_message"] = (
+            "Official course pages were verified for these institutions."
+            if universities
+            else (
+                "The course appears in the KUCCPS course catalog, but no official institution "
+                "course page could be verified. No institution is shown as a confirmed match."
+            )
+        )
         insight["validated_points"] = points if complete else None
 
         user.has_taken_test = True
