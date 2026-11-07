@@ -16,6 +16,7 @@ google-auth==2.29.0
 duckduckgo_search>=6.0.0
 flask-sqlalchemy
 psycopg2-binary
+psycopg[binary]
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib

@@ -1,14 +1,14 @@
 # CareerPath AI Backend
 
-The CareerPath AI backend is a Django API for account management, career
-recommendations, conversational guidance, and report delivery. The
-recommendation and chat logic is shared from `utils/`.
+The CareerPath AI backend is a Django API for account management, personalized
+career and course recommendations, chat, and report delivery. It reuses the
+recommendation and chat logic in `utils/`.
 
 ## Requirements
 
-- Python 3.10 or later
+- Python 3.11
 - Credentials for the external services you plan to use
-- PostgreSQL for production, or SQLite for local development
+- PostgreSQL for production or SQLite for local development
 
 ## Local setup
 
@@ -21,30 +21,27 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-Create a private `.env` file in this directory:
+Create a private `.env` file:
 
 ```dotenv
 DJANGO_SECRET_KEY=replace_with_a_private_random_value
 AUTH_TOKEN_SECRET=replace_with_a_separate_private_random_value
-# Optional; defaults to 604800 seconds (7 days).
 AUTH_TOKEN_TTL_SECONDS=604800
 GROQ_API_KEY=your_groq_api_key
 GEMINI_API_KEY=your_gemini_api_key
-MAIL_USERNAME=your_email_address
-MAIL_PASSWORD=your_email_app_password
-# Optional; SQLite is used when DATABASE_URL is not set.
+# Recommended for Render if Gmail OAuth send permission is configured:
+MAIL_PROVIDER=gmail_api
+GMAIL_CLIENT_ID=your_gmail_oauth_client_id
+GMAIL_CLIENT_SECRET=your_gmail_oauth_client_secret
+GMAIL_REFRESH_TOKEN=your_gmail_oauth_refresh_token
+MAIL_FROM=your_authorized_gmail_account@gmail.com
+# Alternatively, use Resend with a verified sender domain:
+# MAIL_PROVIDER=resend
+# RESEND_API_KEY=your_resend_api_key
+# MAIL_FROM=CareerPath AI <no-reply@your-verified-domain.example>
+# Optional locally; SQLite is used when DATABASE_URL is not set.
 DATABASE_URL=sqlite:///local_test.db
 ```
-
-Groq supports text chat and recommendations. Gemini enables document, image,
-and video analysis. SMTP credentials are required for verification and report
-emails. Do not commit `.env` or real credentials.
-Successful verified sign-in returns a signed bearer token. Set
-`AUTH_TOKEN_SECRET` to a long, random value in production; recommendation
-requests require that token and each verified account is limited to three
-lifetime requests. The attempt counter is stored in `recommendation_usage`;
-failed AI generation still consumes an attempt. A fourth request returns
-HTTP 402 with `code: funding_required`.
 
 Initialize the database and start the development server:
 
@@ -53,16 +50,25 @@ python manage.py migrate
 python manage.py runserver 0.0.0.0:5001
 ```
 
-The API listens on port `5001` by default. `PORT` can override the port.
-`DATABASE_URL` accepts SQLite or PostgreSQL URLs.
+`DATABASE_URL` accepts SQLite or PostgreSQL URLs. Groq supports text chat and
+recommendations; Gemini enables document, image, and video analysis. SMTP
+credentials can be used for verification and report emails when SMTP egress is
+available. For Gmail API delivery, the refresh token must include Gmail send
+permission and `MAIL_FROM` must match that Gmail account. For Resend, verify
+the sender domain first and set `MAIL_PROVIDER=resend`, `RESEND_API_KEY`, and
+`MAIL_FROM`. Never commit `.env` or real credentials.
 
-## Existing database migration
+## Authentication and recommendation limits
 
-The Django models map to the existing `user` and `student_log` tables. For a
-database created by the previous Flask service, the deployment command uses
-`migrate --fake-initial` to record the initial Django migration when those
-tables already exist, preserving their data. Review database backups and
-migration state before deploying to a production database.
+Successful verified sign-in (`/login`, `/google-login`, or `/verify`) returns a
+signed bearer token. Set `AUTH_TOKEN_SECRET` to a long, random value in
+production. Tokens expire after `AUTH_TOKEN_TTL_SECONDS` (seven days by
+default). If the signing secret is unset, recommendation requests fail closed
+with `503 auth_not_configured`.
+
+`POST /recommend` requires a bearer token from a verified sign-in response.
+Verified accounts can request recommendations without a lifetime cap.
+Attempts are still recorded in `recommendation_usage` for monitoring.
 
 ## API routes
 
@@ -70,16 +76,31 @@ migration state before deploying to a production database.
 - `POST /resend-code`, `/forgot-password`
 - `POST /change-username`, `/change-password`, `/delete-account`
 - `GET|POST /history`, `POST /save-history`
+- `GET|POST /data-consent` (bearer-authenticated optional data-use choices)
 - `POST /chat`, `POST /recommend`
 - `POST /scrape`, `POST /send-report`
 
-Chat attachments can include PDF, JPEG, PNG, WebP, MP4, MOV, or WebM. Up to
-three files are accepted per message, with a 5 MB limit per file. Image and
-document analysis requires Gemini credentials.
-`/recommend` requires `Authorization: Bearer <access_token>` from a verified
-sign-in response. Tokens expire after `AUTH_TOKEN_TTL_SECONDS`.
+Chat accepts up to three PDF, JPEG, PNG, WebP, MP4, MOV, or WebM attachments
+with a 5 MB limit per file. Image and document analysis requires Gemini
+credentials.
 
-## Tests and checks
+## Existing database migration
+
+The Django models map to the existing `user` and `student_log` tables. For a
+database created by the previous Flask service, deployment runs
+`migrate --fake-initial` to record the initial Django migration when those
+tables already exist, preserving their data. The recommendation quota table is
+created by the next Django migration. Back up the production database and
+review migration state before deployment.
+
+## Deployment
+
+The `Procfile` and `Dockerfile` run migrations and launch Gunicorn with
+`careerpath.wsgi:application`. On Render, configure `DATABASE_URL`,
+`DJANGO_SECRET_KEY`, `AUTH_TOKEN_SECRET`, and the AI/email provider credentials
+in the service environment. The service binds to the provided `PORT`.
+
+## Tests
 
 ```powershell
 python manage.py check
@@ -87,12 +108,35 @@ python manage.py test
 python -m unittest discover -s tests -v
 ```
 
-The Django tests cover API behavior and upload validation. The `unittest`
-suite covers AI guidance and course catalogue utilities.
+The Django tests cover API behavior, token issuance, authenticated
+recommendations, quota enforcement, and upload validation. The `unittest`
+suite covers AI guidance and course catalogue utilities. Tests stub provider
+calls; they do not prove live credentials or provider availability.
 
-## Deployment
+## Provider secrets and cost
 
-The included `Procfile` and `Dockerfile` run migrations and launch Gunicorn
-with `careerpath.wsgi:application`. Configure `DJANGO_SECRET_KEY`, database,
-AI, and SMTP settings in the deployment environment. Do not expose the Django
-development server on a production deployment.
+This application calls Groq's API; it does not use a ChatGPT account password.
+The default model is `openai/gpt-oss-20b`, an open-weight model served by Groq.
+Availability, usage limits, and pricing depend on the provider account. Keep
+API keys, passwords, database URLs, and signing secrets in the service's
+environment settings, never in frontend code or logs.
+
+See the [API guide](docs/API.md), [deployment guide](docs/DEPLOYMENT.md), and
+[test guide](docs/TESTING.md) for operating details.
+
+## Project documentation
+
+- [API Reference](docs/API.md)
+- [Architecture Overview](docs/ARCHITECTURE.md)
+- [Deployment Guide](docs/DEPLOYMENT.md)
+- [Testing Guide](docs/TESTING.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security Policy](SECURITY.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Support](SUPPORT.md)
+- [Changelog](CHANGELOG.md)
+
+## Licensing
+
+No license is declared in this repository. Contact the repository owner
+before redistributing or reusing its contents.

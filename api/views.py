@@ -8,6 +8,9 @@ import re
 import secrets
 import string
 import time
+import urllib.error
+import urllib.parse
+import urllib.request
 from collections import Counter
 
 from django.conf import settings
@@ -15,6 +18,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.db import IntegrityError, transaction
 from django.db.models import Q
 from django.http import JsonResponse
+from django.utils import timezone
 from django.views.decorators.http import require_http_methods
 from google.auth.exceptions import GoogleAuthError
 from google.auth.transport import requests as google_requests
@@ -26,7 +30,9 @@ from utils.ai_engines import (
     ask_hybrid_career_advice,
     calculate_total_points,
     generate_chat_reply,
+    get_eligible_context,
     grade_to_int,
+    is_course_in_catalog,
 )
 from utils.web_scraper import get_course_url
 
@@ -37,6 +43,7 @@ logger = logging.getLogger(__name__)
 email_executor = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 GOOGLE_CLIENT_ID = settings.GOOGLE_CLIENT_ID
 MAX_RECOMMENDATION_ATTEMPTS = None
+DATA_CONSENT_POLICY_VERSION = "2026-11-v1"
 
 
 def _token_serializer():
@@ -72,9 +79,60 @@ def _json_body(request):
     return payload if isinstance(payload, dict) else None
 
 
+def _send_via_gmail_api(message):
+    credentials = {
+        "client_id": settings.GMAIL_CLIENT_ID,
+        "client_secret": settings.GMAIL_CLIENT_SECRET,
+        "refresh_token": settings.GMAIL_REFRESH_TOKEN,
+        "grant_type": "refresh_token",
+    }
+    if not all(credentials.values()) or not settings.MAIL_FROM:
+        raise RuntimeError(
+            "Gmail API delivery requires Gmail OAuth credentials and MAIL_FROM."
+        )
+
+    token_request = urllib.request.Request(
+        "https://oauth2.googleapis.com/token",
+        data=urllib.parse.urlencode(credentials).encode("utf-8"),
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(token_request, timeout=settings.EMAIL_TIMEOUT) as response:
+            token_payload = json.loads(response.read())
+    except urllib.error.HTTPError as error:
+        raise RuntimeError(
+            f"Gmail OAuth token refresh failed with HTTP {error.code}."
+        ) from error
+
+    access_token = token_payload.get("access_token") if isinstance(token_payload, dict) else None
+    if not access_token:
+        raise RuntimeError("Gmail OAuth token refresh returned no access token.")
+
+    message.from_email = settings.MAIL_FROM
+    raw_message = base64.urlsafe_b64encode(message.message().as_bytes()).decode("ascii")
+    send_request = urllib.request.Request(
+        "https://gmail.googleapis.com/gmail/v1/users/me/messages/send",
+        data=json.dumps({"raw": raw_message}).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(send_request, timeout=settings.EMAIL_TIMEOUT) as response:
+            if response.status >= 400:
+                raise RuntimeError(
+                    f"Gmail API email delivery failed with HTTP {response.status}."
+                )
+    except urllib.error.HTTPError as error:
+        raise RuntimeError(
+            f"Gmail API email delivery failed with HTTP {error.code}."
+        ) from error
+
+
 def _send_email(subject, recipient, text, html=None, attachments=None):
-    if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-        raise RuntimeError("Email delivery is not configured.")
     message = EmailMultiAlternatives(
         subject=subject,
         body=text,
@@ -83,6 +141,61 @@ def _send_email(subject, recipient, text, html=None, attachments=None):
     )
     if html:
         message.attach_alternative(html, "text/html")
+    if settings.EMAIL_PROVIDER == "gmail_api":
+        if not settings.MAIL_FROM:
+            raise RuntimeError("Gmail API email delivery requires MAIL_FROM.")
+        for filename, content, mime_type in attachments or []:
+            message.attach(filename, content, mime_type)
+        _send_via_gmail_api(message)
+        return
+    if settings.EMAIL_PROVIDER == "resend":
+        if not settings.RESEND_API_KEY or not settings.MAIL_FROM:
+            raise RuntimeError(
+                "Resend email delivery requires RESEND_API_KEY and MAIL_FROM."
+            )
+        payload = {
+            "from": settings.MAIL_FROM,
+            "to": [recipient],
+            "subject": subject,
+            "text": text,
+        }
+        if html:
+            payload["html"] = html
+        if attachments:
+            payload["attachments"] = [
+                {
+                    "filename": filename,
+                    "content": base64.b64encode(
+                        content if isinstance(content, bytes) else str(content).encode()
+                    ).decode("ascii"),
+                    "content_type": mime_type,
+                }
+                for filename, content, mime_type in attachments
+            ]
+        request = urllib.request.Request(
+            "https://api.resend.com/emails",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {settings.RESEND_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=settings.EMAIL_TIMEOUT) as response:
+                if response.status >= 400:
+                    raise RuntimeError(
+                        f"Resend email delivery failed with HTTP {response.status}."
+                    )
+        except urllib.error.HTTPError as error:
+            raise RuntimeError(
+                f"Resend email delivery failed with HTTP {error.code}."
+            ) from error
+        return
+    if settings.EMAIL_PROVIDER != "smtp":
+        raise RuntimeError("MAIL_PROVIDER must be 'smtp', 'resend', or 'gmail_api'.")
+    if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
+        raise RuntimeError("SMTP email delivery is not configured.")
     for filename, content, mime_type in attachments or []:
         message.attach(filename, content, mime_type)
     message.send(fail_silently=False)
@@ -103,6 +216,13 @@ def _send_verification_email(user, code, subject="Verify your CareerPath AI acco
     )
 
 
+def _log_email_delivery_failure(future):
+    try:
+        future.result()
+    except Exception:
+        logger.exception("Background email delivery failed.")
+
+
 def _user_payload(user):
     return {
         "name": user.name,
@@ -118,9 +238,92 @@ def _user_by_email(email):
     return User.objects.filter(email__iexact=email.strip()).first()
 
 
+def _authenticated_user(request):
+    serializer = _token_serializer()
+    if serializer is None:
+        return None, JsonResponse(
+            {
+                "error": "Server authentication is not configured. Set AUTH_TOKEN_SECRET in the service environment.",
+                "code": "auth_not_configured",
+            },
+            status=503,
+        )
+    scheme, separator, token = request.META.get("HTTP_AUTHORIZATION", "").partition(" ")
+    if scheme.lower() != "bearer" or not separator or not token:
+        return None, JsonResponse(
+            {"error": "Sign in and send the returned bearer token.", "code": "authentication_required"},
+            status=401,
+        )
+    try:
+        claims = serializer.loads(token, max_age=settings.AUTH_TOKEN_TTL_SECONDS)
+        user_id = int(claims["sub"])
+    except (BadSignature, SignatureExpired, KeyError, TypeError, ValueError):
+        return None, JsonResponse(
+            {"error": "Your sign-in token is invalid or expired. Please sign in again.", "code": "invalid_token"},
+            status=401,
+        )
+    user = User.objects.filter(pk=user_id).first()
+    if user is None:
+        return None, JsonResponse(
+            {"error": "The account for this token no longer exists.", "code": "invalid_token"},
+            status=401,
+        )
+    if not user.is_verified:
+        return None, JsonResponse(
+            {"error": "Verify your account before continuing.", "code": "account_not_verified"},
+            status=403,
+        )
+    return user, None
+
+
 @require_http_methods(["GET"])
 def home(request):
     return JsonResponse({"message": "CareerPath AI Backend is running beautifully!"})
+
+
+@require_http_methods(["GET", "POST"])
+def data_consent(request):
+    user, error = _authenticated_user(request)
+    if error:
+        return error
+
+    if request.method == "GET":
+        return JsonResponse({
+            "personalization": user.personalization_consent,
+            "improvement": user.improvement_consent,
+            "recorded": user.consent_updated_at is not None,
+            "updated_at": user.consent_updated_at.isoformat() if user.consent_updated_at else None,
+            "policy_version": user.consent_policy_version,
+            "model_training_active": False,
+        })
+
+    data = _json_body(request)
+    if data is None or any(
+        type(data.get(field)) is not bool
+        for field in ("personalization", "improvement")
+    ):
+        return JsonResponse(
+            {"error": "Both personalization and improvement choices must be true or false."},
+            status=400,
+        )
+    user.personalization_consent = data["personalization"]
+    user.improvement_consent = data["improvement"]
+    user.consent_updated_at = timezone.now()
+    user.consent_policy_version = DATA_CONSENT_POLICY_VERSION
+    user.save(update_fields=[
+        "personalization_consent",
+        "improvement_consent",
+        "consent_updated_at",
+        "consent_policy_version",
+    ])
+    return JsonResponse({
+        "personalization": user.personalization_consent,
+        "improvement": user.improvement_consent,
+        "recorded": True,
+        "updated_at": user.consent_updated_at.isoformat(),
+        "policy_version": user.consent_policy_version,
+        "model_training_active": False,
+    })
 
 
 @require_http_methods(["POST"])
@@ -177,22 +380,68 @@ def register(request):
         return JsonResponse(
             {"message": "Name, email, and password are required"}, status=400
         )
-    code = f"{int(time.time()) % 1_000_000:06d}"
-    try:
-        user = User.objects.create(
-            name=name,
-            email=email,
-            password_hash=generate_password_hash(password),
-            is_verified=False,
-            verification_code=code,
-            history=[],
+    existing_user = _user_by_email(email)
+    if existing_user:
+        code = f"{int(time.time()) % 1_000_000:06d}"
+        if existing_user.is_verified:
+            return JsonResponse(
+                {
+                    "message": "An account with this email already exists. Please sign in instead.",
+                    "code": "account_exists",
+                    "login_required": True,
+                    "email": existing_user.email,
+                },
+                status=409,
+            )
+        existing_user.verification_code = code
+        existing_user.save(update_fields=["verification_code"])
+        try:
+            _send_verification_email(existing_user, code)
+        except Exception:
+            logger.exception("Failed to resend verification email to %s.", email)
+            return JsonResponse(
+                {"message": "The account exists but we couldn't resend its verification email. Please try again later."},
+                status=503,
+            )
+        return JsonResponse(
+            {
+                "message": "An account is already awaiting verification. A fresh verification code was sent to your email.",
+                "verification_required": True,
+                "email": existing_user.email,
+            },
+            status=200,
         )
+
+    code = f"{int(time.time()) % 1_000_000:06d}"
+    email_delivery_failed = False
+    try:
+        with transaction.atomic():
+            user = User.objects.create(
+                name=name,
+                email=email,
+                password_hash=generate_password_hash(password),
+                is_verified=False,
+                verification_code=code,
+                history=[],
+            )
+            try:
+                _send_verification_email(user, code)
+            except Exception:
+                logger.exception("Failed to send verification email to %s.", email)
+                transaction.set_rollback(True)
+                email_delivery_failed = True
     except IntegrityError:
         return JsonResponse({"message": "User already exists"}, status=400)
-    try:
-        _send_verification_email(user, code)
-    except Exception:
-        logger.exception("Failed to send verification email to %s.", email)
+    if email_delivery_failed:
+        return JsonResponse(
+            {
+                "message": (
+                    "We couldn't send the verification email, so your account "
+                    "was not created. Please try again later."
+                )
+            },
+            status=503,
+        )
     return JsonResponse(
         {"message": "User created. Please check your email for the verification code."},
         status=201,
@@ -204,27 +453,21 @@ def verify(request):
     data = _json_body(request)
     if data is None:
         return JsonResponse({"message": "A valid JSON object is required."}, status=400)
-    user = _user_by_email(data.get("email"))
-    if not user:
-        return JsonResponse({"message": "User not found"}, status=404)
-    if user.verification_code != data.get("code"):
-        return JsonResponse({"message": "Invalid verification code"}, status=400)
-    user.is_verified = True
-    user.verification_code = None
-    user.save(update_fields=["is_verified", "verification_code"])
     try:
-        _send_email(
-            "Account verified - welcome to CareerPath AI",
-            user.email,
-            f"Hello {user.name or 'Student'}, your email has been verified.",
-            f"<p>Hello {user.name or 'Student'}, your CareerPath AI account is now active.</p>",
-        )
+        user = _user_by_email(data.get("email"))
+        if not user:
+            return JsonResponse({"message": "User not found"}, status=404)
+        submitted_code = str(data.get("code") or "").strip()
+        if not submitted_code or user.verification_code != submitted_code:
+            return JsonResponse({"message": "Invalid verification code"}, status=400)
+        user.is_verified = True
+        user.verification_code = None
+        user.save(update_fields=["is_verified", "verification_code"])
+        payload = {"message": "Email verified successfully!", "user": _user_payload(user)}
+        return JsonResponse(_with_access_token(payload, user))
     except Exception:
-        logger.exception("Failed to send account verified email to %s.", user.email)
-    return JsonResponse(_with_access_token(
-        {"message": "Email verified successfully!", "user": _user_payload(user)},
-        user,
-    ))
+        logger.exception("Account verification failed for %s.", data.get("email") or "unknown email")
+        return JsonResponse({"message": "Unable to verify this account right now. Please try again."}, status=503)
 
 
 @require_http_methods(["POST"])
@@ -240,28 +483,36 @@ def login(request):
         return JsonResponse(
             {"message": "Username or email and password are required"}, status=400
         )
-    user = _user_by_email(identifier)
-    if user and user.password_hash != "GOOGLE_AUTH_USER":
-        password_matches = check_password_hash(user.password_hash, password)
-    else:
-        candidates = User.objects.filter(name__iexact=identifier)
-        user = next(
-            (
-                candidate for candidate in candidates
-                if candidate.password_hash != "GOOGLE_AUTH_USER"
-                and check_password_hash(candidate.password_hash, password)
-            ),
-            None,
-        )
-        password_matches = user is not None
-    if not user or not password_matches:
-        return JsonResponse({"message": "Invalid email or password"}, status=401)
-    if not user.is_verified:
-        return JsonResponse({"message": "Please verify your email first."}, status=403)
-    return JsonResponse(_with_access_token(
-        {"message": "Login successful", "user": _user_payload(user)},
-        user,
-    ))
+    try:
+        user = _user_by_email(identifier)
+        if user and user.password_hash != "GOOGLE_AUTH_USER":
+            try:
+                password_matches = check_password_hash(user.password_hash, password)
+            except Exception:
+                logger.exception("Invalid password hash for user %s.", identifier)
+                return JsonResponse({"message": "Invalid email or password"}, status=401)
+        else:
+            candidates = User.objects.filter(name__iexact=identifier)
+            user = None
+            for candidate in candidates:
+                if candidate.password_hash == "GOOGLE_AUTH_USER":
+                    continue
+                try:
+                    if check_password_hash(candidate.password_hash, password):
+                        user = candidate
+                        break
+                except Exception:
+                    logger.exception("Invalid password hash for username candidate %s.", identifier)
+            password_matches = user is not None
+        if not user or not password_matches:
+            return JsonResponse({"message": "Invalid email or password"}, status=401)
+        if not user.is_verified:
+            return JsonResponse({"message": "Please verify your email first."}, status=403)
+        payload = {"message": "Login successful", "user": _user_payload(user)}
+        return JsonResponse(_with_access_token(payload, user))
+    except Exception:
+        logger.exception("Login failed for %s.", identifier)
+        return JsonResponse({"message": "Unable to sign in right now. Please try again."}, status=503)
 
 
 @require_http_methods(["GET", "POST"])
@@ -346,6 +597,12 @@ def career_chat(request):
             {"error": "The assistant name must be 1 to 32 letters, numbers, spaces, or simple punctuation."},
             status=400,
         )
+    conversation_memory = payload.get("conversation_memory", "")
+    if not isinstance(conversation_memory, str) or len(conversation_memory) > 6000:
+        return JsonResponse(
+            {"error": "Conversation memory must be text no longer than 6,000 characters."},
+            status=400,
+        )
 
     formats = {
         ".pdf": ("application/pdf", lambda value: value.startswith(b"%PDF-")),
@@ -383,7 +640,12 @@ def career_chat(request):
             return JsonResponse({"error": f"{upload.name} does not match its file type."}, status=400)
         attachments.append({"data": content, "mime_type": content_type})
     try:
-        result = generate_chat_reply(messages, attachments, assistant_name.strip())
+        result = generate_chat_reply(
+            messages,
+            attachments,
+            assistant_name.strip(),
+            conversation_memory=conversation_memory.strip(),
+        )
     except RuntimeError as error:
         logger.warning("Career chat is unavailable: %s", error)
         return JsonResponse({"error": str(error)}, status=503)
@@ -460,40 +722,9 @@ def _recommendation_level(grades, points, preferred_level):
 
 @require_http_methods(["POST"])
 def recommend(request):
-    serializer = _token_serializer()
-    if serializer is None:
-        return JsonResponse(
-            {
-                "error": "Server authentication is not configured. Set AUTH_TOKEN_SECRET in the service environment.",
-                "code": "auth_not_configured",
-            },
-            status=503,
-        )
-    scheme, separator, token = request.META.get("HTTP_AUTHORIZATION", "").partition(" ")
-    if scheme.lower() != "bearer" or not separator or not token:
-        return JsonResponse(
-            {"error": "Sign in and send the returned bearer token.", "code": "authentication_required"},
-            status=401,
-        )
-    try:
-        claims = serializer.loads(token, max_age=settings.AUTH_TOKEN_TTL_SECONDS)
-        user_id = int(claims["sub"])
-    except (BadSignature, SignatureExpired, KeyError, TypeError, ValueError):
-        return JsonResponse(
-            {"error": "Your sign-in token is invalid or expired. Please sign in again.", "code": "invalid_token"},
-            status=401,
-        )
-    user = User.objects.filter(pk=user_id).first()
-    if user is None:
-        return JsonResponse(
-            {"error": "The account for this token no longer exists.", "code": "invalid_token"},
-            status=401,
-        )
-    if not user.is_verified:
-        return JsonResponse(
-            {"error": "Verify your account before requesting recommendations.", "code": "account_not_verified"},
-            status=403,
-        )
+    user, error = _authenticated_user(request)
+    if error:
+        return error
     data = _json_body(request)
     if data is None:
         return JsonResponse({"error": "A JSON request body is required.", "code": "invalid_request"}, status=400)
@@ -552,65 +783,102 @@ def recommend(request):
             insight.get("specific_course")
             or primary.get("course_name")
             or insight.get("course")
-            or interest
         )
+        if not is_course_in_catalog(course):
+            valid_courses = get_eligible_context(interest, grades)
+            fallback_course = next(
+                (candidate for candidate in valid_courses if is_course_in_catalog(candidate)),
+                None,
+            )
+            if fallback_course:
+                course = fallback_course
+                insight["specific_course"] = fallback_course
+                logger.info("Used verified KUCCPS course fallback for interest %s.", interest)
+            else:
+                logger.warning("Recommendation AI selected no course available for interest %s.", interest)
+                return JsonResponse(
+                    {
+                        "error": "No confirmed KUCCPS course was found for this interest. Try another area or add more grades.",
+                        "code": "course_not_in_catalog",
+                        "course": "",
+                        "universities": [],
+                    },
+                    status=422,
+                )
         universities = []
-        candidates = [item for item in insight.get("universities", []) if isinstance(item, dict) and item.get("name")]
+        raw_candidates = insight.get("universities")
+        raw_candidates = raw_candidates if isinstance(raw_candidates, list) else []
+        candidates = [
+            item
+            for item in raw_candidates
+            if isinstance(item, dict) and item.get("name")
+        ][:5]
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             futures = {
                 executor.submit(
                     get_course_url,
                     item["name"],
-                    item.get("specific_course") or item.get("course") or item.get("course_name") or course,
+                    course,
                     target_type="institution",
                 ): item
                 for item in candidates
             }
             for future in concurrent.futures.as_completed(futures):
                 university = futures[future]
-                course_name = (
-                    university.get("specific_course")
-                    or university.get("course")
-                    or university.get("course_name")
-                    or course
-                )
+                course_name = course
                 try:
                     url = future.result()
                 except Exception:
                     logger.exception("Could not verify an offering at %s.", university["name"])
                     url = None
+                if not url:
+                    continue
                 university["specific_course"] = course_name
-                university["website_url"] = url if url and url.startswith("https://") else None
-                university["verified_offering"] = bool(university["website_url"])
+                university["website_url"] = url
+                university["verified_offering"] = True
+                university["reason"] = (
+                    "The official course page was verified. Check it for current entry requirements."
+                )
+                university["requirements_met"] = [{
+                    "subject": "Admission requirements",
+                    "required": "See official course page",
+                    "attained": "Not verified",
+                    "status": "Not checked",
+                }]
                 universities.append(university)
-        insight["universities"] = universities[:5] or [{
-            "name": "KUCCPS Official Portal",
-            "description": "We could not automatically verify institutions offering this exact course. Please search the official KUCCPS portal.",
-            "specific_course": course,
-            "website_url": None,
-            "verified_offering": False,
-            "requirements_met": [{"subject": "General Requirement", "required": "Check Website", "status": "Pending"}],
-        }]
+        insight["universities"] = universities[:5]
+        insight["institution_match_status"] = "verified" if universities else "not_verified"
+        insight["institution_match_message"] = (
+            "Official course pages were verified for these institutions."
+            if universities
+            else (
+                "The course appears in the KUCCPS course catalog, but no official institution "
+                "course page could be verified. No institution is shown as a confirmed match."
+            )
+        )
         insight["validated_points"] = points if complete else None
 
         user.has_taken_test = True
         user.history = [*(user.history or []), insight]
         user.save(update_fields=["has_taken_test", "history"])
-        try:
-            StudentLog.objects.create(
-                timestamp=time.strftime("%Y-%m-%d %H:%M:%S"),
-                student_name=user_name,
-                interest=interest[:100],
-                grades=grades,
-                points=points if complete else None,
-                ai_response=insight,
-                history=[insight],
-            )
-        except Exception:
-            logger.exception("Failed to save the student recommendation log.")
+        career_category = str(insight.get("ai_role") or "").strip()[:100]
+        if (
+            user.improvement_consent
+            and data.get("improvement_consent") is True
+            and career_category
+        ):
+            try:
+                StudentLog.objects.create(
+                    timestamp=time.strftime("%Y-%m-%d %H:%M:%S"),
+                    interest=career_category,
+                    ai_response={"ai_role": career_category},
+                    contributed_to_improvement=True,
+                )
+            except Exception:
+                logger.exception("Failed to save the de-identified improvement contribution.")
         counts = Counter()
         try:
-            for log in StudentLog.objects.filter(interest__icontains=interest[:100]):
+            for log in StudentLog.objects.filter(contributed_to_improvement=True):
                 role = (log.ai_response or {}).get("ai_role") if isinstance(log.ai_response, dict) else None
                 if role:
                     counts[role.strip().title()] += 1
@@ -771,17 +1039,15 @@ def send_report(request):
     if len(pdf_bytes) > 12 * 1024 * 1024:
         return JsonResponse({"error": "The PDF must be 12 MB or smaller."}, status=400)
     name = str(data.get("name") or "Student")
-    email_message = EmailMultiAlternatives(
-        subject="Your CareerPath AI Assessment Report",
-        body=f"Hello {name}, your CareerPath AI assessment report is attached.",
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[data["email"]],
-    )
-    email_message.attach("CareerPath_Report.pdf", pdf_bytes, "application/pdf")
     try:
-        if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-            raise RuntimeError("Email delivery is not configured.")
-        email_executor.submit(email_message.send, fail_silently=False)
+        future = email_executor.submit(
+            _send_email,
+            "Your CareerPath AI Assessment Report",
+            data["email"],
+            f"Hello {name}, your CareerPath AI Assessment Report is attached.",
+            attachments=[("CareerPath_Report.pdf", pdf_bytes, "application/pdf")],
+        )
+        future.add_done_callback(_log_email_delivery_failure)
     except Exception:
         logger.exception("Could not queue the report email.")
         return JsonResponse({"error": "Could not send the report email."}, status=503)

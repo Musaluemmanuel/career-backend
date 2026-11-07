@@ -85,7 +85,13 @@ EMAIL_PORT = int(os.environ.get("MAIL_PORT", "587"))
 EMAIL_USE_TLS = os.environ.get("MAIL_USE_TLS", "true").lower() == "true"
 EMAIL_HOST_USER = os.environ.get("MAIL_USERNAME", "")
 EMAIL_HOST_PASSWORD = os.environ.get("MAIL_PASSWORD", "")
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or "CareerPath AI <no-reply@careerpath.local>"
+EMAIL_PROVIDER = os.environ.get("MAIL_PROVIDER", "smtp").strip().lower()
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+MAIL_FROM = os.environ.get("MAIL_FROM", "").strip()
+GMAIL_CLIENT_ID = os.environ.get("GMAIL_CLIENT_ID", "")
+GMAIL_CLIENT_SECRET = os.environ.get("GMAIL_CLIENT_SECRET", "")
+GMAIL_REFRESH_TOKEN = os.environ.get("GMAIL_REFRESH_TOKEN", "")
+DEFAULT_FROM_EMAIL = MAIL_FROM or EMAIL_HOST_USER or "CareerPath AI <no-reply@careerpath.local>"
 EMAIL_TIMEOUT = 15
 
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "")

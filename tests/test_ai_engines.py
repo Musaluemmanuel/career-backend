@@ -121,8 +121,8 @@ class CareerAdviceContextTests(unittest.TestCase):
 
         system_prompt, user_prompt = fetch_from_groq.call_args.args[:2]
         self.assertIn("No grades were provided", system_prompt)
-        self.assertIn("Do not infer eligibility", system_prompt)
-        self.assertIn("Not provided", system_prompt)
+        self.assertIn("leave eligibility unconfirmed", system_prompt)
+        self.assertIn("Do not claim eligibility", system_prompt)
         self.assertIn("Points: not calculated", user_prompt)
 
     @patch.object(ai_engines, "client_groq")
@@ -143,16 +143,14 @@ class CareerAdviceContextTests(unittest.TestCase):
         self.assertEqual(result["suggestions"], ["Explore health careers", "Talk about study options"])
         self.assertEqual(result["assistant_name"], "CareerPath AI")
         call = client_groq.chat.completions.create.call_args.kwargs
-        self.assertEqual(call["model"], "llama-3.1-8b-instant")
+        self.assertEqual(call["model"], ai_engines.GROQ_MODEL)
         self.assertEqual(call["messages"][-1]["content"], "I like helping people through healthcare.")
-        self.assertIn("career-interest discovery activity", call["messages"][0]["content"])
-        self.assertIn("scenario-based question", call["messages"][0]["content"])
-        self.assertIn("Do not repeat the introduction", call["messages"][0]["content"])
-        self.assertIn("primary school", call["messages"][0]["content"])
-        self.assertIn("optional and continue helping if they have none", call["messages"][0]["content"])
-        self.assertIn("as broadly", call["messages"][0]["content"])
-        self.assertIn("detail as they wish", call["messages"][0]["content"])
-        self.assertIn("a condition for answering", call["messages"][0]["content"])
+        system_prompt = " ".join(call["messages"][0]["content"].split())
+        self.assertIn("optional career discovery activity", system_prompt)
+        self.assertIn("scenario-based question at a time", system_prompt)
+        self.assertIn("Do not repeat a welcome introduction", system_prompt)
+        self.assertIn("Never assume that students have KCSE or other exam results", system_prompt)
+        self.assertIn("claiming eligibility when grades are missing", system_prompt)
         self.assertGreater(call["temperature"], 0.3)
         self.assertEqual(call["response_format"], {"type": "json_object"})
 

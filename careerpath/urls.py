@@ -11,6 +11,7 @@ urlpatterns = [
     path("login", views.login, name="login"),
     path("history", views.history, name="history"),
     path("save-history", views.save_history, name="save-history"),
+    path("data-consent", views.data_consent, name="data-consent"),
     path("chat", views.career_chat, name="chat"),
     path("recommend", views.recommend, name="recommend"),
     path("resend-code", views.resend_code, name="resend-code"),

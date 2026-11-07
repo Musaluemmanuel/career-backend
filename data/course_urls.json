@@ -784,16 +784,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "4275465",
       "kuccps_program_codes": [
         "4275465"
-      ],
-      "kuccps_pdf_page": 57,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "AMREF INTERNATIONAL UNIVERSITY",
@@ -804,16 +800,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "4275423",
       "kuccps_program_codes": [
         "4275423"
-      ],
-      "kuccps_pdf_page": 55,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "AMREF INTERNATIONAL UNIVERSITY",
@@ -824,16 +816,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "4275681",
       "kuccps_program_codes": [
         "4275681"
-      ],
-      "kuccps_pdf_page": 71,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "AMREF INTERNATIONAL UNIVERSITY",
@@ -1294,16 +1282,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480325",
-      "kuccps_pdf_page": 47,
       "kuccps_program_codes": [
         "1480325"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1314,16 +1298,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1480445",
       "kuccps_program_codes": [
         "1480445"
-      ],
-      "kuccps_pdf_page": 56,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1334,16 +1314,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480144",
-      "kuccps_pdf_page": 22,
       "kuccps_program_codes": [
         "1480144"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1354,16 +1330,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480106",
-      "kuccps_pdf_page": 1,
       "kuccps_program_codes": [
         "1480106"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1392,16 +1364,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480303",
-      "kuccps_pdf_page": 45,
       "kuccps_program_codes": [
         "1480303"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1412,16 +1380,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480146",
-      "kuccps_pdf_page": 68,
       "kuccps_program_codes": [
         "1480146"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1432,16 +1396,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480312",
-      "kuccps_pdf_page": 46,
       "kuccps_program_codes": [
         "1480312"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1452,16 +1412,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480292",
-      "kuccps_pdf_page": 43,
       "kuccps_program_codes": [
         "1480292"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1472,16 +1428,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480522",
-      "kuccps_pdf_page": 61,
       "kuccps_program_codes": [
         "1480522"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1492,16 +1444,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480296",
-      "kuccps_pdf_page": 44,
       "kuccps_program_codes": [
         "1480296"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1512,16 +1460,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480392",
-      "kuccps_pdf_page": 52,
       "kuccps_program_codes": [
         "1480392"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1532,16 +1476,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480550",
-      "kuccps_pdf_page": 63,
       "kuccps_program_codes": [
         "1480550"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1552,16 +1492,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480133",
-      "kuccps_pdf_page": 9,
       "kuccps_program_codes": [
         "1480133"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1572,16 +1508,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480199",
-      "kuccps_pdf_page": 34,
       "kuccps_program_codes": [
         "1480199"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1592,16 +1524,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480540",
-      "kuccps_pdf_page": 62,
       "kuccps_program_codes": [
         "1480540"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1648,16 +1576,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1480652",
       "kuccps_program_codes": [
         "1480652"
-      ],
-      "kuccps_pdf_page": 68,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1686,16 +1610,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1480513",
       "kuccps_program_codes": [
         "1480513"
-      ],
-      "kuccps_pdf_page": 60,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1706,16 +1626,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1480109",
       "kuccps_program_codes": [
         "1480109"
-      ],
-      "kuccps_pdf_page": 2,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1726,16 +1642,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480366",
-      "kuccps_pdf_page": 51,
       "kuccps_program_codes": [
         "1480366"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1746,16 +1658,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1480107",
       "kuccps_program_codes": [
         "1480107"
-      ],
-      "kuccps_pdf_page": 2,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1766,16 +1674,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480111",
-      "kuccps_pdf_page": 3,
       "kuccps_program_codes": [
         "1480111"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1786,16 +1690,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1480423",
-      "kuccps_pdf_page": 55,
       "kuccps_program_codes": [
         "1480423"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1806,16 +1706,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1480115",
       "kuccps_program_codes": [
         "1480115"
-      ],
-      "kuccps_pdf_page": 5,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1826,16 +1722,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1480233",
       "kuccps_program_codes": [
         "1480233"
-      ],
-      "kuccps_pdf_page": 39,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "CATHOLIC UNIVERSITY OF EASTERN AFRICA",
@@ -1846,17 +1738,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1480132",
       "kuccps_program_codes": [
         "1480132"
-      ],
-      "kuccps_pdf_page": 9,
-      "first_verified_at": "2026-11-04T03:25:35.652616+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2,
-      "last_error": null
+      ]
     },
     {
       "university": "CHUKA UNIVERSITY",
@@ -3038,16 +2925,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1080610",
       "kuccps_program_codes": [
         "1080610"
-      ],
-      "kuccps_pdf_page": 66,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "CO-OPERATIVE UNIVERSITY OF KENYA",
@@ -3094,16 +2977,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1080239",
       "kuccps_program_codes": [
         "1080239"
-      ],
-      "kuccps_pdf_page": 40,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "CO-OPERATIVE UNIVERSITY OF KENYA",
@@ -3582,16 +3461,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1162144",
-      "kuccps_pdf_page": 22,
       "kuccps_program_codes": [
         "1162144"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "DAYSTAR UNIVERSITY",
@@ -3656,16 +3531,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1162602",
       "kuccps_program_codes": [
         "1162602"
-      ],
-      "kuccps_pdf_page": 78,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "DAYSTAR UNIVERSITY",
@@ -3911,15 +3782,11 @@
       "verified": true,
       "status": "verified",
       "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:27:24.983343+00:00",
       "last_verified_at": "2026-11-04T10:27:24.983343+00:00",
-      "last_checked_at": "2026-11-04T10:27:24.983343+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1162132",
       "kuccps_program_codes": [
         "1162132"
-      ],
-      "kuccps_pdf_page": 9
+      ]
     },
     {
       "university": "DEDAN KIMATHI UNIVERSITY OF TECHNOLOGY",
@@ -4344,16 +4211,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1173132",
       "kuccps_program_codes": [
         "1173132"
-      ],
-      "kuccps_pdf_page": 9,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T06:48:25.644077+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "DEDAN KIMATHI UNIVERSITY OF TECHNOLOGY",
@@ -6038,16 +5901,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "3895642",
       "kuccps_program_codes": [
         "3895642"
-      ],
-      "kuccps_pdf_page": 68,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "ISLAMIC UNIVERSITY OF KENYA",
@@ -6058,16 +5917,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "3895151",
       "kuccps_program_codes": [
         "3895151"
-      ],
-      "kuccps_pdf_page": 23,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ISLAMIC UNIVERSITY OF KENYA",
@@ -6078,16 +5933,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "3895135",
       "kuccps_program_codes": [
         "3895135"
-      ],
-      "kuccps_pdf_page": 19,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6098,16 +5949,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1053485",
-      "kuccps_pdf_page": 58,
       "kuccps_program_codes": [
         "1053485"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6118,16 +5965,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1053153",
-      "kuccps_pdf_page": 24,
       "kuccps_program_codes": [
         "1053153"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6138,17 +5981,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053155",
       "kuccps_program_codes": [
         "1053155"
-      ],
-      "kuccps_pdf_page": 24,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6159,16 +5997,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1053135",
-      "kuccps_pdf_page": 19,
       "kuccps_program_codes": [
         "1053135"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6179,16 +6013,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1053180",
-      "kuccps_pdf_page": 31,
       "kuccps_program_codes": [
         "1053180"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6199,16 +6029,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1053137",
-      "kuccps_pdf_page": 21,
       "kuccps_program_codes": [
         "1053137"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6219,16 +6045,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1053235",
-      "kuccps_pdf_page": 40,
       "kuccps_program_codes": [
         "1053235"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6239,16 +6061,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1053248",
-      "kuccps_pdf_page": 41,
       "kuccps_program_codes": [
         "1053248"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6259,17 +6077,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053107",
       "kuccps_program_codes": [
         "1053107"
-      ],
-      "kuccps_pdf_page": 1,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6301,17 +6114,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053415",
       "kuccps_program_codes": [
         "1053415"
-      ],
-      "kuccps_pdf_page": 53,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6322,17 +6130,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053293",
       "kuccps_program_codes": [
         "1053293"
-      ],
-      "kuccps_pdf_page": 44,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6343,17 +6146,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053423",
       "kuccps_program_codes": [
         "1053423"
-      ],
-      "kuccps_pdf_page": 54,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6364,17 +6162,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053511",
       "kuccps_program_codes": [
         "1053511"
-      ],
-      "kuccps_pdf_page": 60,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6385,17 +6178,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053158",
       "kuccps_program_codes": [
         "1053158"
-      ],
-      "kuccps_pdf_page": 25,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6406,17 +6194,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053732",
       "kuccps_program_codes": [
         "1053732"
-      ],
-      "kuccps_pdf_page": 72,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6427,17 +6210,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053626",
       "kuccps_program_codes": [
         "1053626"
-      ],
-      "kuccps_pdf_page": 67,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6448,17 +6226,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053479",
       "kuccps_program_codes": [
         "1053479"
-      ],
-      "kuccps_pdf_page": 58,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6469,14 +6242,10 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "last_error": null,
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1053486",
       "kuccps_program_codes": [
         "1053486"
-      ],
-      "kuccps_pdf_page": 77
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6508,17 +6277,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053187",
       "kuccps_program_codes": [
         "1053187"
-      ],
-      "kuccps_pdf_page": 32,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6529,17 +6293,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053111",
       "kuccps_program_codes": [
         "1053111"
-      ],
-      "kuccps_pdf_page": 3,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6550,17 +6309,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053554",
       "kuccps_program_codes": [
         "1053554"
-      ],
-      "kuccps_pdf_page": 63,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6571,17 +6325,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053776",
       "kuccps_program_codes": [
         "1053776"
-      ],
-      "kuccps_pdf_page": 72,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6592,17 +6341,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053483",
       "kuccps_program_codes": [
         "1053483"
-      ],
-      "kuccps_pdf_page": 58,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JARAMOGI OGINGA ODINGA UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -6613,17 +6357,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1053185",
       "kuccps_program_codes": [
         "1053185"
-      ],
-      "kuccps_pdf_page": 32,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JOMO KENYATTA UNIVERSITY OF AGRICULTURE AND TECHNOLOGY",
@@ -8272,17 +8011,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1249132",
       "kuccps_program_codes": [
         "1249132"
-      ],
-      "kuccps_pdf_page": 9,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "JOMO KENYATTA UNIVERSITY OF AGRICULTURE AND TECHNOLOGY",
@@ -8455,16 +8189,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061206",
       "kuccps_program_codes": [
         "1061206"
-      ],
-      "kuccps_pdf_page": 36,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8475,16 +8205,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061301",
       "kuccps_program_codes": [
         "1061301"
-      ],
-      "kuccps_pdf_page": 45,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8495,16 +8221,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061133",
       "kuccps_program_codes": [
         "1061133"
-      ],
-      "kuccps_pdf_page": 9,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8515,16 +8237,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061337",
       "kuccps_program_codes": [
         "1061337"
-      ],
-      "kuccps_pdf_page": 49,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8571,16 +8289,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061135",
       "kuccps_program_codes": [
         "1061135"
-      ],
-      "kuccps_pdf_page": 11,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8591,16 +8305,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061137",
       "kuccps_program_codes": [
         "1061137"
-      ],
-      "kuccps_pdf_page": 20,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8611,16 +8321,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061134",
       "kuccps_program_codes": [
         "1061134"
-      ],
-      "kuccps_pdf_page": 10,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8631,16 +8337,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061242",
       "kuccps_program_codes": [
         "1061242"
-      ],
-      "kuccps_pdf_page": 40,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8651,16 +8353,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061661",
       "kuccps_program_codes": [
         "1061661"
-      ],
-      "kuccps_pdf_page": 69,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8671,16 +8369,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061160",
       "kuccps_program_codes": [
         "1061160"
-      ],
-      "kuccps_pdf_page": 25,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8709,16 +8403,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061250",
       "kuccps_program_codes": [
         "1061250"
-      ],
-      "kuccps_pdf_page": 42,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8729,16 +8419,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061120",
       "kuccps_program_codes": [
         "1061120"
-      ],
-      "kuccps_pdf_page": 6,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8749,16 +8435,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061560",
       "kuccps_program_codes": [
         "1061560"
-      ],
-      "kuccps_pdf_page": 63,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8823,16 +8505,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061511",
       "kuccps_program_codes": [
         "1061511"
-      ],
-      "kuccps_pdf_page": 60,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8861,16 +8539,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061588",
       "kuccps_program_codes": [
         "1061588"
-      ],
-      "kuccps_pdf_page": 65,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8881,16 +8555,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061213",
       "kuccps_program_codes": [
         "1061213"
-      ],
-      "kuccps_pdf_page": 36,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8901,16 +8571,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061224",
       "kuccps_program_codes": [
         "1061224"
-      ],
-      "kuccps_pdf_page": 38,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8921,16 +8587,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061405",
       "kuccps_program_codes": [
         "1061405"
-      ],
-      "kuccps_pdf_page": 53,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -8959,16 +8621,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1061132",
       "kuccps_program_codes": [
         "1061132"
-      ],
-      "kuccps_pdf_page": 8,
-      "first_verified_at": "2026-11-04T06:00:36.157582+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "KABARAK UNIVERSITY",
@@ -10365,16 +10023,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T04:37:22.128827+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1555252",
       "kuccps_program_codes": [
         "1555252"
-      ],
-      "kuccps_pdf_page": 73,
-      "verification_version": 2
+      ]
     },
     {
       "university": "KENYA ASSEMBLIES OF GOD EAST UNIVERSITY",
@@ -10385,16 +10039,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1555253",
       "kuccps_program_codes": [
         "1555253"
-      ],
-      "kuccps_pdf_page": 73,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "KENYA ASSEMBLIES OF GOD EAST UNIVERSITY",
@@ -10423,16 +10073,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1555153",
       "kuccps_program_codes": [
         "1555153"
-      ],
-      "kuccps_pdf_page": 23,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KENYA ASSEMBLIES OF GOD EAST UNIVERSITY",
@@ -10443,16 +10089,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1555171",
       "kuccps_program_codes": [
         "1555171"
-      ],
-      "kuccps_pdf_page": 27,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KENYA ASSEMBLIES OF GOD EAST UNIVERSITY",
@@ -11993,16 +11635,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1111120",
       "kuccps_program_codes": [
         "1111120"
-      ],
-      "kuccps_pdf_page": 6,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KENYATTA UNIVERSITY",
@@ -12085,16 +11723,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1111116",
       "kuccps_program_codes": [
         "1111116"
-      ],
-      "kuccps_pdf_page": 5,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KENYATTA UNIVERSITY",
@@ -12267,16 +11901,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1111188",
       "kuccps_program_codes": [
         "1111188"
-      ],
-      "kuccps_pdf_page": 32,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KENYATTA UNIVERSITY",
@@ -12359,16 +11989,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1111618",
       "kuccps_program_codes": [
         "1111618"
-      ],
-      "kuccps_pdf_page": 55,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KENYATTA UNIVERSITY",
@@ -12451,16 +12077,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1111118",
       "kuccps_program_codes": [
         "1111118"
-      ],
-      "kuccps_pdf_page": 5,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KENYATTA UNIVERSITY",
@@ -12723,16 +12345,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1111573",
       "kuccps_program_codes": [
         "1111573"
-      ],
-      "kuccps_pdf_page": 64,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KENYATTA UNIVERSITY",
@@ -13828,16 +13446,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:40:37.758706+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1079132",
       "kuccps_program_codes": [
         "1079132"
-      ],
-      "kuccps_pdf_page": 8,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00"
+      ]
     },
     {
       "university": "KIRINYAGA UNIVERSITY",
@@ -15756,17 +15370,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1087132",
       "kuccps_program_codes": [
         "1087132"
-      ],
-      "kuccps_pdf_page": 9,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "KISII UNIVERSITY",
@@ -15867,16 +15476,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "3890133",
       "kuccps_program_codes": [
         "3890133"
-      ],
-      "kuccps_pdf_page": 10,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KOITALEEL SAMOEI UNIVERSITY COLLEGE",
@@ -15941,16 +15546,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "3890327",
       "kuccps_program_codes": [
         "3890327"
-      ],
-      "kuccps_pdf_page": 48,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "KOITALEEL SAMOEI UNIVERSITY COLLEGE",
@@ -18265,16 +17866,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1066303",
-      "kuccps_pdf_page": 45,
       "kuccps_program_codes": [
         "1066303"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "MANAGEMENT UNIVERSITY OF AFRICA",
@@ -19582,15 +19179,11 @@
       "verified": true,
       "status": "verified",
       "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:49:31.724658+00:00",
       "last_verified_at": "2026-11-04T10:49:31.724658+00:00",
-      "last_checked_at": "2026-11-04T10:49:31.724658+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1229132",
       "kuccps_program_codes": [
         "1229132"
-      ],
-      "kuccps_pdf_page": 8
+      ]
     },
     {
       "university": "MASENO UNIVERSITY",
@@ -20627,16 +20220,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:40:37.758706+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1082132",
       "kuccps_program_codes": [
         "1082132"
-      ],
-      "kuccps_pdf_page": 8,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00"
+      ]
     },
     {
       "university": "MASINDE MULIRO UNIVERSITY OF SCIENCE & TECHNOLOGY",
@@ -21133,16 +20722,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1240320",
-      "kuccps_pdf_page": 47,
       "kuccps_program_codes": [
         "1240320"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -21171,16 +20756,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1240318",
-      "kuccps_pdf_page": 46,
       "kuccps_program_codes": [
         "1240318"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -21443,17 +21024,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1240132",
       "kuccps_program_codes": [
         "1240132"
-      ],
-      "kuccps_pdf_page": 8,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY",
@@ -23627,16 +23203,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1279134",
       "kuccps_program_codes": [
         "1279134"
-      ],
-      "kuccps_pdf_page": 10,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "MOUNT KENYA UNIVERSITY",
@@ -24079,16 +23651,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:40:37.758706+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1279132",
       "kuccps_program_codes": [
         "1279132"
-      ],
-      "kuccps_pdf_page": 9,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00"
+      ]
     },
     {
       "university": "MOUNT KENYA UNIVERSITY",
@@ -25071,17 +24639,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1246132",
       "kuccps_program_codes": [
         "1246132"
-      ],
-      "kuccps_pdf_page": 8,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "MURANG'A UNIVERSITY OF TECHNOLOGY",
@@ -25470,16 +25033,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "5145J24",
-      "kuccps_pdf_page": 78,
       "kuccps_program_codes": [
         "5145J24"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "OPEN UNIVERSITY OF KENYA",
@@ -25490,16 +25049,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "5145299",
-      "kuccps_pdf_page": 45,
       "kuccps_program_codes": [
         "5145299"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "OPEN UNIVERSITY OF KENYA",
@@ -25528,16 +25083,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "5145409",
-      "kuccps_pdf_page": 53,
       "kuccps_program_codes": [
         "5145409"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "OPEN UNIVERSITY OF KENYA",
@@ -25548,16 +25099,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "5145200",
-      "kuccps_pdf_page": 35,
       "kuccps_program_codes": [
         "5145200"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "OPEN UNIVERSITY OF KENYA",
@@ -25568,16 +25115,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "5145199",
-      "kuccps_pdf_page": 35,
       "kuccps_program_codes": [
         "5145199"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "OPEN UNIVERSITY OF KENYA",
@@ -25588,16 +25131,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "5145115",
-      "kuccps_pdf_page": 4,
       "kuccps_program_codes": [
         "5145115"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "OPEN UNIVERSITY OF KENYA",
@@ -25626,16 +25165,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "5145511",
-      "kuccps_pdf_page": 60,
       "kuccps_program_codes": [
         "5145511"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "OPEN UNIVERSITY OF KENYA",
@@ -25646,16 +25181,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "5145192",
-      "kuccps_pdf_page": 74,
       "kuccps_program_codes": [
         "5145192"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "PAN AFRICA CHRISTIAN UNIVERSITY",
@@ -27811,16 +27342,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1090153",
       "kuccps_program_codes": [
         "1090153"
-      ],
-      "kuccps_pdf_page": 23,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "SCOTT CHRISTIAN UNIVERSITY",
@@ -27831,16 +27358,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1090171",
       "kuccps_program_codes": [
         "1090171"
-      ],
-      "kuccps_pdf_page": 27,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "SCOTT CHRISTIAN UNIVERSITY",
@@ -27851,16 +27374,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1090337",
       "kuccps_program_codes": [
         "1090337"
-      ],
-      "kuccps_pdf_page": 49,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "SCOTT CHRISTIAN UNIVERSITY",
@@ -27871,16 +27390,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1090244",
       "kuccps_program_codes": [
         "1090244"
-      ],
-      "kuccps_pdf_page": 41,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "SCOTT CHRISTIAN UNIVERSITY",
@@ -27891,16 +27406,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1090135",
       "kuccps_program_codes": [
         "1090135"
-      ],
-      "kuccps_pdf_page": 12,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "SCOTT CHRISTIAN UNIVERSITY",
@@ -27929,16 +27440,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1090221",
       "kuccps_program_codes": [
         "1090221"
-      ],
-      "kuccps_pdf_page": 37,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "SCOTT CHRISTIAN UNIVERSITY",
@@ -27949,16 +27456,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1090158",
       "kuccps_program_codes": [
         "1090158"
-      ],
-      "kuccps_pdf_page": 25,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "SCOTT CHRISTIAN UNIVERSITY",
@@ -27969,16 +27472,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1090448",
       "kuccps_program_codes": [
         "1090448"
-      ],
-      "kuccps_pdf_page": 56,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "SCOTT CHRISTIAN UNIVERSITY",
@@ -28669,21 +28168,16 @@
       "domain": "seku.ac.ke",
       "course": "BACHELOR OF SCIENCE (NURSING)",
       "target_type": "institution",
+      "url": "https://seku.ac.ke/undergraduate-programmes.html",
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T11:03:53.547756+00:00",
       "kuccps_program_code": "1166132",
       "kuccps_program_codes": [
         "1166132"
-      ],
-      "kuccps_pdf_page": 8,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:56:58.929608+00:00",
-      "last_verified_at": "2026-11-04T11:03:53.547756+00:00",
-      "last_error": null,
-      "url": "https://seku.ac.ke/undergraduate-programmes.html"
+      ]
     },
     {
       "university": "SOUTH EASTERN KENYA UNIVERSITY",
@@ -28910,16 +28404,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107153",
       "kuccps_program_codes": [
         "1107153"
-      ],
-      "kuccps_pdf_page": 23,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -28948,16 +28438,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107620",
       "kuccps_program_codes": [
         "1107620"
-      ],
-      "kuccps_pdf_page": 67,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -28968,16 +28454,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107171",
       "kuccps_program_codes": [
         "1107171"
-      ],
-      "kuccps_pdf_page": 27,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -28988,16 +28470,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107337",
       "kuccps_program_codes": [
         "1107337"
-      ],
-      "kuccps_pdf_page": 49,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -29026,16 +28504,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107448",
       "kuccps_program_codes": [
         "1107448"
-      ],
-      "kuccps_pdf_page": 56,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -29046,16 +28520,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107662",
       "kuccps_program_codes": [
         "1107662"
-      ],
-      "kuccps_pdf_page": 69,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -29120,16 +28590,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107446",
       "kuccps_program_codes": [
         "1107446"
-      ],
-      "kuccps_pdf_page": 56,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -29176,16 +28642,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107155",
       "kuccps_program_codes": [
         "1107155"
-      ],
-      "kuccps_pdf_page": 24,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -29214,16 +28676,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107614",
       "kuccps_program_codes": [
         "1107614"
-      ],
-      "kuccps_pdf_page": 66,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -29234,16 +28692,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1107543",
       "kuccps_program_codes": [
         "1107543"
-      ],
-      "kuccps_pdf_page": 62,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -29272,17 +28726,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1107132",
       "kuccps_program_codes": [
         "1107132"
-      ],
-      "kuccps_pdf_page": 9,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "ST PAULS UNIVERSITY",
@@ -29329,16 +28778,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091244",
-      "kuccps_pdf_page": 41,
       "kuccps_program_codes": [
         "1091244"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29367,16 +28812,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1091146",
       "kuccps_program_codes": [
         "1091146"
-      ],
-      "kuccps_pdf_page": 22,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29387,16 +28828,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091135",
-      "kuccps_pdf_page": 12,
       "kuccps_program_codes": [
         "1091135"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29407,16 +28844,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091137",
-      "kuccps_pdf_page": 20,
       "kuccps_program_codes": [
         "1091137"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29427,16 +28860,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091548",
-      "kuccps_pdf_page": 63,
       "kuccps_program_codes": [
         "1091548"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29447,16 +28876,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091247",
-      "kuccps_pdf_page": 41,
       "kuccps_program_codes": [
         "1091247"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29467,16 +28892,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091116",
-      "kuccps_pdf_page": 5,
       "kuccps_program_codes": [
         "1091116"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29487,16 +28908,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091185",
-      "kuccps_pdf_page": 32,
       "kuccps_program_codes": [
         "1091185"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29507,16 +28924,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091232",
-      "kuccps_pdf_page": 39,
       "kuccps_program_codes": [
         "1091232"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29527,16 +28940,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091309",
-      "kuccps_pdf_page": 46,
       "kuccps_program_codes": [
         "1091309"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29547,16 +28956,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091118",
-      "kuccps_pdf_page": 5,
       "kuccps_program_codes": [
         "1091118"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29567,16 +28972,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091349",
-      "kuccps_pdf_page": 50,
       "kuccps_program_codes": [
         "1091349"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29587,16 +28988,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091163",
-      "kuccps_pdf_page": 26,
       "kuccps_program_codes": [
         "1091163"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29607,16 +29004,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091256",
-      "kuccps_pdf_page": 42,
       "kuccps_program_codes": [
         "1091256"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29627,16 +29020,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091122",
-      "kuccps_pdf_page": 7,
       "kuccps_program_codes": [
         "1091122"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29647,16 +29036,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091415",
-      "kuccps_pdf_page": 53,
       "kuccps_program_codes": [
         "1091415"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29667,16 +29052,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091114",
-      "kuccps_pdf_page": 4,
       "kuccps_program_codes": [
         "1091114"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29687,16 +29068,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091498",
-      "kuccps_pdf_page": 74,
       "kuccps_program_codes": [
         "1091498"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29725,16 +29102,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091108",
-      "kuccps_pdf_page": 2,
       "kuccps_program_codes": [
         "1091108"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TAITA TAVETA UNIVERSITY",
@@ -29745,16 +29118,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1091G67",
-      "kuccps_pdf_page": 78,
       "kuccps_program_codes": [
         "1091G67"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TANGAZA UNIVERSITY",
@@ -29873,16 +29242,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1475135",
-      "kuccps_pdf_page": 16,
       "kuccps_program_codes": [
         "1475135"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "TANGAZA UNIVERSITY",
@@ -29893,16 +29258,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1475137",
       "kuccps_program_codes": [
         "1475137"
-      ],
-      "kuccps_pdf_page": 21,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30003,16 +29364,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112503",
       "kuccps_program_codes": [
         "1112503"
-      ],
-      "kuccps_pdf_page": 59,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30041,16 +29398,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112116",
       "kuccps_program_codes": [
         "1112116"
-      ],
-      "kuccps_pdf_page": 5,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30061,16 +29414,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112617",
       "kuccps_program_codes": [
         "1112617"
-      ],
-      "kuccps_pdf_page": 67,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30171,16 +29520,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112466",
       "kuccps_program_codes": [
         "1112466"
-      ],
-      "kuccps_pdf_page": 57,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30299,16 +29644,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112371",
       "kuccps_program_codes": [
         "1112371"
-      ],
-      "kuccps_pdf_page": 51,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30427,16 +29768,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112384",
       "kuccps_program_codes": [
         "1112384"
-      ],
-      "kuccps_pdf_page": 52,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30555,16 +29892,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112527",
       "kuccps_program_codes": [
         "1112527"
-      ],
-      "kuccps_pdf_page": 61,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30647,16 +29980,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112425",
       "kuccps_program_codes": [
         "1112425"
-      ],
-      "kuccps_pdf_page": 55,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30847,16 +30176,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112195",
       "kuccps_program_codes": [
         "1112195"
-      ],
-      "kuccps_pdf_page": 34,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -30867,16 +30192,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1112424",
       "kuccps_program_codes": [
         "1112424"
-      ],
-      "kuccps_pdf_page": 55,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF KENYA",
@@ -31337,16 +30658,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:24:04.290953+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:24:04.290953+00:00",
       "kuccps_program_code": "1063124",
       "kuccps_program_codes": [
         "1063124"
-      ],
-      "kuccps_pdf_page": 7,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:24:04.290953+00:00",
-      "last_verified_at": "2026-11-04T10:24:04.290953+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF MOMBASA",
@@ -31483,16 +30800,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:24:04.290953+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:24:04.290953+00:00",
       "kuccps_program_code": "1063439",
       "kuccps_program_codes": [
         "1063439"
-      ],
-      "kuccps_pdf_page": 55,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:24:04.290953+00:00",
-      "last_verified_at": "2026-11-04T10:24:04.290953+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF MOMBASA",
@@ -31611,16 +30924,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1063426",
       "kuccps_program_codes": [
         "1063426"
-      ],
-      "kuccps_pdf_page": 78,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF MOMBASA",
@@ -31631,16 +30940,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1063B76",
       "kuccps_program_codes": [
         "1063B76"
-      ],
-      "kuccps_pdf_page": 76,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF MOMBASA",
@@ -31651,16 +30956,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:24:04.290953+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:24:04.290953+00:00",
       "kuccps_program_code": "1063527",
       "kuccps_program_codes": [
         "1063527"
-      ],
-      "kuccps_pdf_page": 61,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:24:04.290953+00:00",
-      "last_verified_at": "2026-11-04T10:24:04.290953+00:00"
+      ]
     },
     {
       "university": "TECHNICAL UNIVERSITY OF MOMBASA",
@@ -31761,16 +31062,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1063B80",
       "kuccps_program_codes": [
         "1063B80"
-      ],
-      "kuccps_pdf_page": 76,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "THARAKA UNIVERSITY",
@@ -32195,16 +31492,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1500244",
       "kuccps_program_codes": [
         "1500244"
-      ],
-      "kuccps_pdf_page": 41,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "THE EAST AFRICAN UNIVERSITY",
@@ -32215,16 +31508,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1500494",
       "kuccps_program_codes": [
         "1500494"
-      ],
-      "kuccps_pdf_page": 17,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "THE EAST AFRICAN UNIVERSITY",
@@ -32703,16 +31992,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1515115",
       "kuccps_program_codes": [
         "1515115"
-      ],
-      "kuccps_pdf_page": 4,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TOM MBOYA UNIVERSITY",
@@ -32777,16 +32062,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1515568",
       "kuccps_program_codes": [
         "1515568"
-      ],
-      "kuccps_pdf_page": 64,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "TOM MBOYA UNIVERSITY",
@@ -32905,16 +32186,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1515309",
       "kuccps_program_codes": [
         "1515309"
-      ],
-      "kuccps_pdf_page": 45,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "TOM MBOYA UNIVERSITY",
@@ -34167,16 +33444,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "first_verified_at": "2026-11-04T01:25:45.057842+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1114133",
-      "kuccps_pdf_page": 9,
       "kuccps_program_codes": [
         "1114133"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34205,16 +33478,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114135",
       "kuccps_program_codes": [
         "1114135"
-      ],
-      "kuccps_pdf_page": 13,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34261,16 +33530,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114137",
       "kuccps_program_codes": [
         "1114137"
-      ],
-      "kuccps_pdf_page": 21,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34299,16 +33564,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114331",
       "kuccps_program_codes": [
         "1114331"
-      ],
-      "kuccps_pdf_page": 48,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34427,16 +33688,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T10:07:07.599750+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:07:07.599750+00:00",
       "kuccps_program_code": "1114213",
       "kuccps_program_codes": [
         "1114213"
-      ],
-      "kuccps_pdf_page": 36,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:07:07.599750+00:00",
-      "last_verified_at": "2026-11-04T10:07:07.599750+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34501,16 +33758,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114216",
       "kuccps_program_codes": [
         "1114216"
-      ],
-      "kuccps_pdf_page": 37,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34575,16 +33828,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114293",
       "kuccps_program_codes": [
         "1114293"
-      ],
-      "kuccps_pdf_page": 44,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34667,16 +33916,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114353",
       "kuccps_program_codes": [
         "1114353"
-      ],
-      "kuccps_pdf_page": 50,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34759,16 +34004,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114327",
       "kuccps_program_codes": [
         "1114327"
-      ],
-      "kuccps_pdf_page": 48,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -34887,16 +34128,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114114",
       "kuccps_program_codes": [
         "1114114"
-      ],
-      "kuccps_pdf_page": 4,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -35033,16 +34270,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1114356",
       "kuccps_program_codes": [
         "1114356"
-      ],
-      "kuccps_pdf_page": 50,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF ELDORET",
@@ -35161,16 +34394,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093469",
       "kuccps_program_codes": [
         "1093469"
-      ],
-      "kuccps_pdf_page": 57,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35199,16 +34428,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093144",
       "kuccps_program_codes": [
         "1093144"
-      ],
-      "kuccps_pdf_page": 22,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35273,16 +34498,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093146",
       "kuccps_program_codes": [
         "1093146"
-      ],
-      "kuccps_pdf_page": 22,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35329,16 +34550,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093135",
       "kuccps_program_codes": [
         "1093135"
-      ],
-      "kuccps_pdf_page": 12,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35385,17 +34602,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093134",
       "kuccps_program_codes": [
         "1093134"
-      ],
-      "kuccps_pdf_page": 10,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2,
-      "last_error": null
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35406,16 +34618,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093233",
       "kuccps_program_codes": [
         "1093233"
-      ],
-      "kuccps_pdf_page": 39,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35426,16 +34634,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093187",
       "kuccps_program_codes": [
         "1093187"
-      ],
-      "kuccps_pdf_page": 65,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35446,16 +34650,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093417",
       "kuccps_program_codes": [
         "1093417"
-      ],
-      "kuccps_pdf_page": 54,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35484,16 +34684,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093114",
       "kuccps_program_codes": [
         "1093114"
-      ],
-      "kuccps_pdf_page": 4,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35522,16 +34718,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093111",
       "kuccps_program_codes": [
         "1093111"
-      ],
-      "kuccps_pdf_page": 3,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35614,16 +34806,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093185",
       "kuccps_program_codes": [
         "1093185"
-      ],
-      "kuccps_pdf_page": 32,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35706,16 +34894,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093132",
       "kuccps_program_codes": [
         "1093132"
-      ],
-      "kuccps_pdf_page": 8,
-      "first_verified_at": "2026-11-04T06:00:36.157582+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35798,16 +34982,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093511",
       "kuccps_program_codes": [
         "1093511"
-      ],
-      "kuccps_pdf_page": 60,
-      "first_verified_at": "2026-11-04T04:30:30.559861+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "verification_version": 2
+      ]
     },
     {
       "university": "UNIVERSITY OF EMBU",
@@ -35854,16 +35034,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1093249",
       "kuccps_program_codes": [
         "1093249"
-      ],
-      "kuccps_pdf_page": 42,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF KABIANGA",
@@ -36180,16 +35356,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1118120",
       "kuccps_program_codes": [
         "1118120"
-      ],
-      "kuccps_pdf_page": 6,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF KABIANGA",
@@ -36365,16 +35537,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1118732",
       "kuccps_program_codes": [
         "1118732"
-      ],
-      "kuccps_pdf_page": 72,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF KABIANGA",
@@ -36403,16 +35571,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1118157",
       "kuccps_program_codes": [
         "1118157"
-      ],
-      "kuccps_pdf_page": 25,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF NAIROBI",
@@ -36441,16 +35605,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
-      "kuccps_program_code": "1263101",
-      "kuccps_pdf_page": 1,
-      "first_verified_at": "2026-11-04T01:20:10.829379+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1263101",
       "kuccps_program_codes": [
         "1263101"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "UNIVERSITY OF NAIROBI",
@@ -36497,16 +35657,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
-      "kuccps_program_code": "1263302",
-      "kuccps_pdf_page": 45,
-      "first_verified_at": "2026-11-04T01:20:10.829379+00:00",
+      "verification_version": 2,
       "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
+      "kuccps_program_code": "1263302",
       "kuccps_program_codes": [
         "1263302"
-      ],
-      "verification_version": 2
+      ]
     },
     {
       "university": "UNIVERSITY OF NAIROBI",
@@ -36517,16 +35673,12 @@
       "source": "kuccps_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T09:43:59.370325+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T09:43:59.370325+00:00",
       "kuccps_program_code": "1263165",
       "kuccps_program_codes": [
         "1263165"
-      ],
-      "kuccps_pdf_page": 26,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T09:43:59.370325+00:00",
-      "last_verified_at": "2026-11-04T09:43:59.370325+00:00"
+      ]
     },
     {
       "university": "UNIVERSITY OF NAIROBI",
@@ -37366,15 +36518,11 @@
       "verified": true,
       "status": "verified",
       "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:27:24.588130+00:00",
       "last_verified_at": "2026-11-04T10:27:24.588130+00:00",
-      "last_checked_at": "2026-11-04T10:27:24.588130+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
       "kuccps_program_code": "1263132",
       "kuccps_program_codes": [
         "1263132"
-      ],
-      "kuccps_pdf_page": 8
+      ]
     },
     {
       "university": "UNIVERSITY OF NAIROBI",
@@ -37547,17 +36695,12 @@
       "source": "manually_curated_official_course_page",
       "verified": true,
       "status": "verified",
-      "last_checked_at": "2026-11-04T11:33:45.546604+00:00",
-      "catalog": "KUCCPS 2025/2026 DEGREE PROGRAMMES",
+      "verification_version": 2,
+      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
       "kuccps_program_code": "1116132",
       "kuccps_program_codes": [
         "1116132"
-      ],
-      "kuccps_pdf_page": 9,
-      "verification_version": 2,
-      "first_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_verified_at": "2026-11-04T10:40:37.758706+00:00",
-      "last_error": null
+      ]
     },
     {
       "university": "ZETECH UNIVERSITY",
@@ -37955,6 +37098,5 @@
       ],
       "kuccps_pdf_page": 62
     }
-  ],
-  "updated_at": "2026-11-04T11:05:47.389996+00:00"
+  ]
 }
