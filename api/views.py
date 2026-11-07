@@ -36,7 +36,7 @@ from .models import RecommendationUsage, StudentLog, User
 logger = logging.getLogger(__name__)
 email_executor = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 GOOGLE_CLIENT_ID = settings.GOOGLE_CLIENT_ID
-MAX_RECOMMENDATION_ATTEMPTS = 3
+MAX_RECOMMENDATION_ATTEMPTS = None
 
 
 def _token_serializer():
@@ -58,10 +58,7 @@ def _with_access_token(payload, user):
 
 def _reserve_recommendation_attempt(user):
     with transaction.atomic():
-        RecommendationUsage.objects.get_or_create(user=user)
-        usage = RecommendationUsage.objects.select_for_update().get(user=user)
-        if usage.attempts >= MAX_RECOMMENDATION_ATTEMPTS:
-            return False
+        usage, _ = RecommendationUsage.objects.select_for_update().get_or_create(user=user)
         usage.attempts += 1
         usage.save(update_fields=["attempts"])
     return True
@@ -510,22 +507,9 @@ def recommend(request):
     if user.name:
         data["name"] = user.name
     try:
-        if not _reserve_recommendation_attempt(user):
-            return JsonResponse(
-                {
-                    "error": "You have used all 3 complimentary recommendation attempts. Please request funding to continue.",
-                    "code": "funding_required",
-                    "limit": MAX_RECOMMENDATION_ATTEMPTS,
-                    "funding_message": "Please contact the app administrator to request additional AI usage funding.",
-                },
-                status=402,
-            )
+        _reserve_recommendation_attempt(user)
     except Exception:
-        logger.exception("Could not check or reserve recommendation usage.")
-        return JsonResponse(
-            {"error": "Could not check recommendation usage. Please try again later.", "code": "quota_unavailable"},
-            status=503,
-        )
+        logger.exception("Could not record recommendation usage.")
 
     user_name = data.get("name", "Student")
     interest = str(data.get("interest") or "General").strip()[:12000]

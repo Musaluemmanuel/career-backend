@@ -222,7 +222,7 @@ class ApiViewsTests(TestCase):
 
     @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
     @patch("api.views.ask_hybrid_career_advice")
-    def test_recommendation_requires_token_and_enforces_account_quota(self, ask_advice):
+    def test_recommendation_requires_token_and_has_no_lifetime_limit(self, ask_advice):
         user = User.objects.create(
             name="Amina",
             email="amina@example.com",
@@ -239,16 +239,13 @@ class ApiViewsTests(TestCase):
         self.assertEqual(response.status_code, 401)
         ask_advice.assert_not_called()
 
+        from api.views import _reserve_recommendation_attempt
         RecommendationUsage.objects.create(user=user, attempts=3)
-        response = self.client.post(
-            "/recommend",
-            data=body,
-            content_type="application/json",
-            HTTP_AUTHORIZATION=f"Bearer {token}",
-        )
-        self.assertEqual(response.status_code, 402)
-        self.assertEqual(response.json()["code"], "funding_required")
-        ask_advice.assert_not_called()
+        self.assertTrue(_reserve_recommendation_attempt(user))
+        self.assertEqual(RecommendationUsage.objects.get(user=user).attempts, 4)
+        self.assertTrue(_reserve_recommendation_attempt(user))
+        self.assertEqual(RecommendationUsage.objects.get(user=user).attempts, 5)
+
 
     def test_reset_endpoint_is_not_exposed(self):
         response = self.client.get("/reset-db-now")
