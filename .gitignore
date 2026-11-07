@@ -7,6 +7,9 @@ __pycache__/
 
 # Local Databases & Caches (Let the cloud host create fresh ones)
 users.json
+local_test.db
+*.sqlite3
+db.sqlite3
 student_logs.json
 university_portals/
 
