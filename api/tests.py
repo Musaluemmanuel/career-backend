@@ -1,5 +1,6 @@
 import base64
 import json
+import urllib.error
 from unittest.mock import MagicMock, patch
 
 from django.conf import settings
@@ -18,9 +19,85 @@ from utils.ai_engines import (
 from utils.web_scraper import get_course_url
 
 from .models import RecommendationUsage, StudentLog, User
+from .views import _log_email_delivery_failure, _send_email
 
 
 class ApiViewsTests(TestCase):
+    @override_settings(
+        EMAIL_PROVIDER="resend",
+        RESEND_API_KEY="test-api-key",
+        MAIL_FROM="CareerPath AI <no-reply@example.com>",
+        DEFAULT_FROM_EMAIL="CareerPath AI <no-reply@example.com>",
+        EMAIL_TIMEOUT=8,
+    )
+    @patch("api.views.urllib.request.urlopen")
+    def test_resend_email_uses_configured_https_api(self, urlopen):
+        response = MagicMock()
+        response.status = 200
+        urlopen.return_value.__enter__.return_value = response
+
+        _send_email(
+            "Verify account",
+            "student@example.com",
+            "Your verification code is 123456.",
+            "<p>Your verification code is <strong>123456</strong>.</p>",
+            [("report.pdf", b"%PDF-1.4", "application/pdf")],
+        )
+
+        request = urlopen.call_args.args[0]
+        payload = json.loads(request.data)
+        self.assertEqual(request.full_url, "https://api.resend.com/emails")
+        self.assertEqual(request.get_header("Authorization"), "Bearer test-api-key")
+        self.assertEqual(payload["from"], "CareerPath AI <no-reply@example.com>")
+        self.assertEqual(payload["to"], ["student@example.com"])
+        self.assertEqual(payload["subject"], "Verify account")
+        self.assertEqual(payload["text"], "Your verification code is 123456.")
+        self.assertEqual(payload["html"], "<p>Your verification code is <strong>123456</strong>.</p>")
+        self.assertEqual(payload["attachments"][0]["content"], base64.b64encode(b"%PDF-1.4").decode())
+        urlopen.assert_called_once_with(request, timeout=8)
+
+    @override_settings(
+        EMAIL_PROVIDER="resend",
+        RESEND_API_KEY="test-api-key",
+        MAIL_FROM="CareerPath AI <no-reply@example.com>",
+    )
+    @patch(
+        "api.views.urllib.request.urlopen",
+        side_effect=urllib.error.HTTPError(
+            "https://api.resend.com/emails", 403, "Forbidden", {}, None
+        ),
+    )
+    def test_resend_email_surfaces_provider_rejection(self, _urlopen):
+        with self.assertRaisesRegex(RuntimeError, "HTTP 403"):
+            _send_email("Verify account", "student@example.com", "Your code is 123456.")
+
+    @override_settings(
+        EMAIL_PROVIDER="resend",
+        RESEND_API_KEY="test-api-key",
+        MAIL_FROM="CareerPath AI <no-reply@example.com>",
+    )
+    @patch("api.views.email_executor.submit")
+    def test_report_email_uses_configured_provider(self, submit):
+        response = self.client.post(
+            "/send-report",
+            data=json.dumps({
+                "email": "student@example.com",
+                "pdf_data": base64.b64encode(b"%PDF-1.4 test").decode("ascii"),
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 202)
+        submit.assert_called_once()
+        self.assertIs(submit.call_args.args[0], _send_email)
+        self.assertEqual(
+            submit.call_args.kwargs["attachments"],
+            [("CareerPath_Report.pdf", b"%PDF-1.4 test", "application/pdf")],
+        )
+        submit.return_value.add_done_callback.assert_called_once_with(
+            _log_email_delivery_failure
+        )
+
     @patch("utils.ai_engines.client_groq")
     def test_chat_suggestions_are_student_voice_requests_with_stable_roles(self, client):
         client.chat.completions.create.return_value.choices[0].message.content = json.dumps({
@@ -29,14 +106,20 @@ class ApiViewsTests(TestCase):
             "assistant_name": "CareerPath AI",
         })
 
+        memory = "The student is exploring nursing and likes working with children."
         result = generate_chat_reply([
             {"role": "assistant", "content": "Nursing has several specialisations."},
             {"role": "user", "content": "Tell me about nursing specialisations"},
-        ])
+        ], conversation_memory=memory)
 
         sent_messages = client.chat.completions.create.call_args.kwargs["messages"]
         self.assertIn("inserted verbatim as the student's next message", sent_messages[0]["content"])
         self.assertIn("questions addressed to", sent_messages[0]["content"])
+        self.assertIn(memory, sent_messages[0]["content"])
+        self.assertIn("do not ask them to repeat information", sent_messages[0]["content"])
+        self.assertIn("ask one focused clarification", sent_messages[0]["content"])
+        self.assertIn("materially different", sent_messages[0]["content"])
+        self.assertIn("best contextual interpretation", sent_messages[0]["content"])
         self.assertEqual(
             [(message["role"], message["content"]) for message in sent_messages[1:]],
             [
@@ -45,6 +128,38 @@ class ApiViewsTests(TestCase):
             ],
         )
         self.assertEqual(result["suggestions"], ["Tell me about nursing specialisations"])
+
+    @patch("api.views.generate_chat_reply")
+    def test_chat_passes_validated_conversation_memory_to_ai(self, generate_reply):
+        generate_reply.return_value = {
+            "reply": "Let's continue exploring nursing.",
+            "suggestions": ["Tell me about nursing courses"],
+            "assistant_name": "Schools",
+        }
+        memory = "The student is interested in nursing and prefers working with children."
+        response = self.client.post(
+            "/chat",
+            data=json.dumps({
+                "messages": [{"role": "user", "content": "What about the entry requirements?"}],
+                "assistant_name": "Schools",
+                "conversation_memory": memory,
+            }),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(generate_reply.call_args.kwargs["conversation_memory"], memory)
+
+        invalid_response = self.client.post(
+            "/chat",
+            data=json.dumps({
+                "messages": [{"role": "user", "content": "Continue"}],
+                "conversation_memory": "x" * 6001,
+            }),
+            content_type="application/json",
+        )
+        self.assertEqual(invalid_response.status_code, 400)
+        self.assertIn("6,000 characters", invalid_response.json()["error"])
+        self.assertEqual(generate_reply.call_count, 1)
 
     def test_home_and_cors(self):
         response = self.client.get("/", HTTP_ORIGIN="https://student.example")
@@ -55,6 +170,7 @@ class ApiViewsTests(TestCase):
             "https://student.example",
         )
 
+    @override_settings(AUTH_TOKEN_SECRET="unit-test-secret", AUTH_TOKEN_TTL_SECONDS=3600)
     def test_register_and_verify_account(self):
         with patch("api.views._send_verification_email") as send_email:
             response = self.client.post(
@@ -80,6 +196,37 @@ class ApiViewsTests(TestCase):
         user.refresh_from_db()
         self.assertTrue(user.is_verified)
         self.assertIsNone(user.verification_code)
+
+        login_response = self.client.post(
+            "/login",
+            data=json.dumps({
+                "username": user.email,
+                "password": "secure password",
+            }),
+            content_type="application/json",
+        )
+        self.assertEqual(login_response.status_code, 200)
+        self.assertEqual(login_response.json()["user"]["email"], user.email)
+        self.assertTrue(login_response.json()["access_token"])
+
+    def test_register_rolls_back_when_verification_email_cannot_be_sent(self):
+        with patch(
+            "api.views._send_verification_email",
+            side_effect=OSError("Network is unreachable"),
+        ):
+            response = self.client.post(
+                "/register",
+                data=json.dumps({
+                    "name": "Amina",
+                    "email": "amina@example.com",
+                    "password": "secure password",
+                }),
+                content_type="application/json",
+            )
+
+        self.assertEqual(response.status_code, 503)
+        self.assertIn("account was not created", response.json()["message"])
+        self.assertFalse(User.objects.filter(email="amina@example.com").exists())
 
     def test_login_accepts_email_and_username(self):
         user = User.objects.create(

@@ -29,8 +29,10 @@ AUTH_TOKEN_SECRET=replace_with_a_separate_private_random_value
 AUTH_TOKEN_TTL_SECONDS=604800
 GROQ_API_KEY=your_groq_api_key
 GEMINI_API_KEY=your_gemini_api_key
-MAIL_USERNAME=your_email_address
-MAIL_PASSWORD=your_email_app_password
+# Recommended for Render, where outbound SMTP may be blocked:
+MAIL_PROVIDER=resend
+RESEND_API_KEY=your_resend_api_key
+MAIL_FROM=CareerPath AI <no-reply@your-verified-domain.example>
 # Optional locally; SQLite is used when DATABASE_URL is not set.
 DATABASE_URL=sqlite:///local_test.db
 ```
@@ -44,7 +46,9 @@ python manage.py runserver 0.0.0.0:5001
 
 `DATABASE_URL` accepts SQLite or PostgreSQL URLs. Groq supports text chat and
 recommendations; Gemini enables document, image, and video analysis. SMTP
-credentials are used for verification and report emails. Never commit `.env`
+credentials can be used for verification and report emails when SMTP egress is
+available. For Resend, verify the sender domain first and set
+`MAIL_PROVIDER=resend`, `RESEND_API_KEY`, and `MAIL_FROM`. Never commit `.env`
 or real credentials.
 
 ## Authentication and recommendation limits

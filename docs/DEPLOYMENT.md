@@ -24,7 +24,9 @@ server after the Django migration.
 | `GROQ_API_KEY` | For Groq calls | Provider API key. Keep it in Render environment settings; never put it in frontend code. |
 | `GROQ_MODEL` | No | Defaults to `openai/gpt-oss-20b`; confirm model access with the provider. |
 | `GEMINI_API_KEY` | If Gemini code paths are used | Server-side provider key. |
-| `MAIL_USERNAME`, `MAIL_PASSWORD` | If SMTP is used | Server-side mail credentials. |
+| `MAIL_PROVIDER` | No | `smtp` (default) or `resend`. Use Resend's HTTPS API when the host blocks SMTP egress. |
+| `RESEND_API_KEY`, `MAIL_FROM` | If Resend is used | Private Resend API key and a sender address on a domain verified with Resend. Set both in the Render service environment, never in source control. |
+| `MAIL_USERNAME`, `MAIL_PASSWORD` | If SMTP is used | Server-side mail credentials. Render deployments may block outbound SMTP; use Resend instead if SMTP connections fail. |
 | `CORS_ALLOWED_ORIGINS` | If restricting browser origins | Comma-separated frontend origins. |
 | `GOOGLE_CLIENT_ID` | For Google sign-in | OAuth client ID used to validate Google sign-in tokens. |
 | `PORT` | Provided by Render | Port for the web process; do not hard-code a production port. |
@@ -68,7 +70,8 @@ procedure.
 5. Check `GET /`, then sign in and verify the response includes `access_token`.
 6. Send three authenticated recommendation POSTs; the next must return `402 funding_required` without invoking the recommender.
 7. Confirm the frontend sends the bearer token. Without it, recommendation requests receive 401.
-8. Review logs for migration errors, database connectivity, and provider rate/model errors. A successful health check does not prove AI generation works.
+8. Configure email delivery with a verified sender and test account registration, code delivery, and manual sign-in. On Render, use `MAIL_PROVIDER=resend` with `RESEND_API_KEY` and `MAIL_FROM` if outbound SMTP is blocked.
+9. Review logs for migration errors, database connectivity, and provider rate/model errors. A successful health check does not prove AI generation works.
 
 ## Security notes
 

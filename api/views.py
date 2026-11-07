@@ -8,6 +8,8 @@ import re
 import secrets
 import string
 import time
+import urllib.error
+import urllib.request
 from collections import Counter
 
 from django.conf import settings
@@ -79,8 +81,6 @@ def _json_body(request):
 
 
 def _send_email(subject, recipient, text, html=None, attachments=None):
-    if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-        raise RuntimeError("Email delivery is not configured.")
     message = EmailMultiAlternatives(
         subject=subject,
         body=text,
@@ -89,6 +89,54 @@ def _send_email(subject, recipient, text, html=None, attachments=None):
     )
     if html:
         message.attach_alternative(html, "text/html")
+    if settings.EMAIL_PROVIDER == "resend":
+        if not settings.RESEND_API_KEY or not settings.MAIL_FROM:
+            raise RuntimeError(
+                "Resend email delivery requires RESEND_API_KEY and MAIL_FROM."
+            )
+        payload = {
+            "from": settings.MAIL_FROM,
+            "to": [recipient],
+            "subject": subject,
+            "text": text,
+        }
+        if html:
+            payload["html"] = html
+        if attachments:
+            payload["attachments"] = [
+                {
+                    "filename": filename,
+                    "content": base64.b64encode(
+                        content if isinstance(content, bytes) else str(content).encode()
+                    ).decode("ascii"),
+                    "content_type": mime_type,
+                }
+                for filename, content, mime_type in attachments
+            ]
+        request = urllib.request.Request(
+            "https://api.resend.com/emails",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {settings.RESEND_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=settings.EMAIL_TIMEOUT) as response:
+                if response.status >= 400:
+                    raise RuntimeError(
+                        f"Resend email delivery failed with HTTP {response.status}."
+                    )
+        except urllib.error.HTTPError as error:
+            raise RuntimeError(
+                f"Resend email delivery failed with HTTP {error.code}."
+            ) from error
+        return
+    if settings.EMAIL_PROVIDER != "smtp":
+        raise RuntimeError("MAIL_PROVIDER must be either 'smtp' or 'resend'.")
+    if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
+        raise RuntimeError("SMTP email delivery is not configured.")
     for filename, content, mime_type in attachments or []:
         message.attach(filename, content, mime_type)
     message.send(fail_silently=False)
@@ -107,6 +155,13 @@ def _send_verification_email(user, code, subject="Verify your CareerPath AI acco
         f"Hello {user.name or 'Student'}, your CareerPath AI verification code is {code}.",
         html,
     )
+
+
+def _log_email_delivery_failure(future):
+    try:
+        future.result()
+    except Exception:
+        logger.exception("Background email delivery failed.")
 
 
 def _user_payload(user):
@@ -267,21 +322,35 @@ def register(request):
             {"message": "Name, email, and password are required"}, status=400
         )
     code = f"{int(time.time()) % 1_000_000:06d}"
+    email_delivery_failed = False
     try:
-        user = User.objects.create(
-            name=name,
-            email=email,
-            password_hash=generate_password_hash(password),
-            is_verified=False,
-            verification_code=code,
-            history=[],
-        )
+        with transaction.atomic():
+            user = User.objects.create(
+                name=name,
+                email=email,
+                password_hash=generate_password_hash(password),
+                is_verified=False,
+                verification_code=code,
+                history=[],
+            )
+            try:
+                _send_verification_email(user, code)
+            except Exception:
+                logger.exception("Failed to send verification email to %s.", email)
+                transaction.set_rollback(True)
+                email_delivery_failed = True
     except IntegrityError:
         return JsonResponse({"message": "User already exists"}, status=400)
-    try:
-        _send_verification_email(user, code)
-    except Exception:
-        logger.exception("Failed to send verification email to %s.", email)
+    if email_delivery_failed:
+        return JsonResponse(
+            {
+                "message": (
+                    "We couldn't send the verification email, so your account "
+                    "was not created. Please try again later."
+                )
+            },
+            status=503,
+        )
     return JsonResponse(
         {"message": "User created. Please check your email for the verification code."},
         status=201,
@@ -435,6 +504,12 @@ def career_chat(request):
             {"error": "The assistant name must be 1 to 32 letters, numbers, spaces, or simple punctuation."},
             status=400,
         )
+    conversation_memory = payload.get("conversation_memory", "")
+    if not isinstance(conversation_memory, str) or len(conversation_memory) > 6000:
+        return JsonResponse(
+            {"error": "Conversation memory must be text no longer than 6,000 characters."},
+            status=400,
+        )
 
     formats = {
         ".pdf": ("application/pdf", lambda value: value.startswith(b"%PDF-")),
@@ -472,7 +547,12 @@ def career_chat(request):
             return JsonResponse({"error": f"{upload.name} does not match its file type."}, status=400)
         attachments.append({"data": content, "mime_type": content_type})
     try:
-        result = generate_chat_reply(messages, attachments, assistant_name.strip())
+        result = generate_chat_reply(
+            messages,
+            attachments,
+            assistant_name.strip(),
+            conversation_memory=conversation_memory.strip(),
+        )
     except RuntimeError as error:
         logger.warning("Career chat is unavailable: %s", error)
         return JsonResponse({"error": str(error)}, status=503)
@@ -872,17 +952,15 @@ def send_report(request):
     if len(pdf_bytes) > 12 * 1024 * 1024:
         return JsonResponse({"error": "The PDF must be 12 MB or smaller."}, status=400)
     name = str(data.get("name") or "Student")
-    email_message = EmailMultiAlternatives(
-        subject="Your CareerPath AI Assessment Report",
-        body=f"Hello {name}, your CareerPath AI assessment report is attached.",
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[data["email"]],
-    )
-    email_message.attach("CareerPath_Report.pdf", pdf_bytes, "application/pdf")
     try:
-        if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-            raise RuntimeError("Email delivery is not configured.")
-        email_executor.submit(email_message.send, fail_silently=False)
+        future = email_executor.submit(
+            _send_email,
+            "Your CareerPath AI Assessment Report",
+            data["email"],
+            f"Hello {name}, your CareerPath AI Assessment Report is attached.",
+            attachments=[("CareerPath_Report.pdf", pdf_bytes, "application/pdf")],
+        )
+        future.add_done_callback(_log_email_delivery_failure)
     except Exception:
         logger.exception("Could not queue the report email.")
         return JsonResponse({"error": "Could not send the report email."}, status=503)
