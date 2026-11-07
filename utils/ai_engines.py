@@ -318,7 +318,15 @@ unclear content.
 
 Return ONLY a JSON object with this shape:
 {{"reply":"Your response","suggestions":["An optional next question or choice"],"assistant_name":"Current or requested assistant name"}}
-Return one to four short, specific, optional suggestions. Do not use markdown fences.
+Return one to four short, specific, optional suggestions. These suggestions are
+inserted verbatim as the student's next message when clicked, so write each one
+in the student's voice as a request or choice directed to you. Good examples:
+"Tell me about nursing specialisations", "Explain the entry requirements",
+and "I am interested in paediatric nursing". Do not phrase suggestions as
+questions addressed to the student, such as "Which type interests you?",
+"Would you like to know more?", or "Do you have a preferred location?".
+Ask student-directed follow-up questions in your reply instead. Do not use
+markdown fences.
 """
     attachments = attachments or []
     conversation = "\n".join(

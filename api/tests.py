@@ -11,6 +11,7 @@ from werkzeug.security import generate_password_hash
 from utils.ai_engines import (
     ask_hybrid_career_advice,
     fetch_from_groq,
+    generate_chat_reply,
     is_course_in_catalog,
     validate_ai_response,
 )
@@ -20,6 +21,31 @@ from .models import RecommendationUsage, StudentLog, User
 
 
 class ApiViewsTests(TestCase):
+    @patch("utils.ai_engines.client_groq")
+    def test_chat_suggestions_are_student_voice_requests_with_stable_roles(self, client):
+        client.chat.completions.create.return_value.choices[0].message.content = json.dumps({
+            "reply": "Nursing has several specialisations.",
+            "suggestions": ["Tell me about nursing specialisations"],
+            "assistant_name": "CareerPath AI",
+        })
+
+        result = generate_chat_reply([
+            {"role": "assistant", "content": "Nursing has several specialisations."},
+            {"role": "user", "content": "Tell me about nursing specialisations"},
+        ])
+
+        sent_messages = client.chat.completions.create.call_args.kwargs["messages"]
+        self.assertIn("inserted verbatim as the student's next message", sent_messages[0]["content"])
+        self.assertIn("questions addressed to", sent_messages[0]["content"])
+        self.assertEqual(
+            [(message["role"], message["content"]) for message in sent_messages[1:]],
+            [
+                ("assistant", "Nursing has several specialisations."),
+                ("user", "Tell me about nursing specialisations"),
+            ],
+        )
+        self.assertEqual(result["suggestions"], ["Tell me about nursing specialisations"])
+
     def test_home_and_cors(self):
         response = self.client.get("/", HTTP_ORIGIN="https://student.example")
         self.assertEqual(response.status_code, 200)
