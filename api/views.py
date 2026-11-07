@@ -488,7 +488,7 @@ def login(request):
     if user and user.password_hash != "GOOGLE_AUTH_USER":
         try:
             password_matches = check_password_hash(user.password_hash, password)
-        except (TypeError, ValueError):
+        except Exception:
             logger.exception("Invalid password hash for user %s.", identifier)
             return JsonResponse({"message": "Invalid email or password"}, status=401)
     else:
@@ -501,7 +501,7 @@ def login(request):
                 if check_password_hash(candidate.password_hash, password):
                     user = candidate
                     break
-            except (TypeError, ValueError):
+            except Exception:
                 logger.exception("Invalid password hash for username candidate %s.", identifier)
         password_matches = user is not None
     if not user or not password_matches:

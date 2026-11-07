@@ -323,6 +323,21 @@ class ApiViewsTests(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["user"]["email"], user.email)
 
+    def test_malformed_password_hash_returns_invalid_credentials(self):
+        User.objects.create(
+            name="Broken Account",
+            email="broken@example.com",
+            password_hash="not-a-valid-password-hash",
+            is_verified=True,
+            history=[],
+        )
+        response = self.client.post(
+            "/login",
+            data=json.dumps({"email": "broken@example.com", "password": "anything"}),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 401)
+
     def test_unverified_account_cannot_log_in(self):
         User.objects.create(
             name="Amina",
