@@ -7,11 +7,14 @@ __pycache__/
 
 # Local Databases & Caches (Let the cloud host create fresh ones)
 users.json
+student_logs.json
 local_test.db
 *.sqlite3
 db.sqlite3
-student_logs.json
 university_portals/
+data/course_urls.json.lock
+data/course_urls.json.maintenance.lock
+data/course_urls.json.*.tmp
 
 # Virtual Environments
 venv/

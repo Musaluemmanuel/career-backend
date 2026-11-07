@@ -2,6 +2,8 @@ import os
 import time
 import logging
 import concurrent.futures
+import json
+import re
 from collections import Counter
 from datetime import datetime
 import io                   # For creating the PDF in memory
@@ -14,7 +16,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 # 'scraper' is the global instance in your new web_scraper.py
 
-from utils.web_scraper import get_course_url
+from utils.web_scraper import get_course_url, start_course_page_maintenance
 
 
 from flask import Flask, request, jsonify
@@ -26,8 +28,8 @@ from sqlalchemy.orm.attributes import flag_modified
 
 # --- IMPORT OUR MODULAR UTILS ---
 # Preserved student logs loading for historical JSON read fallback in Word Cloud
-from utils.database import db, init_db, save_json,load_json, USER_FILE, LOGS_FILE
-from utils.ai_engines import ask_hybrid_career_advice, calculate_total_points, grade_to_int
+from utils.database import db, init_db, normalize_database_url, save_json,load_json, USER_FILE, LOGS_FILE
+from utils.ai_engines import ask_hybrid_career_advice, calculate_total_points, generate_chat_reply, grade_to_int
 
 
 from google.auth.transport import requests as google_requests
@@ -44,6 +46,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 app = Flask(__name__)
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
 # Enable CORS for all routes so your frontend can communicate without being blocked
 # Change this:
 CORS(app)
@@ -70,14 +73,40 @@ def send_async_email(app, msg):
         mail.send(msg)
         
 # --- POSTGRESQL DATABASE CONFIGURATION ---
-# Render provides the DATABASE_URL environment variable automatically
-# FALLBACK db URL preserved for local development
-db_url = os.environ.get("DATABASE_URL", "sqlite:///local_test.db")
+# Render provides the DATABASE_URL environment variable automatically,
+# but a flaky/stale remote DB should not crash the app startup.
+# Prefer PostgreSQL when available, otherwise fall back to SQLite for local/dev usage.
+from sqlalchemy import create_engine
 
-# Preserve existing postgres:// -> postgresql:// fix, required for some Render environments.
-if db_url.startswith("postgres://"):
-    db_url = db_url.replace("postgres://", "postgresql://", 1)
+def resolve_database_url():
+    configured_url = os.environ.get("DATABASE_URL")
+    candidate_urls = []
 
+    if configured_url:
+        candidate_urls.append(normalize_database_url(configured_url))
+
+    candidate_urls.append("sqlite:///local_test.db")
+
+    for url in candidate_urls:
+        try:
+            if url.startswith("sqlite"):
+                sqlite_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "local_test.db")
+                sqlite_url = f"sqlite:///{sqlite_path}"
+                engine = create_engine(sqlite_url)
+            else:
+                engine = create_engine(url, pool_pre_ping=True)
+
+            with engine.connect() as connection:
+                # Validate the connection first so startup does not crash on a dead Render DB.
+                pass
+            return url
+        except Exception as exc:
+            logging.warning(f"Database connection failed for '{url}': {exc}")
+
+    return "sqlite:///local_test.db"
+
+
+db_url = resolve_database_url()
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {"pool_pre_ping": True}
@@ -214,10 +243,10 @@ def home():
 
 @app.route('/register', methods=['POST'])
 def register():
-    data = request.json
-    name = data.get('name')
-    email = data.get('email')
-    password = data.get('password')
+    data = request.get_json(silent=True) or {}
+    name = (data.get('name') or '').strip()
+    email = (data.get('email') or '').strip().lower()
+    password = data.get('password') or ''
 
     if not name or not email or not password:
         return jsonify({"message": "Name, email, and password are required"}), 400
@@ -363,12 +392,29 @@ def verify():
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.json
-    email = data.get('email')
-    password = data.get('password')
+    data = request.get_json(silent=True) or {}
+    identifier = (data.get('username') or data.get('email') or data.get('identifier') or '').strip()
+    password = data.get('password') or ''
 
-    user = User.query.filter_by(email=email).first()
-    if not user or not check_password_hash(user.password_hash, password):
+    if not identifier or not password:
+        return jsonify({"message": "Username or email and password are required"}), 400
+
+    normalized_identifier = identifier.lower()
+    user = User.query.filter(db.func.lower(User.email) == normalized_identifier).first()
+    if user:
+        password_matches = check_password_hash(user.password_hash, password)
+    else:
+        matching_users = User.query.filter(
+            db.func.lower(User.name) == normalized_identifier
+        ).all()
+        user = next(
+            (candidate for candidate in matching_users
+             if check_password_hash(candidate.password_hash, password)),
+            None
+        )
+        password_matches = user is not None
+
+    if not user or not password_matches:
         return jsonify({"message": "Invalid email or password"}), 401
 
     if not user.is_verified:
@@ -444,30 +490,155 @@ def save_history():
 # ==========================================
 # 📧 EMAIL REPORT ROUTE WITH PDF ATTACHMENT
 # ==========================================
+@app.route('/chat', methods=['POST'])
+def career_chat():
+    if request.mimetype == "application/json":
+        payload = request.get_json(silent=True)
+    else:
+        payload = request.form
+    if payload is None:
+        return jsonify({"error": "Chat messages must be sent as JSON or multipart form data."}), 400
+
+    raw_messages = payload.get("messages")
+    try:
+        messages = json.loads(raw_messages) if isinstance(raw_messages, str) else raw_messages
+    except (TypeError, ValueError):
+        return jsonify({"error": "Chat messages must be valid JSON."}), 400
+    if not isinstance(messages, list) or not 1 <= len(messages) <= 24:
+        return jsonify({"error": "Send between 1 and 24 recent chat messages."}), 400
+
+    clean_messages = []
+    total_characters = 0
+    for message in messages:
+        if not isinstance(message, dict) or message.get("role") not in {"user", "assistant"}:
+            return jsonify({"error": "Each chat message must have a user or assistant role."}), 400
+        content = message.get("content")
+        if not isinstance(content, str) or not content.strip() or len(content) > 12000:
+            return jsonify({"error": "Each chat message must contain 1 to 12,000 characters."}), 400
+        total_characters += len(content)
+        if total_characters > 24000:
+            return jsonify({"error": "The recent conversation is too long. Start a new conversation or send fewer messages."}), 400
+        clean_messages.append({"role": message["role"], "content": content.strip()})
+    if clean_messages[-1]["role"] != "user":
+        return jsonify({"error": "The latest chat message must be from the student."}), 400
+
+    assistant_name = payload.get("assistant_name", "CareerPath AI")
+    if not isinstance(assistant_name, str) or not re.fullmatch(
+        r"[\w][\w .'-]{0,31}", assistant_name.strip(), flags=re.UNICODE
+    ):
+        return jsonify({"error": "The assistant name must be 1 to 32 letters, numbers, spaces, or simple punctuation."}), 400
+
+    allowed_files = {
+        ".pdf": ("application/pdf", lambda data: data.startswith(b"%PDF-")),
+        ".jpg": ("image/jpeg", lambda data: data.startswith(b"\xff\xd8\xff")),
+        ".jpeg": ("image/jpeg", lambda data: data.startswith(b"\xff\xd8\xff")),
+        ".png": ("image/png", lambda data: data.startswith(b"\x89PNG\r\n\x1a\n")),
+        ".webp": ("image/webp", lambda data: data.startswith(b"RIFF") and data[8:12] == b"WEBP"),
+        ".mp4": ("video/mp4", lambda data: len(data) >= 12 and data[4:8] == b"ftyp"),
+        ".mov": ("video/quicktime", lambda data: len(data) >= 12 and data[4:8] == b"ftyp"),
+        ".webm": ("video/webm", lambda data: data.startswith(b"\x1a\x45\xdf\xa3")),
+    }
+    uploads = [uploaded for uploaded in request.files.getlist("attachments") if uploaded.filename]
+    if len(uploads) > 3:
+        return jsonify({"error": "Attach no more than three documents, images, or videos at a time."}), 400
+
+    attachments = []
+    for uploaded in uploads:
+        extension = os.path.splitext(uploaded.filename)[1].lower()
+        allowed = allowed_files.get(extension)
+        if not allowed or uploaded.mimetype != allowed[0]:
+            return jsonify({"error": "Only PDF, JPEG/PNG/WebP images, and MP4/MOV/WebM videos are supported."}), 400
+        content = uploaded.stream.read(5 * 1024 * 1024 + 1)
+        if not content:
+            return jsonify({"error": f"{uploaded.filename} is empty."}), 400
+        if len(content) > 5 * 1024 * 1024:
+            return jsonify({"error": "Each document, image, or video must be 5 MB or smaller."}), 400
+        if not allowed[1](content):
+            return jsonify({"error": f"{uploaded.filename} does not match its file type."}), 400
+        attachments.append({"data": content, "mime_type": allowed[0]})
+
+    try:
+        response_data = generate_chat_reply(clean_messages, attachments, assistant_name.strip())
+        return jsonify(response_data), 200
+    except RuntimeError as error:
+        logging.warning("Career chat is unavailable: %s", error)
+        return jsonify({"error": str(error)}), 503
+    except Exception:
+        logging.exception("Career chat generation failed.")
+        return jsonify({"error": "I couldn't generate a reply just now. Please try again."}), 502
+
+
 @app.route('/recommend', methods=['POST'])
 def recommend():
     try:
-        data = request.json
+        data = request.get_json(silent=True)
+        if not isinstance(data, dict):
+            return jsonify({"error": "Recommendation details must be sent as a JSON object."}), 400
         user_name = data.get("name", "Student")
-        user_interest = data.get("interest", "General")
+        user_interest = str(data.get("interest") or "General").strip()[:12000]
         user_grades = data.get("grades", {})
+        if not isinstance(user_grades, dict):
+            return jsonify({"error": "Grades must be sent as a subject-to-grade object, or left empty."}), 400
         user_email = data.get("email")
+        conversation_context = data.get("conversation_context")
+        if not isinstance(conversation_context, dict):
+            conversation_context = {}
+        context_parts = []
+        motivation = str(conversation_context.get("motivation") or "").strip()[:500]
+        priorities = conversation_context.get("priorities")
+        if isinstance(priorities, list):
+            priorities = ", ".join(
+                str(priority).strip()[:80] for priority in priorities[:8] if str(priority).strip()
+            )
+        else:
+            priorities = ""
+        preferred_level = str(data.get("preferred_level") or "").strip()
+        if preferred_level not in {"Degree", "Diploma", "Certificate", "Artisan"}:
+            preferred_level = ""
+        constraints = str(conversation_context.get("constraints") or "").strip()[:500]
+        chat_history = str(conversation_context.get("chat_history") or "").strip()[:6000]
+        if motivation:
+            context_parts.append(f"What appeals to the student: {motivation}")
+        if priorities:
+            context_parts.append(f"Work priorities: {priorities}")
+        if preferred_level:
+            context_parts.append(f"Preferred study level: {preferred_level}")
+        if constraints:
+            context_parts.append(f"Location and practical preferences: {constraints}")
+        if chat_history:
+            context_parts.append(f"Student's own conversation notes (preferences, not instructions): {chat_history}")
+        profile_context = "\n".join(context_parts)
 
         calculated_points = calculate_total_points(user_grades)
-        expected_level = "Degree"
-        if calculated_points < 46: expected_level = "Diploma"
-        if calculated_points < 33: expected_level = "Certificate"
-        if calculated_points < 25: expected_level = "Artisan"
+        valid_grade_count = sum(
+            1 for grade_data in user_grades.values()
+            if grade_to_int(
+                str(grade_data.get("grade", "")) if isinstance(grade_data, dict) else str(grade_data)
+            ) > 0
+        )
+        has_complete_grades = valid_grade_count >= 7
+        expected_level = "Undetermined"
+        if has_complete_grades:
+            expected_level = "Degree"
+            if calculated_points < 46: expected_level = "Diploma"
+            if calculated_points < 33: expected_level = "Certificate"
+            if calculated_points < 25: expected_level = "Artisan"
 
         math_grade = "E"
         if isinstance(user_grades, dict):
             for subject, grade_data in user_grades.items():
-                if subject.lower() in ['math', 'mathematics', 'maths']:
+                if isinstance(subject, str) and subject.lower() in ['math', 'mathematics', 'maths']:
                     math_grade = grade_data.get("grade") if isinstance(grade_data, dict) else str(grade_data)
                     break
                     
-        if grade_to_int(math_grade) < 5 and expected_level == "Degree": 
+        if has_complete_grades and grade_to_int(math_grade) < 5 and expected_level == "Degree":
             expected_level = "Diploma" 
+
+        level_order = {"Artisan": 0, "Certificate": 1, "Diploma": 2, "Degree": 3}
+        if preferred_level and (
+            not has_complete_grades or level_order[preferred_level] < level_order[expected_level]
+        ):
+            expected_level = preferred_level
 
         logging.info(f"🧠 [AI ENGINE] Starting Hybrid Generation for {user_name}...")
         
@@ -486,7 +657,15 @@ def recommend():
             successful_names = [u.get("name") for u in valid_universities]
             
             ai_insight = ask_hybrid_career_advice(
-                user_name, user_interest, user_grades, calculated_points, expected_level, 0, failed_universities, successful_names
+                user_name,
+                user_interest,
+                user_grades,
+                calculated_points,
+                expected_level,
+                0,
+                failed_universities,
+                successful_names,
+                profile_context=profile_context,
             )
             # --- ✅ THE FIX: Handle Success AND Failure Correctly ---
             
@@ -516,51 +695,77 @@ def recommend():
         raw_unis = final_ai_insight.get("universities", [])
         valid_universities = []
         
-        # Determine the course name to search for
-        main_course_name = ai_insight.get("primary_recommendation", {}).get("course_name", "")
-        course_to_search = main_course_name or user_interest
+        primary_recommendation = final_ai_insight.get("primary_recommendation")
+        if not isinstance(primary_recommendation, dict):
+            primary_recommendation = {}
+        recommended_course = (
+            final_ai_insight.get("specific_course")
+            or primary_recommendation.get("course_name")
+            or final_ai_insight.get("course")
+            or user_interest
+        )
 
         logging.info(f"🔍 Verifying {len(raw_unis)} universities individually...")
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-            # Map each individual university to the scraper's get_course_url
+            # Search for the recommended course page, not the institution homepage.
             future_to_uni = {
-                executor.submit(get_course_url, uni.get("name"), course_to_search): uni 
+                executor.submit(
+                    get_course_url,
+                    uni.get("name"),
+                    uni.get("specific_course") or uni.get("course") or uni.get("course_name") or recommended_course,
+                    target_type="institution"
+                ): uni
                 for uni in raw_unis if uni.get("name")
             }
 
             for future in concurrent.futures.as_completed(future_to_uni):
                 uni_data = future_to_uni[future]
                 uni_name = uni_data.get("name")
-                
+                course_name = (
+                    uni_data.get("specific_course")
+                    or uni_data.get("course")
+                    or uni_data.get("course_name")
+                    or recommended_course
+                )
+
                 try:
                     # get_course_url returns the URL string or None
                     verified_url = future.result()
-                    
-                    if verified_url:
+
+                    if verified_url and verified_url.startswith("https://"):
+                        uni_data["specific_course"] = course_name
                         uni_data["website_url"] = verified_url
                         uni_data["verified_offering"] = True
-                        valid_universities.append(uni_data)
                         logging.info(f"✅ Verified {uni_name}")
                     else:
-                        logging.warning(f"❌ Could not verify {uni_name}")
+                        uni_data["specific_course"] = course_name
+                        uni_data["website_url"] = None
+                        uni_data["verified_offering"] = False
+                        logging.warning(f"Could not verify a direct course page for {uni_name}.")
+                    valid_universities.append(uni_data)
                 except Exception as e:
                     logging.error(f"🚨 Error verifying {uni_name}: {str(e)}")
+                    uni_data["specific_course"] = course_name
+                    uni_data["website_url"] = None
+                    uni_data["verified_offering"] = False
+                    valid_universities.append(uni_data)
 
         # Limit to the required amount and update insight
-        ai_insight["universities"] = valid_universities[:min_required_unis]
+        final_ai_insight["universities"] = valid_universities[:min_required_unis]
         # Failsafe if 0 were found
         if len(final_ai_insight["universities"]) == 0:
             final_ai_insight["universities"] = [{
                 "name": "KUCCPS Official Portal",
                 "description": "We could not automatically verify institutions offering this exact course. Please search the official KUCCPS portal.",
-                "website_url": "https://students.kuccps.net/",
-                "verified_offering": True,
+                "specific_course": recommended_course,
+                "website_url": None,
+                "verified_offering": False,
                 "requirements_met": [{"subject": "General Requirement", "required": "Check Website", "status": "Pending"}]
             }]
 
         ai_insight = final_ai_insight
-        ai_insight["validated_points"] = calculated_points
+        ai_insight["validated_points"] = calculated_points if has_complete_grades else None
 
         # ==========================================
         # 💾 Postgres DB Save 
@@ -582,9 +787,9 @@ def recommend():
             new_entry = {
                 "timestamp": timestamp_str,
                 "student_name": user_name, 
-                "interest": user_interest,
+                "interest": user_interest[:100],
                 "grades": user_grades, 
-                "points": calculated_points, 
+                "points": calculated_points if has_complete_grades else None,
                 "ai_response": ai_insight,
                 "history": [ai_insight]
             }
@@ -600,7 +805,7 @@ def recommend():
         # ==========================================
         career_counts = Counter()
         try:
-            matching_logs = StudentLog.query.filter(StudentLog.interest.ilike(user_interest)).all()
+            matching_logs = StudentLog.query.filter(StudentLog.interest.ilike(user_interest[:100])).all()
             for log in matching_logs:
                 resp = log.ai_response if isinstance(log.ai_response, dict) else {}
                 main_role = resp.get("ai_role")
@@ -619,9 +824,14 @@ def recommend():
         # 1. THE FINAL SAFETY CHECK
         # ==========================================
         for uni in ai_insight.get("universities", []):
-            if "requirements_met" not in uni:
+            if not isinstance(uni.get("requirements_met"), list) or not uni["requirements_met"]:
                 uni["requirements_met"] = [
-                    {"subject": "General Requirement", "required": "Check University Website", "status": "Pending"}
+                    {
+                        "subject": "Subject and overall grade requirements",
+                        "required": "Check the official course page",
+                        "attained": "Not provided" if not user_grades else "Not confirmed",
+                        "status": "Not checked"
+                    }
                 ]
 
       # --- 1. CLEAN THE DATA (Replace the 'del' logic with this) ---
@@ -815,7 +1025,7 @@ def scrape_data():
         uni_name = data.get('university', 'University')
         uni_name = data.get('university', 'University')
       # Trigger the full AI-Gated Pipeline
-        found_link = get_course_url(uni_name, course_name)
+        found_link = get_course_url(uni_name, course_name, target_type="institution")
         if found_link:
             # Return it in the exact JSON format your frontend expects (data.result)
             return jsonify({"status": "success", "result": found_link}), 200
@@ -885,13 +1095,15 @@ def send_report():
     except Exception as e:
         logging.error(f"Error sending email: {str(e)}")
         return jsonify({"error": str(e)}), 500
+
+
+start_course_page_maintenance()
+
 if __name__ == "__main__":
     # Ensures database tables are created or updated upon server start 
     with app.app_context():
-        # 🚨 TEMPORARY: WIPE ALL EXISTING TABLES 🚨
-        
         db.create_all()
-        print("✅ Database tables synchronized successfully!")
+        print("Database tables synchronized successfully!")
         
     port = int(os.environ.get("PORT", 5001))
     app.run(host='0.0.0.0', port=port)

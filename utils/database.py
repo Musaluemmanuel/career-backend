@@ -7,6 +7,18 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 db_lock = threading.Lock()
 
+
+def normalize_database_url(db_url):
+    """Use psycopg2, the PostgreSQL DBAPI installed by requirements.txt."""
+    if db_url.startswith("postgres://"):
+        return db_url.replace("postgres://", "postgresql://", 1)
+    if db_url.startswith("postgresql+psycopg://"):
+        return db_url.replace("postgresql+psycopg://", "postgresql://", 1)
+    if db_url.startswith("postgresql+psycopg2://"):
+        return db_url.replace("postgresql+psycopg2://", "postgresql://", 1)
+    return db_url
+
+
 # Define File Paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 USER_FILE = os.path.join(BASE_DIR, 'users.json')
@@ -15,8 +27,7 @@ LOGS_FILE = os.path.join(BASE_DIR, 'student_logs.json')
 def init_db(app):
     """Initializes PostgreSQL for Render while using models defined in app.py."""
     db_url = os.environ.get("DATABASE_URL", "sqlite:///local_test.db")
-    if db_url and db_url.startswith("postgres://"):
-        db_url = db_url.replace("postgres://", "postgresql://", 1)
+    db_url = normalize_database_url(db_url)
     
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
