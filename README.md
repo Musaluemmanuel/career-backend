@@ -114,4 +114,21 @@ API keys, passwords, database URLs, and signing secrets in the service's
 environment settings, never in frontend code or logs.
 
 See the [API guide](docs/API.md), [deployment guide](docs/DEPLOYMENT.md), and
-[test guide](docs/TESTING.md).
+[test guide](docs/TESTING.md) for operating details.
+
+## Project documentation
+
+- [API Reference](docs/API.md)
+- [Architecture Overview](docs/ARCHITECTURE.md)
+- [Deployment Guide](docs/DEPLOYMENT.md)
+- [Testing Guide](docs/TESTING.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security Policy](SECURITY.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Support](SUPPORT.md)
+- [Changelog](CHANGELOG.md)
+
+## Licensing
+
+No license is declared in this repository. Contact the repository owner
+before redistributing or reusing its contents.

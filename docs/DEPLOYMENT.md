@@ -26,6 +26,9 @@ server after the Django migration.
 | `GEMINI_API_KEY` | If Gemini code paths are used | Server-side provider key. |
 | `MAIL_USERNAME`, `MAIL_PASSWORD` | If SMTP is used | Server-side mail credentials. |
 | `CORS_ALLOWED_ORIGINS` | If restricting browser origins | Comma-separated frontend origins. |
+| `GOOGLE_CLIENT_ID` | For Google sign-in | OAuth client ID used to validate Google sign-in tokens. |
+| `PORT` | Provided by Render | Port for the web process; do not hard-code a production port. |
+| `DJANGO_DEBUG` | No | Keep unset or `false` in production. |
 
 `psycopg2-binary` is included for Django's PostgreSQL backend. The legacy Flask
 service also lists psycopg v3; the Django WSGI startup does not import the
@@ -71,4 +74,6 @@ procedure.
 
 - Never put API keys, passwords, database URLs, or access tokens in Git or logs.
 - Only `/recommend` requires bearer authentication; review authorization of other routes separately.
+- Set `CORS_ALLOWED_ORIGINS` to the exact deployed frontend origins. With no
+  allowlist configured, the current middleware reflects request origins.
 - Never expose destructive database-reset functionality in production.
