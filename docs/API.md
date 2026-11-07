@@ -1,24 +1,37 @@
 # API reference
 
-Base URL: your deployed Flask API. JSON endpoints use `Content-Type: application/json`.
+Base URL: your deployed Django API. JSON endpoints use
+`Content-Type: application/json`.
 
 ## `GET /`
-Basic service health response. This does not verify that AI provider requests succeed.
+
+Returns a basic service health response. It does not check external AI-provider
+availability.
 
 ## Sign-in and bearer token
 
-The production entry point (`secured_app:app`) adds `access_token`, `token_type`, and `expires_in` to successful verified responses from `POST /login`, `POST /google-login`, and `POST /verify` when `AUTH_TOKEN_SECRET` is configured. The signed token identifies the database account and expires after `AUTH_TOKEN_TTL_SECONDS` (default 604800 seconds / 7 days). Keep it private.
+Successful verified responses from `POST /login`, `/google-login`, and `/verify`
+include `access_token`, `token_type`, and `expires_in` when
+`AUTH_TOKEN_SECRET` (or the legacy `SECRET_KEY`) is configured. The signed
+token identifies the account and expires after `AUTH_TOKEN_TTL_SECONDS`
+(default 604800 seconds / seven days). Keep it private.
 
 ```json
-{"access_token":"<signed-token>","token_type":"Bearer","expires_in":604800}
+{
+  "access_token": "<signed-token>",
+  "token_type": "Bearer",
+  "expires_in": 604800
+}
 ```
 
 ## `POST /recommend`
 
-Requires the verified account's bearer token. The app binds recommendation ownership to the authenticated user; an optional email in the request must match that account.
+Requires a verified account's bearer token. A supplied email must match the
+authenticated account; the API binds recommendation ownership to the signed-in
+identity.
 
 ```http
-Authorization: Bearer <access_token>
+Authorization: Bearer <access-token>
 Content-Type: application/json
 ```
 
@@ -27,13 +40,25 @@ Example body:
 ```json
 {
   "interest": "computer science and software development",
-  "grades": {"Math":"A-","English":"B","Kiswahili":"B","Biology":"B+","Physics":"C","Chemistry":"C+","ComputerStudies":"A"}
+  "grades": {
+    "Math": "A-",
+    "English": "B",
+    "Kiswahili": "B",
+    "Biology": "B+",
+    "Physics": "C",
+    "Chemistry": "C+",
+    "ComputerStudies": "A"
+  }
 }
 ```
 
 ### Three-attempt lifetime cap
 
-Three admitted recommendation requests are allowed per authenticated account over its lifetime. Each request consumes one attempt immediately after authentication, including a request that later fails in the AI pipeline. Attempts persist in PostgreSQL. At the limit the recommendation pipeline is not called, and a fourth request returns HTTP `402`:
+Three admitted recommendation requests are allowed per authenticated account
+over its lifetime. Each request consumes one attempt immediately after
+authentication, including a request whose AI pipeline later fails. Attempts
+persist in `recommendation_usage`. At the limit the AI pipeline is not called,
+and a fourth request returns HTTP `402`:
 
 ```json
 {
@@ -44,7 +69,9 @@ Three admitted recommendation requests are allowed per authenticated account ove
 }
 ```
 
-This is not a payment system. Funding approval and counter adjustments require a secure administrator process; there is no public reset/funding endpoint. The cap is on endpoint attempts, not the number of internal LLM calls/retries within each admitted request. OPTIONS requests do not consume attempts.
+This is not a payment system. Funding approval and counter adjustments require
+a secure administrator process; there is no public reset/funding endpoint. The
+cap is on endpoint attempts, not internal LLM calls or retries.
 
 ### Errors
 
@@ -58,4 +85,8 @@ This is not a payment system. Funding approval and counter adjustments require a
 
 ## Other routes
 
-Registration, verification, saved history, account settings, scraping, and email routes remain defined in `app.py`. This wrapper applies bearer authentication and the usage cap only to `/recommend`. Review authorization of the other routes separately.
+Registration, verification, saved history, account settings, scraping, chat,
+and email routes remain available through the Django API. Bearer
+authentication and the lifetime usage cap are applied to `/recommend`;
+authorization for other account-management routes should be reviewed
+separately.

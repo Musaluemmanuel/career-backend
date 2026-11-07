@@ -1,57 +1,116 @@
 # CareerPath AI Backend
 
-Flask API for personalized Kenyan course and career recommendations. It stores account and recommendation history in SQLAlchemy, calls Groq for AI generation, verifies institution links, and is deployed as a Gunicorn web service.
+The CareerPath AI backend is a Django API for account management, personalized
+career and course recommendations, chat, and report delivery. It reuses the
+recommendation and chat logic in `utils/`.
 
-## Project layout
+## Requirements
 
-- `app.py` — Flask routes, database models, and recommendation pipeline.
-- `secured_app.py` — production entry point: bearer-token authentication for recommendations, three-attempt per-account lifetime cap, funding-required response, and shared Groq model selection.
-- `utils/ai_engines.py` — course eligibility, validation, and career recommendation generation.
-- `utils/web_scraper.py` — institution-link lookup and local cache.
-- `docs/API.md` — API and authentication details.
-- `docs/DEPLOYMENT.md` — Render settings and environment variables.
-- `tests/` — isolated security and quota tests.
+- Python 3.11
+- Credentials for the external services you plan to use
+- PostgreSQL for production or SQLite for local development
 
 ## Local setup
 
-Python 3.11 is recommended.
+From the backend directory, create and activate a virtual environment and
+install dependencies:
 
-```bash
+```powershell
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
-pip install -r requirements.txt
-export DATABASE_URL='sqlite:///local_test.db'
-export AUTH_TOKEN_SECRET='use-a-long-random-secret'
-export GROQ_API_KEY='your-provider-api-key'
-export GROQ_MODEL='openai/gpt-oss-20b'
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 ```
 
-Run the production entry point:
+Create a private `.env` file:
 
-```bash
-gunicorn secured_app:app --bind 0.0.0.0:${PORT:-10000} --timeout 300
+```dotenv
+DJANGO_SECRET_KEY=replace_with_a_private_random_value
+AUTH_TOKEN_SECRET=replace_with_a_separate_private_random_value
+AUTH_TOKEN_TTL_SECONDS=604800
+GROQ_API_KEY=your_groq_api_key
+GEMINI_API_KEY=your_gemini_api_key
+MAIL_USERNAME=your_email_address
+MAIL_PASSWORD=your_email_app_password
+# Optional locally; SQLite is used when DATABASE_URL is not set.
+DATABASE_URL=sqlite:///local_test.db
 ```
 
-See the [API guide](docs/API.md) and [deployment guide](docs/DEPLOYMENT.md).
+Initialize the database and start the development server:
 
-## Recommendation attempt policy
+```powershell
+python manage.py migrate
+python manage.py runserver 0.0.0.0:5001
+```
 
-Each verified account can start at most three recommendation requests over its lifetime. A request reserves one attempt before AI execution, including a request whose provider call later fails, to prevent unlimited retries. A fourth request receives HTTP `402` with `code: funding_required`. The counter is stored in the `recommendation_usage` table. This is an application usage gate only; it does not collect payment or automatically enable more attempts. An administrator must handle any funding approval and counter adjustment securely.
+`DATABASE_URL` accepts SQLite or PostgreSQL URLs. Groq supports text chat and
+recommendations; Gemini enables document, image, and video analysis. SMTP
+credentials are used for verification and report emails. Never commit `.env`
+or real credentials.
 
-The recommendation endpoint requires a valid bearer token returned by successful verified sign-in. Frontends must store the `access_token` and send `Authorization: Bearer <token>` with `POST /recommend`.
+## Authentication and recommendation limits
+
+Successful verified sign-in (`/login`, `/google-login`, or `/verify`) returns a
+signed bearer token. Set `AUTH_TOKEN_SECRET` to a long, random value in
+production. Tokens expire after `AUTH_TOKEN_TTL_SECONDS` (seven days by
+default). If the signing secret is unset, recommendation requests fail closed
+with `503 auth_not_configured`.
+
+`POST /recommend` requires `Authorization: Bearer <access_token>`. Each
+verified account can start three recommendation requests over its lifetime.
+An attempt is reserved before AI generation, so failed provider requests count;
+a fourth request returns HTTP `402` with `code: funding_required`. The counter
+is stored in `recommendation_usage`. This is a usage limit, not a payment or
+funding system; there is no public counter-reset endpoint.
+
+## API routes
+
+- `POST /register`, `/verify`, `/login`, `/google-login`
+- `POST /resend-code`, `/forgot-password`
+- `POST /change-username`, `/change-password`, `/delete-account`
+- `GET|POST /history`, `POST /save-history`
+- `POST /chat`, `POST /recommend`
+- `POST /scrape`, `POST /send-report`
+
+Chat accepts up to three PDF, JPEG, PNG, WebP, MP4, MOV, or WebM attachments
+with a 5 MB limit per file. Image and document analysis requires Gemini
+credentials.
+
+## Existing database migration
+
+The Django models map to the existing `user` and `student_log` tables. For a
+database created by the previous Flask service, deployment runs
+`migrate --fake-initial` to record the initial Django migration when those
+tables already exist, preserving their data. The recommendation quota table is
+created by the next Django migration. Back up the production database and
+review migration state before deployment.
+
+## Deployment
+
+The `Procfile` and `Dockerfile` run migrations and launch Gunicorn with
+`careerpath.wsgi:application`. On Render, configure `DATABASE_URL`,
+`DJANGO_SECRET_KEY`, `AUTH_TOKEN_SECRET`, and the AI/email provider credentials
+in the service environment. The service binds to the provided `PORT`.
 
 ## Tests
 
-```bash
+```powershell
+python manage.py check
+python manage.py test
 python -m unittest discover -s tests -v
 ```
 
-Tests use an in-memory SQLite database and stub recommendation generation. They do not consume provider tokens, send email, or establish that a Groq model is available. Perform staging integration tests after deployment.
+The Django tests cover API behavior, token issuance, authenticated
+recommendations, quota enforcement, and upload validation. The `unittest`
+suite covers AI guidance and course catalogue utilities. Tests stub provider
+calls; they do not prove live credentials or provider availability.
 
 ## Provider secrets and cost
 
-This application uses Groq's API, not a ChatGPT account password. Do not put API keys, passwords, database URLs, or signing secrets in chat, source code, frontend code, or logs. Configure `GROQ_API_KEY` and `AUTH_TOKEN_SECRET` in Render's environment settings. The default Groq model is `openai/gpt-oss-20b`; confirm model availability, free-tier eligibility, and provider limits in your Groq console. There is no password for the model.
+This application calls Groq's API; it does not use a ChatGPT account password.
+The default model is `openai/gpt-oss-20b`, an open-weight model served by Groq.
+Availability, usage limits, and pricing depend on the provider account. Keep
+API keys, passwords, database URLs, and signing secrets in the service's
+environment settings, never in frontend code or logs.
 
-## Security limitations to review
-
-The wrapper requires bearer authentication on `/recommend`; other legacy routes in `app.py` are not protected by this change. `app.py` invokes `db.create_all()` during import. Use database migrations for future schema changes and secure or remove destructive routes such as `/reset-db-now` before production exposure.
+See the [API guide](docs/API.md), [deployment guide](docs/DEPLOYMENT.md), and
+[test guide](docs/TESTING.md).

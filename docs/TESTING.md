@@ -1,15 +1,30 @@
 # Test guide and feedback
 
-Run tests with:
+Run the checks from the backend directory:
 
-```bash
+```powershell
+python manage.py check
+python manage.py test
 python -m unittest discover -s tests -v
 ```
 
-The focused suite checks the secured entry point's missing-token rejection, account binding, email mismatch, unverified-user rejection, token issuance, quota behavior (three allowed and the fourth returns `402 funding_required`), and OPTIONS preflight behavior. It uses in-memory SQLite and a stub recommendation handler; it makes no provider calls and sends no email.
+The Django API suite covers account flows, bearer-token issuance and
+validation, verified-account recommendations, account binding, quota behavior,
+and upload validation. The separate `unittest` suite checks AI prompt and
+course-catalogue behavior. Tests stub recommendation generation; they do not
+consume provider tokens, send email, or establish that a live provider/model is
+available.
 
-After deployment, verify in staging: successful sign-in returns an access token; the browser attaches it; three calls enter the recommendation handler; a fourth returns the funding response; usage remains at three; and OPTIONS does not use a trial. Check the Render and provider consoles separately for live DB/model access.
+After deployment, verify in staging that sign-in returns an access token, the
+browser sends it to `/recommend`, three requests are admitted, and a fourth
+returns HTTP `402 funding_required`. Confirm migrations preserved the existing
+account and history tables and created `recommendation_usage`. Check the
+Render and provider consoles separately for live database and AI access.
 
-The quota caps HTTP recommendation attempts, not internal Groq calls/retries made for one admitted attempt. Groq account limits and any costs remain separate.
+The quota caps HTTP recommendation attempts, not internal Groq calls or
+retries made for one admitted attempt. Provider limits and any costs are
+separate.
 
-Frontend integration is required: `login.html` must save the returned `access_token`, and the dashboard's recommendation request must send `Authorization: Bearer <token>`. Until that frontend update deploys, its requests will receive HTTP 401.
+The frontend must store the returned `access_token` and send it as a bearer
+token with recommendation requests. Without that integration, recommendation
+requests receive HTTP 401.
