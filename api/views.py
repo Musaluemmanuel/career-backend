@@ -30,6 +30,7 @@ from utils.ai_engines import (
     ask_hybrid_career_advice,
     calculate_total_points,
     generate_chat_reply,
+    get_eligible_context,
     grade_to_int,
     is_course_in_catalog,
 )
@@ -382,6 +383,38 @@ def register(request):
         return JsonResponse(
             {"message": "Name, email, and password are required"}, status=400
         )
+    existing_user = _user_by_email(email)
+    if existing_user:
+        code = f"{int(time.time()) % 1_000_000:06d}"
+        if existing_user.is_verified:
+            return JsonResponse(
+                {
+                    "message": "An account with this email already exists. Please sign in instead.",
+                    "code": "account_exists",
+                    "login_required": True,
+                    "email": existing_user.email,
+                },
+                status=409,
+            )
+        existing_user.verification_code = code
+        existing_user.save(update_fields=["verification_code"])
+        try:
+            _send_verification_email(existing_user, code)
+        except Exception:
+            logger.exception("Failed to resend verification email to %s.", email)
+            return JsonResponse(
+                {"message": "The account exists but we couldn't resend its verification email. Please try again later."},
+                status=503,
+            )
+        return JsonResponse(
+            {
+                "message": "An account is already awaiting verification. A fresh verification code was sent to your email.",
+                "verification_required": True,
+                "email": existing_user.email,
+            },
+            status=200,
+        )
+
     code = f"{int(time.time()) % 1_000_000:06d}"
     email_delivery_failed = False
     try:
@@ -764,14 +797,26 @@ def recommend(request):
             or insight.get("course")
         )
         if not is_course_in_catalog(course):
-            logger.warning("Recommendation AI selected a course outside the KUCCPS catalog.")
-            return JsonResponse(
-                {
-                    "error": "We could not confirm the suggested course in the KUCCPS catalog. Please try again.",
-                    "code": "course_not_in_catalog",
-                },
-                status=502,
+            valid_courses = get_eligible_context(interest, grades)
+            fallback_course = next(
+                (candidate for candidate in valid_courses if is_course_in_catalog(candidate)),
+                None,
             )
+            if fallback_course:
+                course = fallback_course
+                insight["specific_course"] = fallback_course
+                logger.info("Used verified KUCCPS course fallback for interest %s.", interest)
+            else:
+                logger.warning("Recommendation AI selected no course available for interest %s.", interest)
+                return JsonResponse(
+                    {
+                        "error": "No confirmed KUCCPS course was found for this interest. Try another area or add more grades.",
+                        "code": "course_not_in_catalog",
+                        "course": "",
+                        "universities": [],
+                    },
+                    status=422,
+                )
         universities = []
         raw_candidates = insight.get("universities")
         raw_candidates = raw_candidates if isinstance(raw_candidates, list) else []
