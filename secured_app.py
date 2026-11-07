@@ -17,7 +17,7 @@ from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 
 from app import User, app, db
 
-MAX_RECOMMENDATION_ATTEMPTS = 3
+MAX_RECOMMENDATION_ATTEMPTS = None
 TOKEN_TTL_SECONDS = int(os.environ.get("AUTH_TOKEN_TTL_SECONDS", str(7 * 24 * 60 * 60)))
 AUTH_TOKEN_SECRET = os.environ.get("AUTH_TOKEN_SECRET") or os.environ.get("SECRET_KEY")
 TOKEN_SERIALIZER = (
@@ -93,7 +93,7 @@ def _json_error(message, code, status):
 
 
 def _reserve_attempt(user_id):
-    """Atomically reserve one of the account's three lifetime attempts."""
+    """Atomically record one recommendation attempt without imposing a lifetime limit."""
     dialect = db.engine.dialect.name
     if dialect == "postgresql":
         insert = pg_insert
@@ -106,14 +106,10 @@ def _reserve_attempt(user_id):
     statement = statement.on_conflict_do_update(
         index_elements=[RecommendationUsage.user_id],
         set_={"attempts": RecommendationUsage.attempts + 1},
-        where=RecommendationUsage.attempts < MAX_RECOMMENDATION_ATTEMPTS,
     ).returning(RecommendationUsage.attempts)
 
     try:
-        reserved_count = db.session.execute(statement).scalar_one_or_none()
-        if reserved_count is None:
-            db.session.rollback()
-            return False
+        db.session.execute(statement).scalar_one_or_none()
         db.session.commit()
         return True
     except Exception:
@@ -165,15 +161,9 @@ def authenticate_and_limit_recommendations():
     g.authenticated_user = user
 
     try:
-        if not _reserve_attempt(user.id):
-            return jsonify({
-                "error": "You have used all 3 complimentary recommendation attempts. Please request funding to continue.",
-                "code": "funding_required",
-                "limit": MAX_RECOMMENDATION_ATTEMPTS,
-                "funding_message": "Please contact the app administrator to request additional AI usage funding.",
-            }), 402
+        _reserve_attempt(user.id)
     except Exception:
-        return _json_error("Could not check recommendation usage. Please try again later.", "quota_unavailable", 503)
+        logging.exception("Could not record recommendation usage")
 
     return None
 

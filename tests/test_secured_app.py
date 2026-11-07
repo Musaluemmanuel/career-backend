@@ -69,16 +69,13 @@ class SecuredRecommendationTests(unittest.TestCase):
         self.assertEqual(response.get_json()["email"], "student@example.test")
         self.assertEqual(response.get_json()["name"], "Test Student")
 
-    def test_three_requests_allowed_and_fourth_requires_funding(self):
-        for _ in range(3):
+    def test_recommendation_usage_has_no_lifetime_limit(self):
+        for _ in range(5):
             self.assertEqual(self.post_recommend().status_code, 200)
-        response = self.post_recommend()
-        self.assertEqual(response.status_code, 402)
-        self.assertEqual(response.get_json()["code"], "funding_required")
-        self.assertEqual(response.get_json()["limit"], 3)
         with app.app_context():
             usage = db.session.get(secured_app.RecommendationUsage, self.user_id)
-            self.assertEqual(usage.attempts, 3)
+            self.assertEqual(usage.attempts, 5)
+
 
     def test_unverified_account_is_rejected(self):
         with app.app_context():
